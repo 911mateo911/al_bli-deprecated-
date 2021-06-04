@@ -13,7 +13,7 @@ export default function Main() {
             <main className={classes.main} >
                 <img className={classes.mainImg} src={Hands} />
                 <span className={classes.mainHead} >
-                    <h1 className={classes.h1} >Tregto dhe ti</h1>
+                    <h1 className={classes.h1} >Tregto dhe ti.</h1>
                     <h3 className={classes.h3} >Shit cfare nuk te duhet, bli gjithcka!</h3>
                 </span>
             </main>

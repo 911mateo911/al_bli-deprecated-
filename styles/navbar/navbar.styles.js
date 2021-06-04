@@ -3,11 +3,16 @@ const styles = theme => ({
         boxSizing: 'border-box',
         padding: '10px 10px 10px 0',
         display: 'flex',
+        position: 'fixed',
+        width: '100%',
+        marginTop: '-70px',
+        backgroundColor: 'white',
         justifyContent: 'space-between',
         alignItems: 'center',
         [theme.breakpoints.down('xs')]: {
-            paddingTop: 0
-        }
+            padding: '0 10px'
+        },
+        boxShadow: '0px 30px 60px rgb(0 0 0 / 4%)'
     },
     linkWrap: {
         display: 'flex',
