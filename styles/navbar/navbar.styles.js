@@ -9,6 +9,7 @@ const styles = theme => ({
         backgroundColor: 'white',
         justifyContent: 'space-between',
         alignItems: 'center',
+        zIndex: '10',
         [theme.breakpoints.down('xs')]: {
             padding: '0 10px'
         },

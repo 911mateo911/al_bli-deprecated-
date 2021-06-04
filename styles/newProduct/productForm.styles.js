@@ -32,7 +32,7 @@ const styles = theme => ({
         },
         [theme.breakpoints.down('xs')]: {
             width: '95%'
-        },
+        }
     },
     selectWrap: {
         display: 'flex',
@@ -45,6 +45,11 @@ const styles = theme => ({
         [theme.breakpoints.down(theme.breakpoints.values.xs + '400')]: {
             width: '45%'
         }
+    },
+    submitBtn: {
+        color: 'white',
+        alignSelf: 'flex-end',
+        margin: '10px 0'
     }
 })
 

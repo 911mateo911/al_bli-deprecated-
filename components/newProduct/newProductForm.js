@@ -5,16 +5,26 @@ import styles from '../../styles/newProduct/productForm.styles'
 import { ValidatorForm } from 'react-material-ui-form-validator'
 import TextInput from './TextInput'
 import InputLabel from '@material-ui/core/InputLabel';
+import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import CategorySelect from './CategorySelect'
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 import PriceInput from './PriceInput'
 import { FormContext, DispatchContext } from '../contexts/newProductForm.context'
 
 const useStyles = makeStyles(styles)
+
+const theme = createMuiTheme({
+    palette: {
+        primary: {
+            main: '#0cce6b'
+        }
+    }
+})
 
 export default function NewProductForm(props) {
     const classes = useStyles()
@@ -23,8 +33,9 @@ export default function NewProductForm(props) {
     return (
         <div className={classes.root} >
             <h1 className={classes.h1} >Posto produktin tend:</h1>
-            <h3 className={classes.h3} >Plotesoni formularin e meposhtem duke pershkruar ne menyre korrekte produktin.Publikimi i njoftimit eshte falas.</h3>
-            <ValidatorForm className={classes.form} >
+            <h3 className={classes.h3} >Plotesoni formularin e meposhtem duke pershkruar ne menyre korrekte produktin.
+            Publikimi i njoftimit eshte falas.</h3>
+            <ValidatorForm noValidate className={classes.form} onSubmit={e => e.preventDefault()} >
                 <TextInput
                     label='Emer Mbiemer'
                     type=''
@@ -34,7 +45,7 @@ export default function NewProductForm(props) {
                 />
                 <TextInput
                     label='Telefon'
-                    type='number'
+                    type='numeric'
                     multiLine={false}
                     name='telephone'
                     value={inputs.telephone}
@@ -48,7 +59,7 @@ export default function NewProductForm(props) {
                 />
                 <TextInput
                     label='Whatsapp'
-                    type='number'
+                    type='numeric'
                     multiLine={false}
                     name='whatsapp'
                     value={inputs.whatsapp}
@@ -106,6 +117,15 @@ export default function NewProductForm(props) {
                     value={inputs.price}
                     currency={inputs.currency}
                 />
+                <h3 className={classes.h3} >Produkti mund te editohet ose fshihet me vone.</h3>
+                <ThemeProvider theme={theme} >
+                    <Button
+                        className={classes.submitBtn}
+                        color='primary'
+                        type='submit'
+                        variant='contained'
+                    >Vazhdo</Button>
+                </ThemeProvider>
             </ValidatorForm>
         </div>
     )

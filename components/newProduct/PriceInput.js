@@ -9,7 +9,8 @@ import { makeStyles, createMuiTheme, ThemeProvider } from '@material-ui/core/sty
 
 const styles = theme => ({
     root: {
-        width: '100%'
+        width: '100%',
+        marginBottom: '20px'
     },
     lek: {
         color: '#0070f3'
@@ -57,7 +58,6 @@ function PriceInput({ label, value, currency }) {
                 <TextValidator
                     label={label}
                     fullWidth
-                    type='number'
                     margin='normal'
                     variant='outlined'
                     value={value}
@@ -67,6 +67,9 @@ function PriceInput({ label, value, currency }) {
                     }}
                     InputProps={{
                         endAdornment: (moneySelect)
+                    }}
+                    inputProps={{
+                        inputMode: 'numeric'
                     }}
                     className={classes.input}
                     validators={['required']}
