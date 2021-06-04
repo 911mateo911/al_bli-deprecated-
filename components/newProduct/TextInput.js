@@ -51,7 +51,8 @@ function FormInput({ label, name, value, type, multiLine }) {
                         shrink: true
                     }}
                     inputProps={{
-                        inputMode: type
+                        inputMode: type,
+                        maxLength: regex[name].maxLength
                     }}
                     validators={['required', `is${name}`]}
                     errorMessages={['Kerkohet!', regex[name].message]}

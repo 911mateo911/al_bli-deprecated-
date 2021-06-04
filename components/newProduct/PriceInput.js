@@ -1,10 +1,11 @@
-import React, { memo, useContext } from 'react'
-import { TextValidator } from 'react-material-ui-form-validator'
+import React, { memo, useContext, useEffect } from 'react'
+import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator'
 import Select from '@material-ui/core/Select'
 import InputLabel from '@material-ui/core/InputLabel'
 import MenuItem from '@material-ui/core/MenuItem'
 import FormControl from '@material-ui/core/FormControl'
 import { DispatchContext } from '../contexts/newProductForm.context'
+import regex from './regexValues'
 import { makeStyles, createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 
 const styles = theme => ({
@@ -31,9 +32,18 @@ const theme = createMuiTheme({
 
 const useStyles = makeStyles(styles)
 
+const addValidation = (name, value) => {
+    ValidatorForm.addValidationRule(`is${name}`, (value) => {
+        return regex[name].regex.test(value)
+    })
+}
+
 function PriceInput({ label, value, currency }) {
     const classes = useStyles()
     const dispatch = useContext(DispatchContext)
+    useEffect(() => {
+        addValidation('price', value)
+    }, [])
     const moneySelect = (
         <FormControl variant="filled" className={classes.adornment}>
             <InputLabel id="demo-simple-select-filled-label">Lek</InputLabel>
@@ -69,11 +79,12 @@ function PriceInput({ label, value, currency }) {
                         endAdornment: (moneySelect)
                     }}
                     inputProps={{
-                        inputMode: 'numeric'
+                        inputMode: 'numeric',
+                        maxLength: 15
                     }}
                     className={classes.input}
-                    validators={['required']}
-                    errorMessages={['this field is required']}
+                    validators={['required', 'isprice']}
+                    errorMessages={['Kerkohet', regex.price.message]}
                 />
             </ThemeProvider>
         </div>
