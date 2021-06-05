@@ -1,5 +1,4 @@
 import React, { useContext } from 'react'
-import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles'
 import styles from '../../styles/newProduct/productForm.styles'
 import { ValidatorForm } from 'react-material-ui-form-validator'
@@ -12,6 +11,7 @@ import ListSubheader from '@material-ui/core/ListSubheader';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import CategorySelect from './CategorySelect'
+import Car from './subCategories/Car'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 import PriceInput from './PriceInput'
 import { FormContext, DispatchContext } from '../contexts/newProductForm.context'
@@ -97,6 +97,7 @@ export default function NewProductForm(props) {
                         <CategorySelect value={inputs.category} />
                     </FormControl>
                 </div>
+                {inputs.category === 'Makina' && <Car />}
                 <TextInput
                     label='Titulli'
                     type=''

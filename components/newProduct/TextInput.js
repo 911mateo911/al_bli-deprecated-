@@ -2,14 +2,11 @@ import React, { useContext, memo, useEffect } from 'react'
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator'
 import { makeStyles, createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 import { DispatchContext } from '../contexts/newProductForm.context'
-import regex from './regexValues'
+import regex from './utils/regexValues'
 
 const styles = theme => ({
     root: {
         width: '100%'
-    },
-    input: {
-        color: 'red'
     }
 })
 
@@ -23,7 +20,7 @@ const theme = createMuiTheme({
 
 const addValidation = (name, value) => {
     ValidatorForm.addValidationRule(`is${name}`, (value) => {
-        return regex[name].regex.test(value)
+        return regex[name].regex.test(value.trim())
     })
 }
 
@@ -32,6 +29,7 @@ const useStyles = makeStyles(styles)
 function FormInput({ label, name, value, type, multiLine }) {
     const classes = useStyles()
     const dispatch = useContext(DispatchContext)
+    const preserveMultiline = { whiteSpace: 'pre-wrap' }
     useEffect(() => {
         addValidation(name, value)
     }, [])
@@ -39,6 +37,7 @@ function FormInput({ label, name, value, type, multiLine }) {
         <div className={classes.root} >
             <ThemeProvider theme={theme} >
                 <TextValidator
+                    style={multiLine ? preserveMultiline : {}}
                     label={label}
                     fullWidth
                     multiline={multiLine}
