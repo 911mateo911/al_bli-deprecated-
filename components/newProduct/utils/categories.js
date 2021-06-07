@@ -4,12 +4,12 @@ const categories = [
         nenkategori: ['Makina', 'Motorcikleta', 'Pjese kembimi',
             'Makina te demtuara', 'Makina kamping',
             'Makina bujqesore', 'Makina te renda',
-            'Anije', 'Jet ski']
+            'Anije']
     },
     {
         emri: 'Vendbanime',
-        nenkategori: ['Shtepi', 'Apartamente', 'Dhoma',
-            'Vila', 'Garazhe', 'Toke/Ferma',
+        nenkategori: ['Shtepi/Vila', 'Apartamente', 'Dhoma',
+            'Garazhe', 'Toke/Ferma',
             'Prone tjeter']
     },
     {

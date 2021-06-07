@@ -72,5 +72,60 @@ export const boatSubCategories = [
     {
         val: 'tjeter',
         text: 'Tjeter'
+    },
+    {
+        val: 'jetski',
+        text: 'Jet Ski'
+    }
+]
+
+export const decorationSubCategories = [
+    {
+        val: 'mobSallon',
+        text: 'Mobilje Salloni'
+    },
+    {
+        val: 'mobDhomeGjumi',
+        text: 'Mobilje per dhome gjumi'
+    },
+    {
+        val: 'mobKuzhine',
+        text: 'Mobilje kuzhine'
+    },
+    {
+        val: 'tryeza',
+        text: 'Tryeza & Karrige'
+    },
+    {
+        val: 'mobTv',
+        text: 'Mobilje per TV/PC/Stereo'
+    },
+    {
+        val: 'rafte',
+        text: 'Rafte'
+    },
+    {
+        val: 'qilima',
+        text: 'Qilime & Perde'
+    },
+    {
+        val: 'dereDritare',
+        text: 'Dere/Dritare & Ndricim'
+    },
+    {
+        val: 'tualeti',
+        text: 'Tualeti'
+    },
+    {
+        val: 'bime',
+        text: 'Lule & Bime'
+    },
+    {
+        val: 'zbukurime',
+        text: 'Zbukurime & Mbulesa'
+    },
+    {
+        val: 'tjeter',
+        text: 'Tjeter'
     }
 ]

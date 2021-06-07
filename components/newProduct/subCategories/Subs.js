@@ -14,13 +14,13 @@ const styles = theme => ({
 
 const useStyles = makeStyles(styles)
 
-export default function Subs({ subCategories }) {
+export default function Subs({ subCategories, name }) {
     const dispatch = useContext(DispatchContext)
     const input = useContext(FormContext)
     const classes = useStyles()
     useLayoutEffect(() => {
         return () => {
-            dispatch({ type: 'onDelete', name: 'nenkategori' })
+            dispatch({ type: 'onDelete', name })
         };
     }, [])
     return (
@@ -30,11 +30,11 @@ export default function Subs({ subCategories }) {
                 defaultValue=''
                 label='Nenkategori'
                 id="nenkategori-select"
-                value={input.nenkategori || ''}
+                value={input[name] || ''}
                 validators={['required']}
                 variant='filled'
                 errorMessages={['Kerkohet!']}
-                onChange={e => dispatch({ type: 'onChange', name: 'nenkategori', value: e.target.value })}
+                onChange={e => dispatch({ type: 'onChange', name, value: e.target.value })}
             >
                 {subCategories.map((e, i) =>
                     <MenuItem value={e.val} key={i} >
