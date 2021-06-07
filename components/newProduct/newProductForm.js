@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import styles from '../../styles/newProduct/productForm.styles'
-import { ValidatorForm } from 'react-material-ui-form-validator'
+import { SelectValidator, ValidatorForm } from 'react-material-ui-form-validator'
 import TextInput from './TextInput'
 import InputLabel from '@material-ui/core/InputLabel';
 import Button from '@material-ui/core/Button';
@@ -11,7 +11,7 @@ import ListSubheader from '@material-ui/core/ListSubheader';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import CategorySelect from './CategorySelect'
-import Car from './subCategories/Car'
+import SubCategories from './subCategories'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 import PriceInput from './PriceInput'
 import { FormContext, DispatchContext } from '../contexts/newProductForm.context'
@@ -30,12 +30,16 @@ export default function NewProductForm(props) {
     const classes = useStyles()
     const inputs = useContext(FormContext)
     const dispatch = useContext(DispatchContext)
+    function handleSubmit(e) {
+        e.preventDefault()
+        console.log(inputs)
+    }
     return (
         <div className={classes.root} >
             <h1 className={classes.h1} >Posto produktin tend:</h1>
             <h3 className={classes.h3} >Plotesoni formularin e meposhtem duke pershkruar ne menyre korrekte produktin.
             Publikimi i njoftimit eshte falas.</h3>
-            <ValidatorForm noValidate className={classes.form} onSubmit={e => e.preventDefault()} >
+            <ValidatorForm noValidate className={classes.form} onSubmit={handleSubmit} >
                 <TextInput
                     label='Emer Mbiemer'
                     type=''
@@ -65,20 +69,19 @@ export default function NewProductForm(props) {
                     value={inputs.whatsapp}
                 />
                 <div className={classes.selectWrap} >
-                    <FormControl margin='normal' variant="filled" className={classes.select} >
-                        <InputLabel id="demo-simple-select-outlined-label">Qyteti</InputLabel>
-                        <Select
+                    <FormControl margin='normal' className={classes.select} >
+                        <SelectValidator
                             defaultValue=''
-                            labelId="demo-simple-select-outlined-label"
                             id="demo-simple-select-outlined"
                             label="Qyteti"
+                            fullWidth
+                            variant="filled"
                             name='city'
                             value={inputs.city}
+                            validators={['required']}
+                            errorMessages={['Kerkohet!']}
                             onChange={e => dispatch({ type: 'onChange', name: 'city', value: e.target.value })}
                         >
-                            <MenuItem value="">
-                                <em>None</em>
-                            </MenuItem>
                             <MenuItem value='Berat' >Berat</MenuItem>
                             <MenuItem value='Diber' >Diber</MenuItem>
                             <MenuItem value='Durres' >Durres</MenuItem>
@@ -91,13 +94,13 @@ export default function NewProductForm(props) {
                             <MenuItem value='Shkoder' >Shkoder</MenuItem>
                             <MenuItem value='Tirane' >Tirane</MenuItem>
                             <MenuItem value='Vlore' >Vlore</MenuItem>
-                        </Select>
+                        </SelectValidator>
                     </FormControl>
                     <FormControl className={classes.select} margin='normal' variant='filled'>
                         <CategorySelect value={inputs.category} />
                     </FormControl>
                 </div>
-                {inputs.category === 'Makina' && <Car />}
+                <SubCategories state={inputs.category} />
                 <TextInput
                     label='Titulli'
                     type=''
