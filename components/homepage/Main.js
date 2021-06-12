@@ -22,7 +22,7 @@ export default function Main() {
                     <Link href='/kerko' >
                         <a className={classes.bli} >Bli</a>
                     </Link>
-                    <Link href='/shit' >
+                    <Link href='/produkt/shto' >
                         <a className={classes.shit} >Shit</a>
                     </Link>
                 </span>

@@ -19,7 +19,7 @@ export default function Cta() {
                 <h2 className={classes.h2} >Jepi nje shtytje portofolit tend!</h2>
                 <h4 className={classes.h4} >Mos i flak tutje sendet qe nuk te nevojiten,
                  me mire, tregtoji ketu!</h4>
-                <Link href='/kerko' >
+                <Link href='/produkt/shto' >
                     <a className={classes.shit} >Shit produktin e pare</a>
                 </Link>
             </span>
