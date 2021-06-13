@@ -1,3 +1,4 @@
+import React from 'react'
 import Link from 'next/link';
 import styles from '../../styles/navbar/navbar.styles';
 import { makeStyles } from '@material-ui/core/styles';
@@ -12,6 +13,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import MenuDrawer from './menuDrawer'
 import FormControl from '@material-ui/core/FormControl';
 import SearchBar from './searchBar'
+import PopoverElem from './Popover'
 
 const useStyles = makeStyles(styles)
 
@@ -19,12 +21,20 @@ function Navbar() {
     const classes = useStyles()
     const [menuOpen, setMenu] = useState(false)
     const [searchOpen, setSearch] = useState(false)
+    const [anchorEl, setAnchorEl] = React.useState(null);
     function toggleMenu() {
         setMenu(!menuOpen)
     }
     function toggleSearch() {
         setSearch(!searchOpen)
     }
+    function openPopover(e) {
+        setAnchorEl(e.currentTarget)
+    }
+    function closePopover() {
+        setAnchorEl(null)
+    }
+    const popoverOpen = Boolean(anchorEl)
     return (
         <div className={classes.navBar} >
             <MenuDrawer
@@ -35,7 +45,11 @@ function Navbar() {
             <Link href='/' >
                 <p className={classes.logo} >al-<strong className={classes.bli} >Bli</strong></p>
             </Link>
-            <SearchIcon onClick={toggleSearch} className={classes.search} />
+            <span className={classes.mobileWrap} >
+                <SearchIcon onClick={toggleSearch} className={classes.search} />
+                <Avatar onClick={openPopover} className={classes.avatarMobile}>M</Avatar>
+                <PopoverElem anchor={anchorEl} open={popoverOpen} close={closePopover} />
+            </span>
             <SearchBar
                 open={searchOpen}
                 onClose={toggleSearch}
@@ -72,7 +86,8 @@ function Navbar() {
                         }
                     />
                 </FormControl>
-                <Avatar className={classes.socialAvt}>M</Avatar>
+                <Avatar onClick={openPopover} className={classes.socialAvt}>M</Avatar>
+                <PopoverElem anchor={anchorEl} open={popoverOpen} close={closePopover} />
             </div>
         </div >
     )

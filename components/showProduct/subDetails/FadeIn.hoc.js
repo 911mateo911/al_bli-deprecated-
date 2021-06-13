@@ -8,7 +8,10 @@ const styles = theme => ({
         justifyContent: 'center',
         alignItems: 'center',
         flexWrap: 'wrap',
-        margin: 'auto'
+        margin: 'auto',
+        [theme.breakpoints.down(theme.breakpoints.values.xs + 420)] : {
+            justifyContent: 'space-around'
+        }
     }
 })
 

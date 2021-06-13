@@ -101,7 +101,7 @@ export default function House({ name }) {
                 margin='normal'
                 value={input.adresa || ''}
                 inputProps={{
-                    maxLength: 100
+                    maxLength: 70
                 }}
                 validators={['required']}
                 errorMessages={['Kerkohet!']}

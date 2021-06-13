@@ -69,7 +69,6 @@ const styles = theme => ({
     menu: {
         display: 'none',
         fontSize: '2rem',
-        marginLeft: '10px',
         color: '#374151',
         [theme.breakpoints.down('xs')]: {
             display: 'block'
@@ -83,6 +82,7 @@ const styles = theme => ({
         [theme.breakpoints.down('xs')]: {
             display: 'block'
         },
+        margin: '0 5px',
         cursor: 'pointer'
     },
     logo: {
@@ -90,6 +90,7 @@ const styles = theme => ({
         fontSize: '2.5rem',
         margin: '0',
         fontFamily: 'Lato',
+        marginLeft: '50px',
         [theme.breakpoints.down('xs')]: {
             display: 'block'
         },
@@ -108,6 +109,17 @@ const styles = theme => ({
     bli: {
         fontFamily: 'Source Sans Pro',
         color: '#0070f3'
+    },
+    avatarMobile: {
+        display: 'none',
+        [theme.breakpoints.down('xs')]: {
+            display: 'flex'
+        }
+    },
+    mobileWrap: {
+        display: 'flex',
+        alignItems: 'center',
+        width: 'fit-content'
     }
 })
 

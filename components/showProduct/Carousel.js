@@ -51,7 +51,7 @@ export default function Carousel() {
                 className={classes.root} >
                 {renderImgs}
             </Swiper >
-            <ProdDetails category='makina' />
+            <ProdDetails category='shtepi' />
         </span>
     )
 }

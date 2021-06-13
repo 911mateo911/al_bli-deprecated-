@@ -59,6 +59,18 @@ export const box = (value, imgUrl, text) => {
     )
 }
 
+export const bigBox = (value, imgUrl, text) => {
+    const classes = useStyles()
+    const boxStyles = { maxWidth: '500px', width: 'fit-content', padding: '10px', height: 'fit-Content' }
+    return (
+        <div className={classes.box} style={boxStyles} >
+            <p className={classes.text} >{text}</p>
+            <div className={classes.img} style={{ background: `url(${imgUrl}) no-repeat center center / contain` }} ></div>
+            <p className={classes.value} >{value}</p>
+        </div>
+    )
+}
+
 export default function CarDetails() {
     return (
         <FadeInHoc>
