@@ -54,10 +54,20 @@ const styles = theme => ({
     },
     h1: {
         fontFamily: 'Lato',
-        margin: '10px 0',
+        margin: '10px 0 5px 0',
         width: '100%',
         textRendering: 'optimizeLegibility',
         fontSmoothing: 'antialiased',
+        textAlign: 'left'
+    },
+    description: {
+        margin: '10px',
+        width: '100%',
+        whiteSpace: 'pre-wrap',
+        fontFamily: 'Source Sans Pro',
+        textRendering: 'optimizeLegibility',
+        fontSmoothing: 'antialiased',
+        fontWeight: '500',
         textAlign: 'left'
     }
 })

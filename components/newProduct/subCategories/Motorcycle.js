@@ -2,6 +2,11 @@ import React, { useContext, useLayoutEffect, useEffect } from 'react'
 import { DispatchContext, FormContext } from '../../contexts/newProductForm.context'
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator'
 import { makeStyles } from '@material-ui/core/styles'
+import 'date-fns';
+import { formattedDate } from './Car'
+import FormControl from '@material-ui/core/FormControl';
+import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
+import DateFnsUtils from '@date-io/date-fns';
 
 const styles = theme => ({
     root: {
@@ -33,6 +38,7 @@ export default function Motorcycle() {
     }, [])
     useEffect(() => {
         addValidation()
+        dispatch({ type: 'onChange', name: 'viti', value: formattedDate(new Date()) })
     }, [])
     return (
         <div className={classes.root}>
@@ -70,24 +76,25 @@ export default function Motorcycle() {
                 errorMessages={['Kerkohet!']}
                 onChange={e => dispatch({ type: 'onChange', name: e.target.name, value: e.target.value })}
             />
-            <TextValidator
-                label='Viti'
-                name='viti'
-                fullWidth
-                variant='filled'
-                InputLabelProps={{
-                    shrink: true
-                }}
-                margin='normal'
-                value={input.viti || ''}
-                inputProps={{
-                    maxLength: 4,
-                    inputMode: 'numeric'
-                }}
-                validators={['required', `isNumber`]}
-                errorMessages={['Kerkohet!', 'Viti nuk eshte korrekt!']}
-                onChange={e => dispatch({ type: 'onChange', name: e.target.name, value: e.target.value })}
-            />
+            <FormControl required={true} fullWidth >
+                <MuiPickersUtilsProvider
+                    utils={DateFnsUtils} >
+                    <KeyboardDatePicker
+                        disableToolbar
+                        variant="inline"
+                        format="MM/dd/yyyy"
+                        margin="normal"
+                        fullWidth
+                        id="date-picker-inline"
+                        label="Viti"
+                        value={input.viti}
+                        onChange={(e, date) => dispatch({ type: 'onChange', name: 'viti', value: date })}
+                        KeyboardButtonProps={{
+                            'aria-label': 'change date',
+                        }}
+                    />
+                </MuiPickersUtilsProvider>
+            </FormControl>
         </div>
     )
 }

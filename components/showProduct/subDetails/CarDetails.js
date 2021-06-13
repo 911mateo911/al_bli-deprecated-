@@ -1,14 +1,8 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import FadeIn from 'react-fade-in';
+import FadeInHoc from './FadeIn.hoc';
 
-const styles = {
-    root: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexWrap: 'wrap'
-    },
+const styles = theme => ({
     box: {
         textAlign: 'center',
         display: 'flex',
@@ -40,17 +34,21 @@ const styles = {
     },
     img: {
         width: '50px',
-        height: '40px'
+        height: '40px',
+        transition: 'all 0.15s ease-in-out',
+        '&:hover': {
+            transform: 'scale(1.05)'
+        }
     }
-}
+})
 
 const useStyles = makeStyles(styles)
 
-function getImg(src) {
+export function getImg(src) {
     return `https://api.iconify.design/mdi:${src}?height=24&color=%233291ff`
 }
 
-const box = (value, imgUrl, text) => {
+export const box = (value, imgUrl, text) => {
     const classes = useStyles()
     return (
         <div className={classes.box} >
@@ -62,15 +60,14 @@ const box = (value, imgUrl, text) => {
 }
 
 export default function CarDetails() {
-    const classes = useStyles()
     return (
-        <FadeIn className={classes.root} >
+        <FadeInHoc>
             {box('BMW', getImg('car.svg'), 'Marka')}
             {box('X5', getImg('car-info.svg'), 'Modeli')}
-            {box('2019', getImg('calendar-month-outline.svg'), 'Viti')}
+            {box('13/06/2019', getImg('calendar-month-outline.svg'), 'Viti')}
             {box('300000', getImg('map-marker-distance.svg'), 'Kilometra')}
             {box('Nafte', getImg('gas-station.svg'), 'Karburanti')}
-            {box('Manual', getImg('speedometer.svg', 'Transmisioni'))}
-        </FadeIn>
+            {box('Manual', getImg('speedometer.svg'), 'Transmisioni')}
+        </FadeInHoc>
     )
 }

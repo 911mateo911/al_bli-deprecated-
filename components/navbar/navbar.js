@@ -53,7 +53,7 @@ function Navbar() {
                 <Link href='/new' >
                     <a className={classes.linkItem} >Oferta</a>
                 </Link>
-                <Link href='/shit' >
+                <Link href='/produkt/shto' >
                     <a className={classes.linkItem} >Shit</a>
                 </Link>
             </div>
