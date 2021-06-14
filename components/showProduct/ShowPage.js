@@ -5,6 +5,7 @@ import Carousel from './Carousel'
 import Avatar from '@material-ui/core/Avatar'
 import Divider from '@material-ui/core/Divider'
 import Keywords from './Keywords'
+import Contact from './Contact'
 
 const useStyles = makeStyles(styles)
 const description =
@@ -48,6 +49,11 @@ export default function ShowPage() {
                 <h1 className={classes.h1} >
                     Shitet X5 2019 3.5 cdi nafte timon anglez.
                 </h1>
+                <Contact
+                    email='malajmateo@gmail.com'
+                    whatsapp='+355699675522'
+                    telephone='0699675522'
+                />
                 <Keywords list={keywordList} />
                 <Divider className={classes.divider} />
                 <div className={classes.description} >

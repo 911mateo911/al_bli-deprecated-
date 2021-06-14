@@ -2,8 +2,11 @@ const styles = theme => ({
     popover: {
         marginTop: '5px'
     },
+    paper: {
+        boxShadow: '0 4px 14px 0 rgb(0 0 0 / 10%)'
+    },
     root: {
-        width: 'fitContent',
+        width: 'fit-content',
         maxWidth: '500px',
         minWidth: '250px',
         padding: '10px',

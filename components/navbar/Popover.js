@@ -21,9 +21,11 @@ export default function PopoverElem({ open, close, anchor }) {
     return (
         <Popover
             className={classes.popover}
+            classes={{ paper: classes.paper }}
             open={open}
             onClose={close}
             id={id}
+            elevation={0}
             anchorEl={anchor}
             anchorOrigin={{
                 vertical: 'bottom',

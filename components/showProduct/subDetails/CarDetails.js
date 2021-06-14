@@ -80,6 +80,7 @@ export default function CarDetails() {
             {box('300000', getImg('map-marker-distance.svg'), 'Kilometra')}
             {box('Nafte', getImg('gas-station.svg'), 'Karburanti')}
             {box('Manual', getImg('speedometer.svg'), 'Transmisioni')}
+            {bigBox('16000 ALL', getImg('cash.svg'), 'Cmimi')}
         </FadeInHoc>
     )
 }

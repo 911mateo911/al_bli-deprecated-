@@ -1,6 +1,6 @@
 import React from 'react'
 import FadeInHoc from './FadeIn.hoc'
-import { box, getImg } from './CarDetails'
+import { box, getImg, bigBox } from './CarDetails'
 
 export default function MotorcycleDetails() {
     return (
@@ -8,6 +8,7 @@ export default function MotorcycleDetails() {
             {box('Kawasaki', getImg('motorbike.svg'), 'Marka')}
             {box('TX40', getImg('motorbike-electric.svg'), 'Modeli')}
             {box('13/06/2019', getImg('calendar-month-outline.svg'), 'Viti')}
+            {bigBox('16000 ALL', getImg('cash.svg'), 'Cmimi')}
         </FadeInHoc>
     )
 }
