@@ -11,7 +11,8 @@ const initialValues = {
     title: '',
     description: '',
     price: '',
-    currency: ''
+    currency: 'Lek',
+    keywords: ['shitet']
 }
 
 export const FormContext = createContext()

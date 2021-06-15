@@ -14,6 +14,7 @@ import CategorySelect from './CategorySelect'
 import SubCategories from './subCategories'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 import PriceInput from './PriceInput'
+import Keywords from './Keywords'
 import { FormContext, DispatchContext } from '../contexts/newProductForm.context'
 
 const useStyles = makeStyles(styles)
@@ -38,7 +39,7 @@ export default function NewProductForm(props) {
         <div className={classes.root} >
             <h1 className={classes.h1} >Posto produktin tend:</h1>
             <h3 className={classes.h3} >Plotesoni formularin e meposhtem duke pershkruar ne menyre korrekte produktin.
-            Publikimi i njoftimit eshte falas.</h3>
+                Publikimi i njoftimit eshte falas.</h3>
             <ValidatorForm noValidate className={classes.form} onSubmit={handleSubmit} >
                 <TextInput
                     label='Emer Mbiemer'
@@ -115,6 +116,7 @@ export default function NewProductForm(props) {
                     multiLine={true}
                     value={inputs.description}
                 />
+                <Keywords value={inputs.keywords} />
                 <PriceInput
                     label='Cmimi'
                     name='price'

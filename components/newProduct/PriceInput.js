@@ -11,7 +11,8 @@ import { makeStyles, createMuiTheme, ThemeProvider } from '@material-ui/core/sty
 const styles = theme => ({
     root: {
         width: '100%',
-        marginBottom: '20px'
+        marginBottom: '20px',
+        marginTop: '1rem'
     },
     lek: {
         color: '#0070f3'
@@ -55,9 +56,6 @@ function PriceInput({ label, value, currency }) {
                 value={currency}
                 onChange={e => dispatch({ type: 'onChange', name: 'currency', value: e.target.value })}
             >
-                <MenuItem value="">
-                    <em>None</em>
-                </MenuItem>
                 <MenuItem value='€'>€</MenuItem>
                 <MenuItem value='Lek'>Lek</MenuItem>
             </Select>
