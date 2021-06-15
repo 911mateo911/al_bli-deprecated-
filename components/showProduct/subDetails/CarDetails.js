@@ -74,13 +74,13 @@ export const bigBox = (value, imgUrl, text) => {
 export default function CarDetails() {
     return (
         <FadeInHoc>
+            {bigBox('16000 ALL', getImg('cash.svg'), 'Cmimi')}
             {box('BMW', getImg('car.svg'), 'Marka')}
             {box('X5', getImg('car-info.svg'), 'Modeli')}
             {box('13/06/2019', getImg('calendar-month-outline.svg'), 'Viti')}
             {box('300000', getImg('map-marker-distance.svg'), 'Kilometra')}
             {box('Nafte', getImg('gas-station.svg'), 'Karburanti')}
             {box('Manual', getImg('speedometer.svg'), 'Transmisioni')}
-            {bigBox('16000 ALL', getImg('cash.svg'), 'Cmimi')}
         </FadeInHoc>
     )
 }

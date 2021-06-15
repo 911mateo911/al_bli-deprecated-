@@ -1,17 +1,18 @@
 import React from 'react'
+import { useRouter } from 'next/router'
 import Link from 'next/link';
-import styles from '../../styles/navbar/navbar.styles';
-import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import InputAdornment from '@material-ui/core/InputAdornment';
+import styles from '../../styles/navbar/navbar.styles'
+import { makeStyles } from '@material-ui/core/styles'
+import TextField from '@material-ui/core/TextField'
+import Input from '@material-ui/core/Input'
+import InputLabel from '@material-ui/core/InputLabel'
+import InputAdornment from '@material-ui/core/InputAdornment'
 import { useState } from 'react'
-import Avatar from '@material-ui/core/Avatar';
-import SearchIcon from '@material-ui/icons/Search';
-import MenuIcon from '@material-ui/icons/Menu';
+import Avatar from '@material-ui/core/Avatar'
+import SearchIcon from '@material-ui/icons/Search'
+import MenuIcon from '@material-ui/icons/Menu'
 import MenuDrawer from './menuDrawer'
-import FormControl from '@material-ui/core/FormControl';
+import FormControl from '@material-ui/core/FormControl'
 import SearchBar from './searchBar'
 import PopoverElem from './Popover'
 
@@ -19,6 +20,7 @@ const useStyles = makeStyles(styles)
 
 function Navbar() {
     const classes = useStyles()
+    const router = useRouter()
     const [menuOpen, setMenu] = useState(false)
     const [searchOpen, setSearch] = useState(false)
     const [anchorEl, setAnchorEl] = React.useState(null);

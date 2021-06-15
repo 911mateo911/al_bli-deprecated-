@@ -47,17 +47,14 @@ function PriceInput({ label, value, currency }) {
     }, [])
     const moneySelect = (
         <FormControl variant="filled" className={classes.adornment}>
-            <InputLabel id="demo-simple-select-filled-label">Lek</InputLabel>
+            <InputLabel id="demo-simple-select-filled-label">Valuta</InputLabel>
             <Select
                 disableUnderline
-                labelId="demo-simple-select-filled-label"
-                id="demo-simple-select-filled"
-                defaultValue='Lek'
                 value={currency}
                 onChange={e => dispatch({ type: 'onChange', name: 'currency', value: e.target.value })}
             >
-                <MenuItem value='€'>€</MenuItem>
                 <MenuItem value='Lek'>Lek</MenuItem>
+                <MenuItem value='€'>€</MenuItem>
             </Select>
         </FormControl>)
     return (
