@@ -7,7 +7,6 @@ import Divider from '@material-ui/core/Divider';
 import HomeIcon from '@material-ui/icons/Home';
 import CategoryIcon from '@material-ui/icons/Category';
 import { makeStyles } from '@material-ui/core/styles';
-import SearchIcon from '@material-ui/icons/Search';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import styles from '../../styles/navbar/drawer.styles'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
