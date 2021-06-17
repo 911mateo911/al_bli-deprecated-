@@ -4,7 +4,7 @@ import { DispatchContext, FormContext } from '../../contexts/newProductForm.cont
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator'
 import { makeStyles } from '@material-ui/core/styles'
 import FormControl from '@material-ui/core/FormControl';
-import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
+import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 
 const styles = theme => ({
@@ -88,16 +88,17 @@ export default function Car() {
             <FormControl required={true} fullWidth >
                 <MuiPickersUtilsProvider
                     utils={DateFnsUtils} >
-                    <KeyboardDatePicker
-                        disableToolbar
-                        variant="inline"
+                    <DatePicker
                         format="MM/dd/yyyy"
                         margin="normal"
                         fullWidth
                         id="date-picker-inline"
                         label="Viti"
+                        views={['year', 'month']}
+                        openTo='year'
+                        inputVariant='filled'
                         value={input.viti}
-                        onChange={(e, date) => dispatch({ type: 'onChange', name: 'viti', value: date })}
+                        onChange={(date) => dispatch({ type: 'onChange', name: 'viti', value: date })}
                         KeyboardButtonProps={{
                             'aria-label': 'change date',
                         }}
