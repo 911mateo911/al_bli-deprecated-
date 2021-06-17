@@ -3,7 +3,6 @@ import Features from '../components/homepage/Features'
 import LatestPosts from '../components/homepage/LatestPosts'
 import Cta from '../components/homepage/Cta'
 import { makeStyles } from '@material-ui/core/styles'
-
 const styles = theme => ({
   root: {
     marginTop: '70px'

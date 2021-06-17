@@ -3,13 +3,9 @@ import { makeStyles } from '@material-ui/core/styles'
 import styles from '../../styles/newProduct/productForm.styles'
 import { SelectValidator, ValidatorForm } from 'react-material-ui-form-validator'
 import TextInput from './TextInput'
-import InputLabel from '@material-ui/core/InputLabel'
 import Button from '@material-ui/core/Button'
 import MenuItem from '@material-ui/core/MenuItem'
-import FormHelperText from '@material-ui/core/FormHelperText'
-import ListSubheader from '@material-ui/core/ListSubheader'
 import FormControl from '@material-ui/core/FormControl'
-import Select from '@material-ui/core/Select'
 import CategorySelect from './CategorySelect'
 import SubCategories from './subCategories'
 import { useRouter } from 'next/router'
@@ -17,6 +13,7 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 import PriceInput from './PriceInput'
 import Keywords from './Keywords'
 import axios from 'axios'
+import { FlashDispatchContext } from '../contexts/flashMsgs.context'
 import { FormContext, DispatchContext } from '../contexts/newProductForm.context'
 
 const useStyles = makeStyles(styles)
@@ -33,11 +30,16 @@ export default function NewProductForm(props) {
     const classes = useStyles()
     const inputs = useContext(FormContext)
     const dispatch = useContext(DispatchContext)
-    function handleSubmit(e) {
+    const router = useRouter()
+    const flashDispatch = useContext(FlashDispatchContext)
+    async function handleSubmit(e) {
         e.preventDefault()
-        axios.post('/api/add-product', {
+        const request = await axios.post('/api/add-product', {
             data: inputs
         })
+        const response = await request.data
+        flashDispatch({ type: 'addMessage', message: response.message })
+        flashDispatch({ type: 'showSnackbar' })
         router.replace('/')
     }
     return (

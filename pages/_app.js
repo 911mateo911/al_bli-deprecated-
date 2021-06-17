@@ -1,6 +1,7 @@
 import '../styles/globals.css'
 import Navbar from '../components/navbar/navbar'
 import { useEffect } from 'react'
+import { FlashMsgProvider } from '../components/contexts/flashMsgs.context'
 
 function MyApp({ Component, pageProps }) {
   useEffect(() => {
@@ -12,7 +13,9 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Navbar />
-      <Component {...pageProps} />
+      <FlashMsgProvider>
+        <Component {...pageProps} />
+      </FlashMsgProvider>
     </>
   )
 }
