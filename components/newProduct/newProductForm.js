@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import styles from '../../styles/newProduct/productForm.styles'
 import { SelectValidator, ValidatorForm } from 'react-material-ui-form-validator'
@@ -13,6 +13,7 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 import PriceInput from './PriceInput'
 import Keywords from './Keywords'
 import axios from 'axios'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import { FlashDispatchContext } from '../contexts/flashMsgs.context'
 import { FormContext, DispatchContext } from '../contexts/newProductForm.context'
 
@@ -26,24 +27,43 @@ const theme = createMuiTheme({
     }
 })
 
+const flashMessages = {
+    success: 'Postimi u ngarkua me sukses!',
+    error: 'Pati nje problem gjate ngarkimit!'
+}
+
 export default function NewProductForm(props) {
     const classes = useStyles()
     const inputs = useContext(FormContext)
     const dispatch = useContext(DispatchContext)
     const router = useRouter()
+    const [loading, setLoading] = useState(false)
     const flashDispatch = useContext(FlashDispatchContext)
     async function handleSubmit(e) {
         e.preventDefault()
+        setLoading(true)
         const request = await axios.post('/api/add-product', {
             data: inputs
         })
         const response = await request.data
-        flashDispatch({ type: 'addMessage', message: response.message })
+        flashDispatch({
+            type: 'addMessage',
+            message: flashMessages[response.message],
+            severity: response.message
+        })
         flashDispatch({ type: 'showSnackbar' })
         router.replace('/')
     }
+    const loader = (
+        <div className={classes.loaderWrap} >
+            <ThemeProvider theme={theme} >
+                <CircularProgress color='primary' />
+                <h3 className={classes.loaderText} >Duke ngarkuar...</h3>
+            </ThemeProvider>
+        </div>
+    )
     return (
-        <div className={classes.root} >
+        loading ? loader : (<div className={classes.root} >
             <h1 className={classes.h1} >Posto produktin tend:</h1>
             <h3 className={classes.h3} >Plotesoni formularin e meposhtem duke pershkruar ne menyre korrekte produktin.
                 Publikimi i njoftimit eshte falas.</h3>
@@ -140,6 +160,6 @@ export default function NewProductForm(props) {
                     >Vazhdo</Button>
                 </ThemeProvider>
             </ValidatorForm>
-        </div>
+        </div >)
     )
 }

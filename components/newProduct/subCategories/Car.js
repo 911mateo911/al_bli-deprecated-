@@ -94,7 +94,6 @@ export default function Car() {
                         fullWidth
                         id="date-picker-inline"
                         label="Viti"
-                        views={['year', 'month']}
                         openTo='year'
                         inputVariant='filled'
                         value={input.viti}

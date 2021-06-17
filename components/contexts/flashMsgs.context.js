@@ -3,7 +3,8 @@ import reducer from '../reducers/flashMsgs.reducer'
 
 const initialValues = {
     message: '',
-    open: false
+    open: false,
+    severity: ''
 }
 
 export const FlashMsgContext = createContext()

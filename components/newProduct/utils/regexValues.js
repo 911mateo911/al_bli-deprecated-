@@ -20,13 +20,13 @@ const regex = {
         maxLength: 20
     },
     title: {
-        regex: /[\s\S]*/,
-        message: 'Titulli duhet te jete 5-200 karaktere.',
+        regex: /^[\S\s]{1,200}$/,
+        message: 'Titulli duhet te jete 1-200 karaktere.',
         maxLength: 200
     },
     description: {
-        regex: /[\s\S]*/,
-        message: 'Pershkrimi duhet te jete 5-8000 karaktere.',
+        regex: /^[\S\s]{1,8000}$/,
+        message: 'Pershkrimi duhet te jete 1-8000 karaktere.',
         maxLength: 8000
     },
     price: {

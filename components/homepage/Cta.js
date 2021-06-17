@@ -22,8 +22,8 @@ export default function Cta() {
     return (
         <>
             {snackbar.open && (
-                <Snackbar open={snackbar.open} autoHideDuration={3000} onClose={() => dispatch({ type: 'hideSnackbar' })}>
-                    <Alert onClose={() => dispatch({ type: 'hideSnackbar' })} severity={snackbar.message}>
+                <Snackbar anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} className={classes.snackbar} open={snackbar.open} autoHideDuration={3000} onClose={() => dispatch({ type: 'hideSnackbar' })}>
+                    <Alert onClose={() => dispatch({ type: 'hideSnackbar' })} severity={snackbar.severity}>
                         {snackbar.message}
                     </Alert>
                 </Snackbar>

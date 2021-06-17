@@ -50,6 +50,20 @@ const styles = theme => ({
         color: 'white',
         alignSelf: 'flex-end',
         margin: '10px 0'
+    },
+    loaderWrap: {
+        width: '100%',
+        height: '100vh',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'column'
+    },
+    loaderText: {
+        width: 'fit - content',
+        margin: '10px',
+        fontFamily: 'Lato',
+        fontWeight: 400
     }
 })
 
