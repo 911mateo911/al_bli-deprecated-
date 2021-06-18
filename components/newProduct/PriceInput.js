@@ -55,6 +55,7 @@ function PriceInput({ label, value, currency }) {
             >
                 <MenuItem value='Lek'>Lek</MenuItem>
                 <MenuItem value='€'>€</MenuItem>
+                <MenuItem value='$'>$</MenuItem>
             </Select>
         </FormControl>)
     return (

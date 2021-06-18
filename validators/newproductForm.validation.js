@@ -10,7 +10,7 @@ const schema = Joi.object({
     title: Joi.string().min(1).max(200).required().pattern(/^[\S\s]{1,200}$/),
     description: Joi.string().min(1).max(8000).required().pattern(/^[\S\s]{1,8000}$/),
     price: Joi.string().min(1).max(15).required().pattern(/^\d{0,15}$/),
-    currency: Joi.string().valid('€', 'Lek'),
+    currency: Joi.string().valid('€', 'Lek', '$'),
     keywords: Joi.array().required().max(5),
     siperfaqe: Joi.string().optional().max(10),
     nrDhoma: Joi.string().optional().max(2),

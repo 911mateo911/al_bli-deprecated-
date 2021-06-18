@@ -12,6 +12,7 @@ import Divider from '@material-ui/core/Divider'
 import EditIcon from '@material-ui/icons/Edit';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 const useStyles = makeStyles(styles)
 
@@ -48,6 +49,12 @@ export default function PopoverElem({ open, close, anchor }) {
                             <AccountCircleIcon />
                         </ListItemIcon>
                         <ListItemText primary="Profili im" />
+                    </ListItem>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <FavoriteIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Te preferuarat" />
                     </ListItem>
                     <ListItem button>
                         <ListItemIcon>

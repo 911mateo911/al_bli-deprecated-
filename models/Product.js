@@ -6,6 +6,10 @@ const ProductSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
+    rating: {
+        type: Number,
+        default: 1
+    },
     telephone: Number,
     email: String,
     whatsapp: Number,

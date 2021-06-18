@@ -31,7 +31,8 @@ const styles = theme => ({
             marginBottom: '10px'
         },
         [theme.breakpoints.down('sm')]: {
-            width: '60%'
+            width: '60%',
+            maxHeight: 'fit-content'
         }
     },
     cta: {
