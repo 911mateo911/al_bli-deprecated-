@@ -76,10 +76,6 @@ const styles = theme => ({
             background: 'rgba(0,118,255,0.9)',
             boxShadow: '0 6px 20px rgb(0 118 255 / 23%)'
         }
-    },
-    snackbar: {
-        marginBottom: '10px !important',
-        marginRight: '10px !important'
     }
 })
 

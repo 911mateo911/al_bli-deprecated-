@@ -89,9 +89,6 @@ export default function Motorcycle() {
                         inputVariant='filled'
                         value={input.viti}
                         onChange={(date) => dispatch({ type: 'onChange', name: 'viti', value: date })}
-                        KeyboardButtonProps={{
-                            'aria-label': 'change date',
-                        }}
                     />
                 </MuiPickersUtilsProvider>
             </FormControl>

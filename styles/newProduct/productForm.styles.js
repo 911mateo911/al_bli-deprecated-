@@ -53,7 +53,7 @@ const styles = theme => ({
     },
     loaderWrap: {
         width: '100%',
-        height: '100vh',
+        height: 'calc(100vh - 70px)',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',

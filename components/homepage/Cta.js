@@ -4,30 +4,18 @@ import styles from '../../styles/index/cta.styles'
 import rocket from '../../public/rocket.png'
 import Link from 'next/link'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
-import Snackbar from '@material-ui/core/Snackbar'
-import MuiAlert from '@material-ui/lab/Alert'
-import { FlashMsgContext, FlashDispatchContext } from '../contexts/flashMsgs.context'
-
-function Alert(props) {
-    return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
+import Snackbar from '../newProduct/Snackbar'
+import { FlashMsgContext } from '../contexts/flashMsgs.context'
 
 const useStyles = makeStyles(styles)
 
 export default function Cta() {
     const classes = useStyles()
-    const snackbar = useContext(FlashMsgContext)
-    const dispatch = useContext(FlashDispatchContext)
     const { src: rocketSrc } = rocket
+    const isSnackbarOpen = useContext(FlashMsgContext)
     return (
         <>
-            {snackbar.open && (
-                <Snackbar anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} className={classes.snackbar} open={snackbar.open} autoHideDuration={3000} onClose={() => dispatch({ type: 'hideSnackbar' })}>
-                    <Alert onClose={() => dispatch({ type: 'hideSnackbar' })} severity={snackbar.severity}>
-                        {snackbar.message}
-                    </Alert>
-                </Snackbar>
-            )}
+            {isSnackbarOpen && <Snackbar />}
             <div className={classes.root} >
                 <LazyLoadImage
                     className={classes.img}

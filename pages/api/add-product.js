@@ -1,24 +1,27 @@
 import dbConnection from "../../utils/dbConnection";
 import Product from "../../models/Product";
-import { AirlineSeatIndividualSuiteRounded } from "@material-ui/icons";
+import { AirlineSeatIndividualSuiteRounded } from "@material-ui/icons"
+import validationSchema from '../../validators/newproductForm.validation'
+import CustomError from '../../middlewares/customError'
+import extendedData from '../../middlewares/extendProductData'
 
 export default async function handler(req, res) {
   try {
-    await dbConnection();
-    function slugify(str) {
-      const slugArr = str.split(" ");
-      return slugArr.join("_").toLowerCase();
+    await dbConnection()
+    const { data } = req.body
+    const product = validationSchema.validate(data)
+    if (product.error) {
+      throw new CustomError(product.error.message, 400)
     }
-    const { data } = req.body;
-    const newProduct = new Product(data)
-    newProduct.slug = slugify(data.title)
+    const newProduct = new Product(extendedData(data))
     await newProduct.save()
     res.send({
       message: "success",
     })
   } catch (e) {
     res.send({
-      message: 'error'
+      message: 'error',
+      errorMsg: e.msg
     })
   }
 }

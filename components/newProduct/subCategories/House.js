@@ -82,7 +82,7 @@ export default function House({ name }) {
                     margin='normal'
                     value={input.kate || ''}
                     inputProps={{
-                        maxLength: 5,
+                        maxLength: 2,
                         inputMode: 'numeric'
                     }}
                     validators={['required', 'isNumber']}

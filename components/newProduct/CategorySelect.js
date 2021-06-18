@@ -11,7 +11,7 @@ function CategorySelect({ value }) {
     const bgWhite = { backgroundColor: '#f2f2f2' }
     const dispatch = useContext(DispatchContext)
     const allCategories = categories.map(c => {
-        const categoryName = <ListSubheader style={bgWhite} color='primary' >
+        const categoryName = <ListSubheader value='' style={bgWhite} color='primary' >
             {c.emri}
         </ListSubheader>
         const subCategories = c.nenkategori.map(e => <MenuItem value={e} >{e}</MenuItem>)

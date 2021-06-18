@@ -77,9 +77,6 @@ export default function Phones() {
                         inputVariant='filled'
                         value={input.viti}
                         onChange={(date) => dispatch({ type: 'onChange', name: 'viti', value: date })}
-                        KeyboardButtonProps={{
-                            'aria-label': 'change date',
-                        }}
                     />
                 </MuiPickersUtilsProvider>
             </FormControl>

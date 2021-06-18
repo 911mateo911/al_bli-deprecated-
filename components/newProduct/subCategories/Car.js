@@ -98,9 +98,6 @@ export default function Car() {
                         inputVariant='filled'
                         value={input.viti}
                         onChange={(date) => dispatch({ type: 'onChange', name: 'viti', value: date })}
-                        KeyboardButtonProps={{
-                            'aria-label': 'change date',
-                        }}
                     />
                 </MuiPickersUtilsProvider>
             </FormControl>
@@ -115,7 +112,8 @@ export default function Car() {
                 margin='normal'
                 value={input.kilometra || ''}
                 inputProps={{
-                    inputMode: 'numeric'
+                    inputMode: 'numeric',
+                    maxLength: 10
                 }}
                 validators={['required', `isNumber`]}
                 errorMessages={['Kerkohet!', 'Kilometrat nuk jane korrekte!']}
@@ -149,7 +147,7 @@ export default function Car() {
                 margin='normal'
                 value={input.transmisioni || ''}
                 inputProps={{
-                    maxLength: 50
+                    maxLength: 30
                 }}
                 validators={['required', `isText`]}
                 errorMessages={['Kerkohet!', 'Te dhenat nuk jane korrekte!']}

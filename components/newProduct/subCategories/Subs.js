@@ -33,6 +33,7 @@ export default function Subs({ subCategories, name }) {
                 value={input[name] || ''}
                 validators={['required']}
                 variant='filled'
+                name={name}
                 errorMessages={['Kerkohet!']}
                 onChange={e => dispatch({ type: 'onChange', name, value: e.target.value })}
             >
