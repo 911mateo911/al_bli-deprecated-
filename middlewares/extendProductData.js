@@ -9,7 +9,7 @@ function extendData(data) {
     if (data.keywords.length < 5) {
         let i = 0
         while (formData.keywords.length < 5) {
-            formData.keywords.push(titleKeywors[i])
+            formData.keywords.push(titleKeywors[i] || '')
             i++
         }
     }

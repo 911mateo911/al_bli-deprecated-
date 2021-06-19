@@ -1,10 +1,15 @@
 import mongoose from 'mongoose'
 
+function getTodaysDate() {
+    const today = new Date()
+    return `${today.getDate()}/${today.getMonth()}/${today.getFullYear()}`
+}
+
 const ProductSchema = new mongoose.Schema({
     name: String,
     date: {
         type: Date,
-        default: Date.now
+        default: getTodaysDate()
     },
     rating: {
         type: Number,

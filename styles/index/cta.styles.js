@@ -7,6 +7,7 @@ const styles = theme => ({
         alignItems: 'center',
         width: '90%',
         margin: '10px auto',
+        marginTop: '0',
         marginBottom: '1000px',
         [theme.breakpoints.down('md')]: {
             width: '100%',

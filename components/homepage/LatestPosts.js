@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import "swiper/swiper.min.css"
 import "swiper/components/pagination/pagination.min.css"
 import "swiper/components/navigation/navigation.min.css"
+import { useMediaQuery } from '@material-ui/core'
 import SwiperCore, {
     Pagination, Navigation
 } from 'swiper/core'
@@ -29,7 +30,10 @@ const styles = theme => ({
         width: '95%',
         margin: 'auto',
         marginTop: '0',
-        paddingBottom: '35px'
+        paddingBottom: '35px',
+        [theme.breakpoints.down('xs')]: {
+            width: '100%'
+        }
     },
     slide: {
         width: 'auto'
@@ -38,8 +42,9 @@ const styles = theme => ({
 
 const useStyles = makeStyles(styles)
 
-export default function LatestPosts() {
+export default function LatestPosts({ posts }) {
     const classes = useStyles()
+    const isMobile = useMediaQuery('(max-width:600px)')
     return (
         <>
             <h3 className={classes.h3} >Te fundit</h3>
@@ -47,59 +52,24 @@ export default function LatestPosts() {
                 className={classes.root}
                 slidesPerView={'auto'}
                 spaceBetween={20}
+                centeredSlides={isMobile}
                 navigation
                 pagination={{
                     'clickable': true
                 }}
             >
-                <SwiperSlide className={classes.slide} >
-                    <Post
-                        profilePic=''
-                        name='Mateo Malaj'
-                        title='Shitet X5 2019 3.5 cdi nafte timon anglez.'
-                        date='19/08/2021'
-                    />
-                </SwiperSlide>
-                <SwiperSlide className={classes.slide} >
-                    <Post
-                        profilePic=''
-                        name='Mateo Malaj'
-                        title='Shitet X5 2019 3.5 cdi nafte timon anglez.'
-                        date='19/08/2021'
-                    />
-                </SwiperSlide>
-                <SwiperSlide className={classes.slide} >
-                    <Post
-                        profilePic=''
-                        name='Mateo Malaj'
-                        title='Shitet X5 2019 3.5 cdi nafte timon anglez.'
-                        date='19/08/2021'
-                    />
-                </SwiperSlide>
-                <SwiperSlide className={classes.slide} >
-                    <Post
-                        profilePic=''
-                        name='Mateo Malaj'
-                        title='Shitet X5 2019 3.5 cdi nafte timon anglez.'
-                        date='19/08/2021'
-                    />
-                </SwiperSlide>
-                <SwiperSlide className={classes.slide} >
-                    <Post
-                        profilePic=''
-                        name='Mateo Malaj'
-                        title='Shitet X5 2019 3.5 cdi nafte timon anglez.'
-                        date='19/08/2021'
-                    />
-                </SwiperSlide>
-                <SwiperSlide className={classes.slide} >
-                    <Post
-                        profilePic=''
-                        name='Mateo Malaj'
-                        title='Shitet X5 2019 3.5 cdi nafte timon anglez.'
-                        date='19/08/2021'
-                    />
-                </SwiperSlide>
+                {posts.map((e, i) => {
+                    return (
+                        <SwiperSlide className={classes.slide} key={i} >
+                            <Post
+                                profilePic=''
+                                name={e.name}
+                                title={e.title}
+                                date={e.date}
+                            />
+                        </SwiperSlide>
+                    )
+                })}
             </Swiper>
         </>
     )

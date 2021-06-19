@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
         textOverflow: 'ellipsis'
     },
     avatar: {
-        backgroundColor: '#4caf50',
+        backgroundColor: '#3291ff',
     },
     date: {
         fontFamily: 'Source Sans Pro',

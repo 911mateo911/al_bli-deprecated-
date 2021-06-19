@@ -1,6 +1,5 @@
-import dbConnection from "../../utils/dbConnection";
-import Product from "../../models/Product";
-import { AirlineSeatIndividualSuiteRounded } from "@material-ui/icons"
+import dbConnection from "../../utils/dbConnection"
+import Product from "../../models/Product"
 import validationSchema from '../../validators/newproductForm.validation'
 import CustomError from '../../middlewares/customError'
 import extendedData from '../../middlewares/extendProductData'

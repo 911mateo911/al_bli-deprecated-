@@ -55,6 +55,7 @@ const styles = theme => ({
         width: '100%',
         height: 'calc(100vh - 70px)',
         display: 'flex',
+        marginTop: '70px',
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'column'
