@@ -8,6 +8,8 @@ import Keywords from './Keywords'
 import Contact from './Contact'
 import TimeAgo from 'javascript-time-ago'
 import sq from 'javascript-time-ago/locale/sq'
+import Error from '../Error'
+import shoes from '../../public/shoes.png'
 TimeAgo.addLocale(sq)
 const timeAgo = new TimeAgo('sq')
 
@@ -15,6 +17,15 @@ const useStyles = makeStyles(styles)
 
 export default function ShowPage({ product }) {
     const classes = useStyles()
+    if (product.error) {
+        return (
+            <Error
+                src={shoes.src}
+                h1='Faqja nuk u gjend!'
+                desc='Pati nje ngaterrese :('
+            />
+        )
+    }
     const {
         date,
         keywords,

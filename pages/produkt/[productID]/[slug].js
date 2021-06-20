@@ -23,10 +23,12 @@ export async function getServerSideProps(context) {
             }
         }
     } catch (e) {
-        console.log(e)
+        context.res.statuscode = 404
         return {
             props: {
-                product: 'Nje gabim ndodhi gjate marrjes se te dhenave'
+                product: {
+                    error: 404
+                }
             }
         }
     }
