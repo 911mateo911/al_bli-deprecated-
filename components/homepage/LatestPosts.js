@@ -6,10 +6,14 @@ import "swiper/swiper.min.css"
 import "swiper/components/pagination/pagination.min.css"
 import "swiper/components/navigation/navigation.min.css"
 import { useMediaQuery } from '@material-ui/core'
+import TimeAgo from 'javascript-time-ago'
+import sq from 'javascript-time-ago/locale/sq'
 import SwiperCore, {
     Pagination, Navigation
 } from 'swiper/core'
 SwiperCore.use([Pagination, Navigation])
+TimeAgo.addLocale(sq)
+const timeAgo = new TimeAgo('sq')
 
 const styles = theme => ({
     '@global': {
@@ -65,7 +69,7 @@ export default function LatestPosts({ posts }) {
                                 profilePic=''
                                 name={e.name}
                                 title={e.title}
-                                date={e.date}
+                                date={timeAgo.format(Date.parse(e.date))}
                             />
                         </SwiperSlide>
                     )

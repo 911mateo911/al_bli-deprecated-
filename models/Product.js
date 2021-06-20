@@ -9,6 +9,10 @@ const ProductSchema = new mongoose.Schema({
     name: String,
     date: {
         type: Date,
+        default: new Date()
+    },
+    postDate: {
+        type: String,
         default: getTodaysDate()
     },
     rating: {

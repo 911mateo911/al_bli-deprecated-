@@ -6,6 +6,7 @@ const schema = Joi.object({
     email: Joi.string().required().max(50).pattern(/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/),
     whatsapp: Joi.string().min(0).max(20).required().pattern(/^(?:[+\d].*\d|\d)$/),
     city: Joi.string().required(),
+    date: Joi.string().optional,
     category: Joi.string().required(),
     title: Joi.string().min(1).max(200).required().pattern(/^[\S\s]{1,200}$/),
     description: Joi.string().min(1).max(8000).required().pattern(/^[\S\s]{1,8000}$/),
