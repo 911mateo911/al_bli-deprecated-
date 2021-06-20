@@ -22,7 +22,7 @@ const images = [
 
 const useStyles = makeStyles(styles)
 
-export default function Carousel() {
+export default function Carousel({ product }) {
     const classes = useStyles()
     const renderImgs = images.map((img, i) => {
         return (
@@ -51,7 +51,7 @@ export default function Carousel() {
                 className={classes.root} >
                 {renderImgs}
             </Swiper >
-            <ProdDetails category='makina' />
+            <ProdDetails category={product.category} product={product} />
         </span>
     )
 }

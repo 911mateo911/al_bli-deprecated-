@@ -4,6 +4,7 @@ function extendData(data) {
         const slugArr = str.split(" ")
         return slugArr.join("_").toLowerCase()
     }
+    formData.date = new Date()
     formData.slug = slugify(data.title)
     const titleKeywors = data.title.split(' ')
     if (data.keywords.length < 5) {

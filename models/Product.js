@@ -1,19 +1,20 @@
 import mongoose from 'mongoose'
 
-function getTodaysDate() {
-    const today = new Date()
-    return `${today.getDate()}/${today.getMonth()}/${today.getFullYear()}`
+export function formattedDate(dt) {
+    const [month, day, year] = [dt.getMonth(), dt.getDate(), dt.getFullYear()]
+    let formattedMonth = month
+    if (month < 10) formattedMonth = `0${month}`
+    return `${formattedMonth}/${day}/${year}`
 }
 
 const ProductSchema = new mongoose.Schema({
     name: String,
     date: {
-        type: Date,
-        default: new Date()
+        type: Date
     },
     postDate: {
         type: String,
-        default: getTodaysDate()
+        default: formattedDate(new Date())
     },
     rating: {
         type: Number,
@@ -33,6 +34,6 @@ const ProductSchema = new mongoose.Schema({
         default: 'Shitet'
     }],
     slug: String
-})
+}, { strict: false })
 
 export default mongoose.models.Product || mongoose.model('Product', ProductSchema)

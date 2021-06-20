@@ -33,6 +33,15 @@ const flashMessages = {
     error: 'Pati nje problem gjate ngarkimit!'
 }
 
+const clean = obj => {
+    for (let key in obj) {
+        if (obj[key] === '') {
+            delete obj[key]
+        }
+    }
+    return obj
+}
+
 export default function NewProductForm(props) {
     const classes = useStyles()
     const inputs = useContext(FormContext)
@@ -45,7 +54,7 @@ export default function NewProductForm(props) {
         e.preventDefault()
         setLoading(true)
         const request = await axios.post('/api/add-product', {
-            data: inputs
+            data: clean(inputs)
         })
         const response = await request.data
         flashDispatch({
@@ -54,7 +63,7 @@ export default function NewProductForm(props) {
             severity: response.message
         })
         flashDispatch({ type: 'showSnackbar' })
-        if(response.message === 'error') setLoading(false)
+        if (response.message === 'error') setLoading(false)
         if (response.message === 'success') router.replace('/')
     }
     const loader = (

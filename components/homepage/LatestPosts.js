@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React from 'react'
 import { Swiper, SwiperSlide } from "swiper/react"
 import Post from './Post'
 import { makeStyles } from '@material-ui/core/styles'
@@ -46,7 +46,7 @@ const styles = theme => ({
 
 const useStyles = makeStyles(styles)
 
-export default function LatestPosts({ posts }) {
+export default function LatestPosts({ posts, setLoading }) {
     const classes = useStyles()
     const isMobile = useMediaQuery('(max-width:600px)')
     return (
@@ -69,6 +69,11 @@ export default function LatestPosts({ posts }) {
                                 profilePic=''
                                 name={e.name}
                                 title={e.title}
+                                price={e.price}
+                                currency={e.currency}
+                                setLoading={setLoading}
+                                id={e._id}
+                                slug={e.slug}
                                 date={timeAgo.format(Date.parse(e.date))}
                             />
                         </SwiperSlide>

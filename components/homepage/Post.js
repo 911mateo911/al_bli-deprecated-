@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
+import { useRouter } from 'next/router'
 import clsx from 'clsx'
 import Card from '@material-ui/core/Card'
 import CardHeader from '@material-ui/core/CardHeader'
@@ -53,12 +54,22 @@ const useStyles = makeStyles((theme) => ({
         fontFamily: 'Source Sans Pro',
         color: 'rgba(0,0,0,0.9)',
         fontSize: '1rem',
-        fontWeight: '600',
+        fontWeight: '600'
+    },
+    price: {
+        margin: '0',
+        marginLeft: 'auto',
+        marginRight: '12px',
+        fontFamily: 'Lato',
+        color: '#111',
+        fontSize: '1.1rem',
+        fontWeight: '700'
     }
 }))
 
-export default function Post({ profilePic, name, title, date }) {
+export default function Post({ profilePic, name, setLoading, title, date, price, currency, id, slug }) {
     const classes = useStyles()
+    const router = useRouter()
     const getAvatar = () => {
         return (
             profilePic.length ?
@@ -68,6 +79,10 @@ export default function Post({ profilePic, name, title, date }) {
                 </Avatar>
         )
     }
+    function handleClick() {
+        setLoading(true)
+        router.push(`produkt/${id}/${slug}`)
+    }
     return (
         <Card className={classes.root} >
             <CardHeader
@@ -75,7 +90,7 @@ export default function Post({ profilePic, name, title, date }) {
                 title={<h2 className={classes.name} >{name}</h2>}
                 subheader={<h2 className={classes.date}>{date}</h2>}
             />
-            <CardActionArea>
+            <CardActionArea onClick={handleClick} >
                 <CardMedia
                     image='https://res.cloudinary.com/dxtjwhnoz/image/upload/v1620413209/alHotel/vofgvdpwve5nbvx6agky.webp'
                     className={classes.media}
@@ -91,6 +106,7 @@ export default function Post({ profilePic, name, title, date }) {
                 <IconButton>
                     <ShareIcon />
                 </IconButton>
+                <h4 className={classes.price} >{`${price} ${currency}`}</h4>
             </CardActions>
         </Card>
     )
