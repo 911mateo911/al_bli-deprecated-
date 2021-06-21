@@ -15,57 +15,9 @@ import FavoriteIcon from '@material-ui/icons/Favorite'
 import ShareIcon from '@material-ui/icons/Share'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import CardActionArea from '@material-ui/core/CardActionArea'
+import styles from '../../styles/index/post.styles'
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        maxWidth: '350px',
-        minWidth: '300px',
-        boxShadow: '0 2px 7px 0 rgb(0 0 0 / 5%)',
-        border: '.5px solid #eaeaea',
-        '&:hover': {
-            boxShadow: '0 4px 14px 0 rgb(0 0 0 / 10%)'
-        }
-    },
-    media: {
-        height: 0,
-        paddingTop: '56.25%',
-    },
-    h3: {
-        fontFamily: 'Lato',
-        fontWeight: '500',
-        color: 'rgba(0, 0, 0, 0.8)',
-        margin: '0',
-        overflowX: 'hidden',
-        width: '100%',
-        textOverflow: 'ellipsis'
-    },
-    avatar: {
-        backgroundColor: '#3291ff',
-    },
-    date: {
-        fontFamily: 'Source Sans Pro',
-        margin: '0',
-        fontSize: '.9rem',
-        fontWeight: '600',
-        color: 'rgba(0, 0, 0, 0.8)'
-    },
-    name: {
-        margin: '0',
-        fontFamily: 'Source Sans Pro',
-        color: 'rgba(0,0,0,0.9)',
-        fontSize: '1rem',
-        fontWeight: '600'
-    },
-    price: {
-        margin: '0',
-        marginLeft: 'auto',
-        marginRight: '12px',
-        fontFamily: 'Lato',
-        color: '#111',
-        fontSize: '1.1rem',
-        fontWeight: '700'
-    }
-}))
+const useStyles = makeStyles(styles)
 
 export default function Post({ profilePic, name, setLoading, title, date, price, currency, id, slug }) {
     const classes = useStyles()

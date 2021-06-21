@@ -1,20 +1,9 @@
 import mongoose from 'mongoose'
 
-export function formattedDate(dt) {
-    const [month, day, year] = [dt.getMonth(), dt.getDate(), dt.getFullYear()]
-    let formattedMonth = month
-    if (month < 10) formattedMonth = `0${month}`
-    return `${formattedMonth}/${day}/${year}`
-}
-
 const ProductSchema = new mongoose.Schema({
     name: String,
     date: {
         type: Date
-    },
-    postDate: {
-        type: String,
-        default: formattedDate(new Date())
     },
     rating: {
         type: Number,
@@ -33,7 +22,21 @@ const ProductSchema = new mongoose.Schema({
         type: String,
         default: 'Shitet'
     }],
-    slug: String
-}, { strict: false })
+    slug: String,
+    siperfaqe: String,
+    nrDhoma: String,
+    adresa: String,
+    marka: String,
+    modeli: String,
+    viti: String,
+    karburanti: String,
+    kilometra: String,
+    transmisioni: String,
+    prodhuesi: String,
+    subAnije: String,
+    subPjeseKembimi: String,
+    subMakinaBujqesore: String,
+    subDekorime: String
+})
 
 export default mongoose.models.Product || mongoose.model('Product', ProductSchema)

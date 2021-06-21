@@ -13,7 +13,8 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 import PriceInput from './PriceInput'
 import Keywords from './Keywords'
 import axios from 'axios'
-import CircularProgress from '@material-ui/core/CircularProgress'
+import Loader from '../Loader'
+import infinity from '../../public/infinity.svg'
 import { FlashDispatchContext, FlashMsgContext } from '../contexts/flashMsgs.context'
 import Snackbar from '../newProduct/Snackbar'
 import { FormContext, DispatchContext } from '../contexts/newProductForm.context'
@@ -66,16 +67,8 @@ export default function NewProductForm(props) {
         if (response.message === 'error') setLoading(false)
         if (response.message === 'success') router.replace('/')
     }
-    const loader = (
-        <div className={classes.loaderWrap} >
-            <ThemeProvider theme={theme} >
-                <CircularProgress color='primary' />
-                <h3 className={classes.loaderText} >Duke ngarkuar...</h3>
-            </ThemeProvider>
-        </div>
-    )
     return (
-        loading ? loader : (<div className={classes.root} >
+        loading ? <Loader src={infinity.src} message='Po ngarkohet...' /> : (<div className={classes.root} >
             {snackbarOpen && <Snackbar />}
             <h1 className={classes.h1} >Posto produktin tend:</h1>
             <h3 className={classes.h3} >Plotesoni formularin e meposhtem duke pershkruar ne menyre korrekte produktin.

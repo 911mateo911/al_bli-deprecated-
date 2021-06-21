@@ -20,7 +20,17 @@ export default function ProdDetails({ category, product }) {
     }
     return (
         <div className={classes.root} >
-            {isCategory('Makina') && <CarDetails />}
+            {isCategory('Makina') && <CarDetails
+                currency={product.currency}
+                cmimi={product.price}
+                marka={product.marka}
+                modeli={product.modeli}
+                viti={product.viti}
+                city={product.city}
+                km={product.kilometra}
+                karburanti={product.karburanti}
+                transmisioni={product.transmisioni}
+            />}
             {isCategory('Motorcikleta') && <MotorCycleDetails
                 cmimi={product.price}
                 marka={product.marka}
@@ -29,7 +39,14 @@ export default function ProdDetails({ category, product }) {
                 currency={product.currency}
                 city={product.city}
             />}
-            {isCategory('Shtepi') && <HouseDetails />}
+            {isCategory('Shtepi') && <HouseDetails
+                cmimi={product.price}
+                city={product.city}
+                nrDhoma={product.nrDhoma}
+                siperfaqe={product.siperfaqe}
+                nrKate={product.nrKate}
+                adresa={product.adresa}
+            />}
         </div>
     )
 }

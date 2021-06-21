@@ -1,15 +1,22 @@
 import React from 'react'
-import FadeInHoc from './FadeIn.hoc'
 import { box, getImg, bigBox } from './CarDetails'
 
-export default function HouseDetails() {
+export default function HouseDetails({
+    city,
+    cmimi,
+    nrDhoma,
+    nrKate,
+    adresa,
+    siperfaqe
+}) {
     return (
-        <FadeInHoc>
-            {bigBox('160000 ALL', getImg('cash.svg'), 'Cmimi')}
-            {box('3', getImg('home-assistant.svg'), 'Nr. i dhomave')}
-            {box('109m2', getImg('home-outline.svg'), 'Modeli')}
-            {box('2', getImg('home-modern.svg'), 'Nr. i kateve')}
-            {bigBox('Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commo', getImg('home-map-marker.svg'), 'Adresa')}
-        </FadeInHoc>
+        <>
+            {bigBox(`${cmimi} ${currency}`, getImg('cash.svg'), 'Cmimi')}
+            {bigBox(city, getImg('city-variant-outline.svg'), 'Qyteti')}
+            {box(nrDhoma, getImg('home-assistant.svg'), 'Nr. i dhomave')}
+            {box(siperfaqe, getImg('home-floor-l.svg'), 'Siperfaqe')}
+            {box(nrKate, getImg('home-modern.svg'), 'Nr. i kateve')}
+            {bigBox(adresa, getImg('home-map-marker.svg'), 'Adresa')}
+        </>
     )
 }

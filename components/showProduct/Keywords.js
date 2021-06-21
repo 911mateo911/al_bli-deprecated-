@@ -20,7 +20,7 @@ export default function Keywords({ list }) {
                     avatar={
                         <Avatar
                             className={classes.chipAvatar} >
-                            {k[0].toUpperCase()}
+                            {k.toString().toUpperCase()[0]}
                         </Avatar>
                     }
                 />

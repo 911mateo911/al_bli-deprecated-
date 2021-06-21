@@ -8,6 +8,8 @@ import "swiper/components/navigation/navigation.min.css"
 import { useMediaQuery } from '@material-ui/core'
 import TimeAgo from 'javascript-time-ago'
 import sq from 'javascript-time-ago/locale/sq'
+import styles from '../../styles/index/latestPosts.styles'
+import shoes from '../../public/shoes.png'
 import SwiperCore, {
     Pagination, Navigation
 } from 'swiper/core'
@@ -15,39 +17,22 @@ SwiperCore.use([Pagination, Navigation])
 TimeAgo.addLocale(sq)
 const timeAgo = new TimeAgo('sq')
 
-const styles = theme => ({
-    '@global': {
-        '.swiper-button-next,.swiper-button-prev': {
-            color: '#0070f3',
-            marginTop: '-35px'
-        }
-    },
-    h3: {
-        color: '#111',
-        fontFamily: 'Source Sans Pro',
-        textAlign: 'center',
-        fontSize: '2rem',
-        marginTop: '25px',
-        margin: '10px'
-    },
-    root: {
-        width: '95%',
-        margin: 'auto',
-        marginTop: '0',
-        paddingBottom: '35px',
-        [theme.breakpoints.down('xs')]: {
-            width: '100%'
-        }
-    },
-    slide: {
-        width: 'auto'
-    }
-})
-
 const useStyles = makeStyles(styles)
 
 export default function LatestPosts({ posts, setLoading }) {
     const classes = useStyles()
+    const { src: shoesPng } = shoes
+    const errorMsg = (
+        <>
+            <h3 className={classes.h3} >Te fundit</h3>
+            <div className={classes.errorWrap} >
+                <img className={classes.errorImg} src={shoesPng} />
+                <p className={classes.errorMsg} >Pati nje problem!</p>
+            </div>
+        </>
+    )
+    if (posts.error) return errorMsg
+    const latestPosts = JSON.parse(posts)
     const isMobile = useMediaQuery('(max-width:600px)')
     return (
         <>
@@ -62,7 +47,7 @@ export default function LatestPosts({ posts, setLoading }) {
                     'clickable': true
                 }}
             >
-                {posts.map((e, i) => {
+                {latestPosts.map((e, i) => {
                     return (
                         <SwiperSlide className={classes.slide} key={i} >
                             <Post
