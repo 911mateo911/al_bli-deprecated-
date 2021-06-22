@@ -30,7 +30,7 @@ export default function ProdDetails({ category, product }) {
     }
     function isNoneOfAbove() {
         return isCategory('Makina') || isCategory('Motorcikleta') ||
-            isCategory('Shtepi') || hasSubCategory() || isOtherHouse()
+            isCategory('Shtepi/Vila') || hasSubCategory() || isOtherHouse()
     }
     return (
         <div className={classes.root} >
@@ -53,9 +53,10 @@ export default function ProdDetails({ category, product }) {
                 currency={product.currency}
                 city={product.city}
             />}
-            {isCategory('Shtepi') && <HouseDetails
+            {isCategory('Shtepi/Vila') && <HouseDetails
                 cmimi={product.price}
                 city={product.city}
+                currency={product.currency}
                 nrDhoma={product.nrDhoma}
                 siperfaqe={product.siperfaqe}
                 nrKate={product.nrKate}

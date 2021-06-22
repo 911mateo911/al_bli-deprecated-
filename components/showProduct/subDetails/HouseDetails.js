@@ -7,6 +7,7 @@ export default function HouseDetails({
     cmimi,
     nrDhoma,
     nrKate,
+    currency,
     adresa,
     siperfaqe
 }) {
@@ -15,7 +16,7 @@ export default function HouseDetails({
             {bigBox(`${cmimi} ${currency}`, getImg('cash.svg'), 'Cmimi')}
             {bigBox(city, getImg('city-variant-outline.svg'), 'Qyteti')}
             {box(nrDhoma, getImg('home-assistant.svg'), 'Nr. i dhomave')}
-            {box(siperfaqe, getImg('home-floor-l.svg'), 'Siperfaqe')}
+            {box(`${siperfaqe} m2`, getImg('home-floor-l.svg'), 'Siperfaqe')}
             {box(nrKate, getImg('home-modern.svg'), 'Nr. i kateve')}
             {bigBox(adresa, getImg('home-map-marker.svg'), 'Adresa')}
         </FadeInHoc>
