@@ -27,7 +27,7 @@ export default function Post({ profilePic, name, setLoading, title, date, price,
             profilePic.length ?
                 <Avatar className={classes.avatar} src={profilePic} /> :
                 <Avatar className={classes.avatar}>
-                    {name[0]}
+                    {name[0].toUpperCase()}
                 </Avatar>
         )
     }

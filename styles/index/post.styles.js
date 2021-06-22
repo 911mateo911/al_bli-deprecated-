@@ -2,7 +2,7 @@ const styles = theme => ({
     root: {
         maxWidth: '350px',
         minWidth: '300px',
-        boxShadow: '0 2px 7px 0 rgb(0 0 0 / 5%)',
+        boxShadow: '0 3px 10px 0 rgb(0 0 0 / 8%)',
         border: '.5px solid #eaeaea',
         '&:hover': {
             boxShadow: '0 4px 14px 0 rgb(0 0 0 / 10%)'

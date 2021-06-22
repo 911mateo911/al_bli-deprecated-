@@ -15,6 +15,8 @@ import MenuDrawer from './menuDrawer'
 import FormControl from '@material-ui/core/FormControl'
 import SearchBar from './searchBar'
 import PopoverElem from './Popover'
+import { theme } from './searchBar'
+import { ThemeProvider } from '@material-ui/core/styles'
 
 const useStyles = makeStyles(styles)
 
@@ -77,16 +79,18 @@ function Navbar() {
                 <FormControl
                     fullWidth
                 >
-                    <InputLabel htmlFor="input-with-icon-adornment">Kerko</InputLabel>
-                    <Input
-                        placeholder='Kerko produkte'
-                        id="input-with-icon-adornment"
-                        startAdornment={
-                            <InputAdornment position="start">
-                                <SearchIcon />
-                            </InputAdornment>
-                        }
-                    />
+                    <ThemeProvider theme={theme}>
+                        <InputLabel htmlFor="input-with-icon-adornment">Kerko</InputLabel>
+                        <Input
+                            placeholder='Kerko produkte'
+                            id="input-with-icon-adornment"
+                            startAdornment={
+                                <InputAdornment position="start">
+                                    <SearchIcon />
+                                </InputAdornment>
+                            }
+                        />
+                    </ThemeProvider>
                 </FormControl>
                 <Avatar onClick={openPopover} className={classes.socialAvt}>M</Avatar>
                 <PopoverElem anchor={anchorEl} open={popoverOpen} close={closePopover} />
