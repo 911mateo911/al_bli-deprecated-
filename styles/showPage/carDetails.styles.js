@@ -4,6 +4,7 @@ const styles = theme => ({
         display: 'flex',
         width: '100px',
         margin: '10px',
+        minWidth: '100px',
         height: '100px',
         borderRadius: '5px',
         boxShadow: '0 4px 14px 0 rgb(0 0 0 / 10%)',

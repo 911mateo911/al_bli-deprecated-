@@ -65,7 +65,7 @@ export default function NewProductForm(props) {
         })
         flashDispatch({ type: 'showSnackbar' })
         if (response.message === 'error') setLoading(false)
-        if (response.message === 'success') router.replace('/')
+        if (response.message === 'success') router.replace(response.redirectTo)
     }
     return (
         loading ? <Loader src={infinity.src} message='Po ngarkohet...' /> : (<div className={classes.root} >

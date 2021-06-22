@@ -1,3 +1,5 @@
+import addKeywords from "./addKeywords"
+
 function extendData(data) {
     const formData = data
     function slugify(str) {
@@ -7,13 +9,9 @@ function extendData(data) {
     formData.date = new Date()
     formData.slug = slugify(data.title)
     const titleKeywors = data.title.split(' ')
-    if (data.keywords.length < 5) {
-        let i = 0
-        while (formData.keywords.length < 5) {
-            formData.keywords.push(titleKeywors[i] || '')
-            i++
-        }
-    }
+    const descKeywords = data.description.split(' ')
+    const fallBackKeywords = [data.city, data.category, data.name]
+    formData.keywords = addKeywords(titleKeywors, descKeywords, fallBackKeywords, data.keywords)
     return formData
 }
 

@@ -16,6 +16,7 @@ export default async function handler(req, res) {
     await newProduct.save()
     res.send({
       message: "success",
+      redirectTo: `${newProduct._id}/${newProduct.slug}`
     })
   } catch (e) {
     res.send({
