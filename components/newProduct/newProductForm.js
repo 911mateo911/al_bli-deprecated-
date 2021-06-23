@@ -17,6 +17,7 @@ import Loader from '../Loader'
 import infinity from '../../public/infinity.svg'
 import { FlashDispatchContext, FlashMsgContext } from '../contexts/flashMsgs.context'
 import Snackbar from '../newProduct/Snackbar'
+import FilePicker from './FIlePicker'
 import { FormContext, DispatchContext } from '../contexts/newProductForm.context'
 
 const useStyles = makeStyles(styles)
@@ -149,6 +150,7 @@ export default function NewProductForm(props) {
                     multiLine={true}
                     value={inputs.description}
                 />
+                <FilePicker />
                 <Keywords value={inputs.keywords} />
                 <PriceInput
                     label='Cmimi'

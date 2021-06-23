@@ -7,9 +7,9 @@ import ProdDetails from './ProdDetails'
 import "swiper/swiper.min.css"
 import "swiper/components/pagination/pagination.min.css"
 import "swiper/components/navigation/navigation.min.css"
-import 'react-lazy-load-image-component/src/effects/black-and-white.css';
-import SwiperCore, { Pagination, Navigation } from 'swiper/core';
-SwiperCore.use([Pagination, Navigation]);
+import 'react-lazy-load-image-component/src/effects/black-and-white.css'
+import SwiperCore, { Pagination, Navigation } from 'swiper/core'
+SwiperCore.use([Pagination, Navigation])
 
 const images = [
     'https://res.cloudinary.com/dxtjwhnoz/image/upload/v1620413209/alHotel/vofgvdpwve5nbvx6agky.webp',
