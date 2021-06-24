@@ -1,31 +1,34 @@
-import React, { useState, useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { makeStyles } from '@material-ui/core'
 import styles from '../../styles/newProduct/filePicker.styles'
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/swiper.min.css"
 import Button from '@material-ui/core/Button'
+import { DispatchContext } from '../contexts/newProductForm.context'
 import ClearAllIcon from '@material-ui/icons/ClearAll'
 import "swiper/components/pagination/pagination.min.css"
 import 'react-lazy-load-image-component/src/effects/black-and-white.css'
 import SwiperCore, { Pagination } from 'swiper/core'
-import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline'
 SwiperCore.use([Pagination])
 
 const useStyles = makeStyles(styles)
 
-export default function FilePicker() {
-    const [files, setFiles] = useState([]);
+export default function FilePicker({ files }) {
+    const dispatch = useContext(DispatchContext)
     const {
         getRootProps,
         getInputProps
     } = useDropzone({
-        maxFiles: 10,
         accept: 'image/*',
         onDrop: acceptedFiles => {
-            setFiles(acceptedFiles.map(file => Object.assign(file, {
-                preview: URL.createObjectURL(file)
-            })))
+            dispatch({
+                type: 'onSetPhotos',
+                photos: acceptedFiles.slice(0, 10).map(file => Object.assign(file, {
+                    preview: URL.createObjectURL(file)
+                }))
+            })
         }
     })
     useEffect(() => () => {
@@ -34,7 +37,10 @@ export default function FilePicker() {
         }
     }, [files])
     function deleteAllFiles() {
-        setFiles([])
+        dispatch({
+            type: 'onSetPhotos',
+            photos: []
+        })
     }
     function deleteFile(element) {
         const newFiles = files.filter(e => e.path !== element.path)
@@ -43,7 +49,10 @@ export default function FilePicker() {
                 return URL.revokeObjectURL(e.preview)
             }
         })
-        setFiles(newFiles)
+        dispatch({
+            type: 'onSetPhotos',
+            photos: newFiles
+        })
     }
     const classes = useStyles()
     const imgUrl = 'https://api.iconify.design/clarity:image-gallery-line.svg?color=%233291ff'

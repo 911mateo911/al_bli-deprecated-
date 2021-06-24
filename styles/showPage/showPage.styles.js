@@ -20,6 +20,10 @@ const styles = theme => ({
         [theme.breakpoints.down('sm')]: {
             width: '95%',
             margin: '20px auto'
+        },
+        [theme.breakpoints.down('sm')]: {
+            width: '95%',
+            margin: '10px auto'
         }
     },
     divider: {

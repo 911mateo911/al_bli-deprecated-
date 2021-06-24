@@ -55,9 +55,11 @@ export default function NewProductForm(props) {
     async function handleSubmit(e) {
         e.preventDefault()
         setLoading(true)
-        const request = await axios.post('/api/add-product', {
-            data: clean(inputs)
-        })
+        const form = new FormData()
+        inputs.photos.forEach(e => form.append('photos', e))
+        inputs.photos = ''
+        Object.keys(clean(inputs)).forEach(key => form.append(key, clean(inputs)[key]))
+        const request = await axios.post('/api/add-product', form)
         const response = await request.data
         flashDispatch({
             type: 'addMessage',
@@ -150,7 +152,7 @@ export default function NewProductForm(props) {
                     multiLine={true}
                     value={inputs.description}
                 />
-                <FilePicker />
+                <FilePicker files={inputs.photos} />
                 <Keywords value={inputs.keywords} />
                 <PriceInput
                     label='Cmimi'

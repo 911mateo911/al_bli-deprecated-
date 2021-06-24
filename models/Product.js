@@ -36,7 +36,12 @@ const ProductSchema = new mongoose.Schema({
     subAnije: String,
     subPjeseKembimi: String,
     subMakinaBujqesore: String,
-    subDekorime: String
+    subDekorime: String,
+    photos: [{
+        _id: false,
+        url: String,
+        filename: String
+    }]
 })
 
 export default mongoose.models.Product || mongoose.model('Product', ProductSchema)

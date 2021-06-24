@@ -67,7 +67,7 @@ const styles = theme => ({
     delete: {
         position: 'absolute',
         top: '10px',
-        right: '1.5rem',
+        right: '2rem',
         color: '#0070f3',
         padding: '.5rem',
         fontSize: '2.5rem',

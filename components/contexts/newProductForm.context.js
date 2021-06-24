@@ -28,7 +28,8 @@ const initialValues = {
     viti: formattedDate(new Date()),
     subPjeseKembimi: '',
     subMakinaBujqesore: '',
-    subDekorime: ''
+    subDekorime: '',
+    photos: []
 }
 
 export const FormContext = createContext()

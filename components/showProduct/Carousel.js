@@ -11,26 +11,17 @@ import 'react-lazy-load-image-component/src/effects/black-and-white.css'
 import SwiperCore, { Pagination, Navigation } from 'swiper/core'
 SwiperCore.use([Pagination, Navigation])
 
-const images = [
-    'https://res.cloudinary.com/dxtjwhnoz/image/upload/v1620413209/alHotel/vofgvdpwve5nbvx6agky.webp',
-    'https://res.cloudinary.com/dxtjwhnoz/image/upload/v1620413218/alHotel/knkvozniw38vvixfgw9p.jpg',
-    'https://res.cloudinary.com/dxtjwhnoz/image/upload/v1620413222/alHotel/tav2su5nzov0eejnfuvc.jpg',
-    'https://res.cloudinary.com/dxtjwhnoz/image/upload/v1620407338/alHotel/jusumydp3a9a1x7kmnsr.jpg',
-    'https://res.cloudinary.com/dxtjwhnoz/image/upload/v1620407338/alHotel/vjhocsfdjekplnp9zny7.jpg',
-    'https://res.cloudinary.com/dxtjwhnoz/image/upload/v1620407338/alHotel/qg8kw7ozp0kkwoq70tcr.jpg'
-]
-
 const useStyles = makeStyles(styles)
 
 export default function Carousel({ product }) {
     const classes = useStyles()
-    const renderImgs = images.map((img, i) => {
+    const renderImgs = product.photos.map((img, i) => {
         return (
             <SwiperSlide
                 key={i}
             >
                 <LazyLoadImage
-                    src={img}
+                    src={img.url}
                     effect='black-and-white'
                     className={classes.img}
                 />
@@ -47,9 +38,17 @@ export default function Carousel({ product }) {
                 pagination={{
                     "clickable": true
                 }}
-                navigation={true}
+                navigation={product.photos.length > 0}
                 className={classes.root} >
-                {renderImgs}
+                {product.photos.length > 0 ? renderImgs : (
+                    <SwiperSlide>
+                        <LazyLoadImage
+                            src='https://res.cloudinary.com/dxtjwhnoz/image/upload/c_mpad,h_2160,w_3840/v1624539769/no-photos_p4vnkf.png'
+                            effect='black-and-white'
+                            className={classes.img}
+                        />
+                    </SwiperSlide>
+                )}
             </Swiper >
             <ProdDetails product={product} category={product.category} />
         </span>

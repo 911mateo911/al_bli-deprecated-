@@ -11,7 +11,13 @@ import SubsDetails from './subDetails/SubsDetails'
 const styles = theme => ({
     root: {
         width: '100%',
-        marginTop: '20px'
+        marginTop: '20px',
+        [theme.breakpoints.down('sm')]: {
+            marginTop: '10px'
+        },
+        [theme.breakpoints.down('xs')]: {
+            marginTop: '0'
+        }
     }
 })
 
