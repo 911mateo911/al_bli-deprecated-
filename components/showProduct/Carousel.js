@@ -38,7 +38,7 @@ export default function Carousel({ product }) {
                 pagination={{
                     "clickable": true
                 }}
-                navigation={product.photos.length > 0}
+                navigation={true}
                 className={classes.root} >
                 {product.photos.length > 0 ? renderImgs : (
                     <SwiperSlide>
