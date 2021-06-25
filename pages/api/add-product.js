@@ -82,7 +82,6 @@ export default async function handler(req, res) {
       })
     })
   } catch (e) {
-    console.log(e)
     res.send({
       message: 'error',
       errorMsg: e.msg
