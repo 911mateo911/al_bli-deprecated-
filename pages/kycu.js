@@ -1,5 +1,10 @@
 import { makeStyles } from "@material-ui/core/styles"
-import LoginPage from '../components/login/LoginPage'
+import dynamic from 'next/dynamic'
+
+const LoginPageForm = dynamic(
+    () => import('../components/login/LoginPage'),
+    { ssr: false }
+)
 
 const styles = theme => ({
     root: {
@@ -13,7 +18,7 @@ export default function Kycu() {
     const classes = useStyles()
     return (
         <div className={classes.root} >
-            <LoginPage />
+            <LoginPageForm />
         </div>
     )
 }

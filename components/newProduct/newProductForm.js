@@ -80,29 +80,33 @@ export default function NewProductForm(props) {
                 <TextInput
                     label='Emer Mbiemer'
                     type=''
-                    multiLine={false}
                     name='name'
+                    validate
+                    dispatch={dispatch}
                     value={inputs.name}
-                />
-                <TextInput
-                    label='Telefon'
-                    type='numeric'
-                    multiLine={false}
-                    name='telephone'
-                    value={inputs.telephone}
                 />
                 <TextInput
                     label='Email'
                     type=''
-                    multiLine={false}
+                    validate
+                    dispatch={dispatch}
                     name='email'
                     value={inputs.email}
                 />
                 <TextInput
+                    label='Telefon'
+                    type='numeric'
+                    validate
+                    dispatch={dispatch}
+                    name='telephone'
+                    value={inputs.telephone}
+                />
+                <TextInput
                     label='Whatsapp'
                     type='numeric'
-                    multiLine={false}
                     name='whatsapp'
+                    validate
+                    dispatch={dispatch}
                     value={inputs.whatsapp}
                 />
                 <div className={classes.selectWrap} >
@@ -141,15 +145,18 @@ export default function NewProductForm(props) {
                 <TextInput
                     label='Titulli'
                     type=''
-                    multiLine={false}
+                    dispatch={dispatch}
                     name='title'
+                    validate
                     value={inputs.title}
                 />
                 <TextInput
                     label='Pershkrimi'
                     type=''
                     name='description'
-                    multiLine={true}
+                    multiLine
+                    validate
+                    dispatch={dispatch}
                     value={inputs.description}
                 />
                 <FilePicker files={inputs.photos} />

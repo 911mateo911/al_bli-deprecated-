@@ -1,16 +1,15 @@
-import React, { useContext, memo, useEffect } from 'react'
+import React, { memo, useEffect } from 'react'
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator'
 import { makeStyles, createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
-import { DispatchContext } from '../contexts/newProductForm.context'
 import regex from './utils/regexValues'
 
-const styles = theme => ({
+export const styles = theme => ({
     root: {
         width: '100%'
     }
 })
 
-const theme = createMuiTheme({
+export const theme = createMuiTheme({
     palette: {
         primary: {
             main: '#0070f3'
@@ -26,13 +25,14 @@ const addValidation = (name, value) => {
 
 const useStyles = makeStyles(styles)
 
-function FormInput({ label, name, value, type, multiLine }) {
+function FormInput({ label, name, value, type, multiLine, validate, dispatch }) {
     const classes = useStyles()
-    const dispatch = useContext(DispatchContext)
     const preserveMultiline = { whiteSpace: 'pre-wrap' }
     useEffect(() => {
-        addValidation(name, value)
+        if (validate) addValidation(name, value)
     }, [])
+    const validators = ['required', `is${name}`]
+    const errorMessages = ['Kerkohet!', regex[name].message]
     return (
         <div className={classes.root} >
             <ThemeProvider theme={theme} >
@@ -53,8 +53,8 @@ function FormInput({ label, name, value, type, multiLine }) {
                         inputMode: type,
                         maxLength: regex[name].maxLength
                     }}
-                    validators={['required', `is${name}`]}
-                    errorMessages={['Kerkohet!', regex[name].message]}
+                    validators={validate ? validators : ['required']}
+                    errorMessages={validate ? errorMessages : ['Kerkohet!']}
                 />
             </ThemeProvider>
         </div>

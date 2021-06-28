@@ -51,7 +51,6 @@ export async function getServerSideProps(context) {
       }
     }
   } catch (e) {
-    console.log(e)
     return {
       props: {
         posts: {
