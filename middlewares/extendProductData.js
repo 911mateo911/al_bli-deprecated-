@@ -6,11 +6,21 @@ function extendData(data, files) {
         const slugArr = str.split(" ")
         return slugArr.join("_").toLowerCase()
     }
+    function escapeHtml(unsafe) {
+        const string = unsafe
+            .replace(/&/g, '')
+            .replace(/</g, '')
+            .replace(/>/g, '')
+            .replace(/"/g, '')
+            .replace('/', '')
+            .replace(/'/g, '')
+        return string.split('').filter(e => e !== '/').join('')
+    }
     formData.date = new Date()
-    formData.slug = slugify(data.title)
+    formData.slug = escapeHtml(slugify(data.title))
     const titleKeywors = data.title.split(' ')
     const descKeywords = data.description.split(' ')
-    const fallBackKeywords = [data.city, data.category, data.name]
+    const fallBackKeywords = [data.city, data.category, data.name, data.description.slice(0, 16)]
     formData.keywords = addKeywords(titleKeywors, descKeywords, fallBackKeywords, data.keywords)
     return formData
 }

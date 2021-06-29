@@ -35,6 +35,7 @@ export default function Post({ profilePic, name, setLoading, title, date, price,
         setLoading(true)
         router.push(`produkt/${id}/${slug}`)
     }
+    const cardTitle = title.length > 33 ? `${title.slice(0,30)}...` : title
     return (
         <Card className={classes.root} >
             <CardHeader
@@ -48,7 +49,7 @@ export default function Post({ profilePic, name, setLoading, title, date, price,
                     className={classes.media}
                 />
                 <CardContent>
-                    <h3 className={classes.h3} >{title}</h3>
+                    <h3 className={classes.h3} >{cardTitle}</h3>
                 </CardContent>
             </CardActionArea>
             <CardActions disableSpacing>

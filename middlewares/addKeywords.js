@@ -6,14 +6,14 @@ function addKeywords(title, desc, fallback, currentArr) {
     let k = 0
     while (filledArr.length < 5) {
         if (!title[i]) break
-        if (title[i].length > 2) {
+        if (title[i].length > 2 && title[i].length < 35) {
             filledArr.push(title[i])
         }
         i++
     }
     while (filledArr.length < 5) {
         if (!desc[j]) break
-        if (desc[j].length > 2) {
+        if (desc[j].length > 2 && desc[j].length < 35) {
             filledArr.push(desc[j])
         }
         j++
