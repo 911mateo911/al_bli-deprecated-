@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react'
+import { signIn } from 'next-auth/client'
 import Link from 'next/link'
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator'
 import { makeStyles, createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
@@ -13,7 +14,7 @@ import Visibility from '@material-ui/icons/Visibility'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
 import { FlashMsgContext, FlashDispatchContext } from '../contexts/flashMsgs.context'
 
-const theme = createMuiTheme({
+export const theme = createMuiTheme({
     palette: {
         primary: {
             main: '#0070f3'
@@ -45,8 +46,14 @@ export default function LoginPage() {
         event.preventDefault()
     }
     async function handleSubmit() {
-        const response = await axios.post('/api/login', credentials)
-        console.log(response)
+        const { email, password } = credentials
+        const res = await signIn('credentials', {
+            email,
+            password,
+            callbackUrl: '/kycu',
+            redirect: false
+        })
+        console.log(res)
     }
     return (
         <div className={classes.root}>

@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const MONGODB_URI = 'mongodb://localhost:27017/albli'
+export const MONGODB_URI = 'mongodb://localhost:27017/albli'
 
 // this is to prevent re connecting to mongo on hot reloads, useful in developmeny
 let cached = global.mongoose
