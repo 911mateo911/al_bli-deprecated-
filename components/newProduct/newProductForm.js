@@ -35,7 +35,7 @@ const flashMessages = {
     error: 'Pati nje problem gjate ngarkimit!'
 }
 
-const clean = obj => {
+export const clean = obj => {
     for (let key in obj) {
         if (obj[key] === '') {
             delete obj[key]
@@ -56,9 +56,9 @@ export default function NewProductForm(props) {
         e.preventDefault()
         setLoading(true)
         const form = new FormData()
-        inputs.photos.forEach(e => form.append('photos', e))
-        inputs.photos = ''
-        Object.keys(clean(inputs)).forEach(key => form.append(key, clean(inputs)[key]))
+        inputs.photos.forEach(e => form.append('photos', e)) // adding photos to form data
+        inputs.photos = '' // made here so it will be cleaned with the below method
+        Object.keys(clean(inputs)).forEach(key => form.append(key, clean(inputs)[key])) // appending keys to form data
         const request = await axios.post('/api/add-product', form)
         const response = await request.data
         flashDispatch({
@@ -70,8 +70,11 @@ export default function NewProductForm(props) {
         if (response.message === 'error') setLoading(false)
         if (response.message === 'success') router.replace(response.redirectTo)
     }
+    if (loading) {
+        return <Loader src={infinity.src} message='Po ngarkohet...' />
+    }
     return (
-        loading ? <Loader src={infinity.src} message='Po ngarkohet...' /> : (<div className={classes.root} >
+        <div className={classes.root} >
             {snackbarOpen && <Snackbar />}
             <h1 className={classes.h1} >Posto produktin tend:</h1>
             <h3 className={classes.h3} >Plotesoni formularin e meposhtem duke pershkruar ne menyre korrekte produktin.
@@ -177,6 +180,6 @@ export default function NewProductForm(props) {
                     >Vazhdo</Button>
                 </ThemeProvider>
             </ValidatorForm>
-        </div >)
+        </div >
     )
 }

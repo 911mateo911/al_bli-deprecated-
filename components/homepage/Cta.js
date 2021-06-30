@@ -4,7 +4,6 @@ import styles from '../../styles/index/cta.styles'
 import rocket from '../../public/rocket.png'
 import Link from 'next/link'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
-import Snackbar from '../newProduct/Snackbar'
 
 const useStyles = makeStyles(styles)
 

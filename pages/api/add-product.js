@@ -40,28 +40,35 @@ export default async function handler(req, res) {
     await dbConnection()
     const form = formidable({ multiples: true })
     form.parse(req, async (err, fields, files) => {
-      const data = fields
-      data.keywords = fields.keywords.split(',')
-      const product = validationSchema.validate(data)
-      if (product.error) {
-        throw new CustomError(product.error.message, 400)
+      try {
+        const data = fields
+        data.keywords = fields.keywords.split(',')
+        const product = validationSchema.validate(data)
+        if (product.error) {
+          throw new CustomError('Ndodhi nje gabim', 400)
+        }
+        if (files.photos) {
+          const images = [files.photos].flat().slice(0, 10)
+          const imageSrcs = await uploadImagesToCloudinary(images)
+          data.photos = imageSrcs
+        }
+        const newProduct = new Product(extendedData(data))
+        await newProduct.save()
+        res.send({
+          message: "success",
+          redirectTo: `${newProduct._id}/${newProduct.slug}`
+        })
+      } catch (e) {
+        res.send({
+          message: 'error',
+          errorMsg: e.msg
+        })
       }
-      if (files.photos) {
-        const images = [files.photos].flat().slice(0, 10)
-        const imageSrcs = await uploadImagesToCloudinary(images)
-        data.photos = imageSrcs
-      }
-      const newProduct = new Product(extendedData(data))
-      await newProduct.save()
-      res.send({
-        message: "success",
-        redirectTo: `${newProduct._id}/${newProduct.slug}`
-      })
     })
   } catch (e) {
     res.send({
       message: 'error',
-      errorMsg: e.msg
+      errorMsg: 'Ndodhi nje gabim!'
     })
   }
 }

@@ -2,17 +2,24 @@ import React, { useContext, useState, useEffect } from 'react'
 import VpnKeyIcon from '@material-ui/icons/VpnKey'
 import styles from '../../styles/login/login.styles'
 import Avatar from '@material-ui/core/Avatar'
+import { useRouter } from 'next/router'
 import Link from 'next/link'
+import infinity from '../../public/infinity.svg'
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator'
 import { makeStyles, ThemeProvider } from '@material-ui/core/styles'
 import { theme } from '../login/LoginPage'
 import Button from '@material-ui/core/Button'
+import axios from 'axios'
+import Snackbar from '../newProduct/Snackbar'
+import { clean } from '../newProduct/newProductForm'
 import TextInput from '../newProduct/TextInput'
 import ProfilePicker from './ProfilePicker'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import Visibility from '@material-ui/icons/Visibility'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
 import IconButton from '@material-ui/core/IconButton'
+import Loader from '../Loader'
+import { FlashMsgContext, FlashDispatchContext } from '../contexts/flashMsgs.context'
 import { RegisterFormContext, RegisterFormDispatch } from '../contexts/registerForm.context'
 
 const useStyles = makeStyles(styles)
@@ -26,6 +33,9 @@ const addValidation = (value) => {
 export default function RegisterPage() {
     const inputs = useContext(RegisterFormContext)
     const dispatch = useContext(RegisterFormDispatch)
+    const flashDispatch = useContext(FlashDispatchContext)
+    const snackbarOpen = useContext(FlashMsgContext)
+    const router = useRouter()
     useEffect(() => {
         addValidation(inputs.password)
     }, [])
@@ -37,14 +47,38 @@ export default function RegisterPage() {
     const handleMouseDownPassword = (event) => {
         event.preventDefault()
     }
+    async function handleSubmit(e) {
+        e.preventDefault()
+        setState({ ...state, loading: true })
+        const avatar = inputs.profilePic
+        const form = new FormData()
+        inputs.profilePic.slice(0, 1).forEach(e => form.append('profilePic', e))
+        inputs.profilePic = ''
+        Object.keys(clean(inputs)).forEach(key => form.append(key, clean(inputs)[key]))
+        const request = await axios.post('/api/register-user', form)
+        const response = await request.data
+        flashDispatch({
+            type: 'addMessage',
+            message: response.errorMsg || response.successMsg,
+            severity: response.message
+        })
+        flashDispatch({ type: 'showSnackbar' })
+        inputs.profilePic = avatar
+        if (response.message === 'error') setState({ ...state, loading: false })
+        if (response.message === 'success') router.replace(response.redirectTo)
+    }
+    if (state.loading) {
+        return (<Loader src={infinity.src} />)
+    }
     return (
         <div className={classes.root} >
+            {snackbarOpen && <Snackbar />}
             <Avatar className={classes.icon} >
                 <VpnKeyIcon />
             </Avatar>
             <h1 className={classes.h1} >Rregjistrohu</h1>
             <p className={classes.p} >Duke u rregjistruar ti pranon te perdoresh <a className={classes.cookies} href='https://sq.wikipedia.org/wiki/Cookie_(internet)' target='_blank' >cookies</a>.</p>
-            <ValidatorForm noValidate onSubmit={() => console.log('asdasdass')} className={classes.form} >
+            <ValidatorForm noValidate onSubmit={handleSubmit} className={classes.form} >
                 <span className={classes.span} >
                     <ProfilePicker file={inputs.profilePic} />
                     <TextInput

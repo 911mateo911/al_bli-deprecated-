@@ -4,6 +4,7 @@ import hands from '../../public/hands.png'
 import styles from '../../styles/index/main.styles'
 import Link from 'next/link'
 import Image from 'next/image'
+import Snackbar from '../newProduct/Snackbar'
 
 const useStyles = makeStyles(styles)
 
@@ -12,6 +13,7 @@ export default function Main() {
     const { src: handsSrc } = hands
     return (
         <>
+            <Snackbar />
             <main className={classes.main} >
                 <img className={classes.mainImg} src={handsSrc} />
                 <span className={classes.mainHead} >

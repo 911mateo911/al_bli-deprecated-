@@ -7,6 +7,7 @@ import FadeInHoc from './subDetails/FadeIn.hoc'
 import { bigBox, getImg } from './subDetails/CarDetails'
 import OtherHouseDetails from './subDetails/OtherHouseDetails'
 import SubsDetails from './subDetails/SubsDetails'
+import PhoneDetails from './subDetails/PhoneDetails'
 
 const styles = theme => ({
     root: {
@@ -50,6 +51,11 @@ export default function ProdDetails({ category, product }) {
                 km={product.kilometra}
                 karburanti={product.karburanti}
                 transmisioni={product.transmisioni}
+            />}
+            {isCategory('Telefona') && <PhoneDetails
+                modeli={product.modeli}
+                prodhuesi={product.prodhuesi}
+                viti={product.viti}
             />}
             {isCategory('Motorcikleta') && <MotorCycleDetails
                 cmimi={product.price}
