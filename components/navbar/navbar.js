@@ -36,6 +36,20 @@ function Navbar() {
         searchOpen: false,
         anchorEl: null
     })
+    const LoginElem = Boolean(session) ?
+        (<Avatar onClick={openPopover} className={classes.socialAvt}>
+            M
+        </Avatar>
+        ) : <Link href='/kycu' >
+            <a className={classes.loginBtn} >Hyr</a>
+        </Link>
+    const mobileLoginElem = Boolean(session) ?
+        (<Avatar onClick={openPopover} className={classes.avatarMobile}>
+            M
+        </Avatar>)
+        : <Link href='/kycu' >
+            <a className={classes.mobileLoginBtn} >Hyr</a>
+        </Link>
     const popoverOpen = Boolean(state.anchorEl)
     return (
         <div className={classes.navBar} >
@@ -45,11 +59,11 @@ function Navbar() {
             />
             <MenuIcon onClick={toggleMenu} className={classes.menu} />
             <Link href='/' >
-                <p className={classes.logo} >al-<strong className={classes.bli} >Bli</strong></p>
+                <p className={Boolean(session) ? classes.logo : classes.logoNoLogin} >al-<strong className={classes.bli} >Bli</strong></p>
             </Link>
             <span className={classes.mobileWrap} >
                 <SearchIcon onClick={toggleSearch} className={classes.search} />
-                <Avatar onClick={openPopover} className={classes.avatarMobile}>M</Avatar>
+                {!loading && mobileLoginElem}
                 <PopoverElem anchor={state.anchorEl} open={popoverOpen} close={closePopover} />
             </span>
             <SearchBar
@@ -90,7 +104,7 @@ function Navbar() {
                         />
                     </ThemeProvider>
                 </FormControl>
-                <Avatar onClick={openPopover} className={classes.socialAvt}>M</Avatar>
+                {!loading && LoginElem}
                 <PopoverElem anchor={state.anchorEl} open={popoverOpen} close={closePopover} />
             </div>
         </div >

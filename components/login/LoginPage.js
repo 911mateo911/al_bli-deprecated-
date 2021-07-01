@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { signIn } from 'next-auth/client'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -36,8 +36,9 @@ const flashMessages = {
 
 const useStyles = makeStyles(styles)
 
-export default function LoginPage() {
+export default function LoginPage({ isLoggedIn }) {
     const classes = useStyles()
+    const router = useRouter()
     const [state,
         handleChange,
         togglePassword,
@@ -51,7 +52,17 @@ export default function LoginPage() {
         loading: false
     })
     const dispatch = useContext(FlashDispatchContext)
-    const router = useRouter()
+    useEffect(() => {
+        if (isLoggedIn) {
+            dispatch({
+                type: 'addMessage',
+                message: 'Jeni i loguar tashme.',
+                severity: 'error'
+            })
+            dispatch({ type: 'showSnackbar' })
+            router.replace('/')
+        }
+    }, [])
     async function handleSubmit() {
         const { email, password } = state
         startLoading()

@@ -94,6 +94,23 @@ const styles = theme => ({
         [theme.breakpoints.down('xs')]: {
             display: 'block'
         },
+        [theme.breakpoints.down(theme.breakpoints.values.xs + 300)]: {
+            marginLeft: '0'
+        },
+        cursor: 'pointer'
+    },
+    logoNoLogin: {
+        display: 'none',
+        fontSize: '2.5rem',
+        margin: '0',
+        fontFamily: 'Lato',
+        marginLeft: '85px',
+        [theme.breakpoints.down('xs')]: {
+            display: 'block'
+        },
+        [theme.breakpoints.down(theme.breakpoints.values.xs + 360)]: {
+            marginLeft: '0'
+        },
         cursor: 'pointer'
     },
     bigLogo: {
@@ -120,6 +137,43 @@ const styles = theme => ({
         display: 'flex',
         alignItems: 'center',
         width: 'fit-content'
+    },
+    loginBtn: {
+        backgroundColor: '#0070f3',
+        color: 'white',
+        fontFamily: 'Lato',
+        margin: '0 10px 0 10px',
+        padding: '7px 18px',
+        fontWeight: '600',
+        transition: 'all 0.15s ease-in-out',
+        borderRadius: '3px',
+        [theme.breakpoints.down('md')]: {
+            margin: '0 5px 0 10px'
+        },
+        [theme.breakpoints.down('sm')]: {
+            margin: '0 0 0 10px'
+        },
+        '&:hover': {
+            background: 'rgba(0,118,255,0.9)'
+        }
+    },
+    mobileLoginBtn: {
+        backgroundColor: '#0070f3',
+        color: 'white',
+        display: 'none',
+        fontFamily: 'Lato',
+        margin: '0 10px 0 10px',
+        padding: '7px 18px',
+        fontWeight: '600',
+        transition: 'all 0.15s ease-in-out',
+        borderRadius: '3px',
+        [theme.breakpoints.down('xs')]: {
+            margin: '0 0 0 10px',
+            display: 'block'
+        },
+        '&:hover': {
+            background: 'rgba(0,118,255,0.9)'
+        }
     }
 })
 

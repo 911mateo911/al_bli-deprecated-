@@ -20,6 +20,10 @@ const useStyles = makeStyles(styles)
 export default function PopoverElem({ open, close, anchor }) {
     const id = open ? 'simple-popover' : undefined;
     const classes = useStyles()
+    function signOutAndClose() {
+        close()
+        signOut({ redirect: false })
+    }
     return (
         <Popover
             className={classes.popover}
@@ -67,7 +71,7 @@ export default function PopoverElem({ open, close, anchor }) {
                 <Button
                     className={classes.button}
                     variant='outlined'
-                    onClick={() => signOut({ redirect: false })}
+                    onClick={signOutAndClose}
                     color='default'
                     startIcon={<ExitToAppIcon />}
                 >
