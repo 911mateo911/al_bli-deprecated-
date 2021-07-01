@@ -15,8 +15,7 @@ import Keywords from './Keywords'
 import axios from 'axios'
 import Loader from '../Loader'
 import infinity from '../../public/infinity.svg'
-import { FlashDispatchContext, FlashMsgContext } from '../contexts/flashMsgs.context'
-import Snackbar from '../newProduct/Snackbar'
+import { FlashDispatchContext } from '../contexts/flashMsgs.context'
 import FilePicker from './FIlePicker'
 import { FormContext, DispatchContext } from '../contexts/newProductForm.context'
 
@@ -51,7 +50,6 @@ export default function NewProductForm(props) {
     const router = useRouter()
     const [loading, setLoading] = useState(false)
     const flashDispatch = useContext(FlashDispatchContext)
-    const snackbarOpen = useContext(FlashMsgContext)
     async function handleSubmit(e) {
         e.preventDefault()
         setLoading(true)
@@ -75,7 +73,6 @@ export default function NewProductForm(props) {
     }
     return (
         <div className={classes.root} >
-            {snackbarOpen && <Snackbar />}
             <h1 className={classes.h1} >Posto produktin tend:</h1>
             <h3 className={classes.h3} >Plotesoni formularin e meposhtem duke pershkruar ne menyre korrekte produktin.
                 Publikimi i njoftimit eshte falas.</h3>

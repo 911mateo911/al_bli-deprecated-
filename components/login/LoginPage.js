@@ -14,10 +14,9 @@ import InputAdornment from '@material-ui/core/InputAdornment'
 import Visibility from '@material-ui/icons/Visibility'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
 import Loader from '../Loader'
-import Snackbar from '../newProduct/Snackbar'
 import infinity from '../../public/infinity.svg'
 import loginPageHook from '../hooks/loginPage.hook'
-import { FlashMsgContext, FlashDispatchContext } from '../contexts/flashMsgs.context'
+import { FlashDispatchContext } from '../contexts/flashMsgs.context'
 
 export const theme = createMuiTheme({
     palette: {
@@ -52,7 +51,6 @@ export default function LoginPage() {
         loading: false
     })
     const dispatch = useContext(FlashDispatchContext)
-    const snackbarOpen = useContext(FlashMsgContext)
     const router = useRouter()
     async function handleSubmit() {
         const { email, password } = state
@@ -78,7 +76,6 @@ export default function LoginPage() {
     }
     return (
         <div className={classes.root}>
-            <Snackbar />
             <Avatar className={classes.icon} >
                 <LockOutlinedIcon />
             </Avatar>

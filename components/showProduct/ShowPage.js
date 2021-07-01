@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import styles from '../../styles/showPage/showPage.styles'
 import { makeStyles } from '@material-ui/core/styles'
 import Carousel from './Carousel'
@@ -10,7 +10,6 @@ import TimeAgo from 'javascript-time-ago'
 import sq from 'javascript-time-ago/locale/sq'
 import Error from '../Error'
 import shoes from '../../public/shoes.png'
-import Snackbar from '../newProduct/Snackbar'
 import { FlashMsgContext } from '../contexts/flashMsgs.context'
 TimeAgo.addLocale(sq)
 const timeAgo = new TimeAgo('sq')
@@ -19,7 +18,6 @@ const useStyles = makeStyles(styles)
 
 export default function ShowPage({ product }) {
     const classes = useStyles()
-    const isSnackbarOpen = useContext(FlashMsgContext)
     if (product.error) {
         return (
             <Error
@@ -44,7 +42,6 @@ export default function ShowPage({ product }) {
     } = JSON.parse(product)
     return (
         <div className={classes.root} >
-            {isSnackbarOpen && <Snackbar />}
             <Carousel product={JSON.parse(product)} />
             <div className={classes.details} >
                 <span className={classes.user} >

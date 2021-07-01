@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import Avatar from '@material-ui/core/Avatar'
 import styles from '../../styles/navbar/popover.styles'
 import List from '@material-ui/core/List'
+import { signOut } from "next-auth/client"
 import ListItem from '@material-ui/core/ListItem'
 import Button from '@material-ui/core/Button';
 import ListItemIcon from '@material-ui/core/ListItemIcon'
@@ -66,6 +67,7 @@ export default function PopoverElem({ open, close, anchor }) {
                 <Button
                     className={classes.button}
                     variant='outlined'
+                    onClick={() => signOut({ redirect: false })}
                     color='default'
                     startIcon={<ExitToAppIcon />}
                 >

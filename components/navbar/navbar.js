@@ -16,33 +16,31 @@ import FormControl from '@material-ui/core/FormControl'
 import SearchBar from './searchBar'
 import PopoverElem from './Popover'
 import { theme } from './searchBar'
+import { useSession } from "next-auth/client"
 import { ThemeProvider } from '@material-ui/core/styles'
+import navbarHook from '../hooks/navbar.hook';
 
 const useStyles = makeStyles(styles)
 
 function Navbar() {
     const classes = useStyles()
     const router = useRouter()
-    const [menuOpen, setMenu] = useState(false)
-    const [searchOpen, setSearch] = useState(false)
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    function toggleMenu() {
-        setMenu(!menuOpen)
-    }
-    function toggleSearch() {
-        setSearch(!searchOpen)
-    }
-    function openPopover(e) {
-        setAnchorEl(e.currentTarget)
-    }
-    function closePopover() {
-        setAnchorEl(null)
-    }
-    const popoverOpen = Boolean(anchorEl)
+    const [session, loading] = useSession()
+    const [state,
+        toggleMenu,
+        toggleSearch,
+        openPopover,
+        closePopover
+    ] = navbarHook({
+        menuOpen: false,
+        searchOpen: false,
+        anchorEl: null
+    })
+    const popoverOpen = Boolean(state.anchorEl)
     return (
         <div className={classes.navBar} >
             <MenuDrawer
-                open={menuOpen}
+                open={state.menuOpen}
                 onClose={toggleMenu}
             />
             <MenuIcon onClick={toggleMenu} className={classes.menu} />
@@ -52,10 +50,10 @@ function Navbar() {
             <span className={classes.mobileWrap} >
                 <SearchIcon onClick={toggleSearch} className={classes.search} />
                 <Avatar onClick={openPopover} className={classes.avatarMobile}>M</Avatar>
-                <PopoverElem anchor={anchorEl} open={popoverOpen} close={closePopover} />
+                <PopoverElem anchor={state.anchorEl} open={popoverOpen} close={closePopover} />
             </span>
             <SearchBar
-                open={searchOpen}
+                open={state.searchOpen}
                 onClose={toggleSearch}
             />
             <div className={classes.linkWrap} >
@@ -93,7 +91,7 @@ function Navbar() {
                     </ThemeProvider>
                 </FormControl>
                 <Avatar onClick={openPopover} className={classes.socialAvt}>M</Avatar>
-                <PopoverElem anchor={anchorEl} open={popoverOpen} close={closePopover} />
+                <PopoverElem anchor={state.anchorEl} open={popoverOpen} close={closePopover} />
             </div>
         </div >
     )

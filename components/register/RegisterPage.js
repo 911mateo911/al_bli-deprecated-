@@ -10,7 +10,6 @@ import { makeStyles, ThemeProvider } from '@material-ui/core/styles'
 import { theme } from '../login/LoginPage'
 import Button from '@material-ui/core/Button'
 import axios from 'axios'
-import Snackbar from '../newProduct/Snackbar'
 import { clean } from '../newProduct/newProductForm'
 import TextInput from '../newProduct/TextInput'
 import ProfilePicker from './ProfilePicker'
@@ -19,7 +18,7 @@ import Visibility from '@material-ui/icons/Visibility'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
 import IconButton from '@material-ui/core/IconButton'
 import Loader from '../Loader'
-import { FlashMsgContext, FlashDispatchContext } from '../contexts/flashMsgs.context'
+import { FlashDispatchContext } from '../contexts/flashMsgs.context'
 import { RegisterFormContext, RegisterFormDispatch } from '../contexts/registerForm.context'
 
 const useStyles = makeStyles(styles)
@@ -34,7 +33,6 @@ export default function RegisterPage() {
     const inputs = useContext(RegisterFormContext)
     const dispatch = useContext(RegisterFormDispatch)
     const flashDispatch = useContext(FlashDispatchContext)
-    const snackbarOpen = useContext(FlashMsgContext)
     const router = useRouter()
     useEffect(() => {
         addValidation(inputs.password)
@@ -72,7 +70,6 @@ export default function RegisterPage() {
     }
     return (
         <div className={classes.root} >
-            {snackbarOpen && <Snackbar />}
             <Avatar className={classes.icon} >
                 <VpnKeyIcon />
             </Avatar>

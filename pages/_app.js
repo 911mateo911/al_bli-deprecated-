@@ -3,6 +3,7 @@ import { Provider } from "next-auth/client"
 import Navbar from '../components/navbar/navbar'
 import { getSession } from "next-auth/client"
 import { FlashMsgProvider } from '../components/contexts/flashMsgs.context'
+import Snackbar from '../components/newProduct/Snackbar'
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -11,6 +12,7 @@ function MyApp({ Component, pageProps }) {
         <Navbar />
         <FlashMsgProvider>
           <Component {...pageProps} />
+          <Snackbar />
         </FlashMsgProvider>
       </Provider>
     </>
