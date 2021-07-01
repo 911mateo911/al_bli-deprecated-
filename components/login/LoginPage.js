@@ -16,6 +16,7 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff'
 import Loader from '../Loader'
 import Snackbar from '../newProduct/Snackbar'
 import infinity from '../../public/infinity.svg'
+import loginPageHook from '../hooks/loginPage.hook'
 import { FlashMsgContext, FlashDispatchContext } from '../contexts/flashMsgs.context'
 
 export const theme = createMuiTheme({
@@ -38,7 +39,13 @@ const useStyles = makeStyles(styles)
 
 export default function LoginPage() {
     const classes = useStyles()
-    const [credentials, changeCredentials] = useState({
+    const [state,
+        handleChange,
+        togglePassword,
+        handleMouseDownPassword,
+        startLoading,
+        stopLoading
+    ] = loginPageHook({
         email: '',
         password: '',
         passwordShown: false,
@@ -47,18 +54,9 @@ export default function LoginPage() {
     const dispatch = useContext(FlashDispatchContext)
     const snackbarOpen = useContext(FlashMsgContext)
     const router = useRouter()
-    function handleChange(e) {
-        changeCredentials({ ...credentials, [e.target.name]: e.target.value })
-    }
-    function togglePassword() {
-        changeCredentials({ ...credentials, passwordShown: !credentials.passwordShown })
-    }
-    const handleMouseDownPassword = (event) => {
-        event.preventDefault()
-    }
     async function handleSubmit() {
-        const { email, password } = credentials
-        changeCredentials({ ...credentials, loading: true })
+        const { email, password } = state
+        startLoading()
         const req = await signIn('credentials', {
             email,
             password,
@@ -72,10 +70,10 @@ export default function LoginPage() {
             severity: message
         })
         dispatch({ type: 'showSnackbar' })
-        if (req.error) changeCredentials({ ...credentials, loading: false })
-        else router.replace('/')
+        if (message === 'error') stopLoading()
+        if (message === 'success') router.replace('/')
     }
-    if (credentials.loading) {
+    if (state.loading) {
         return <Loader src={infinity.src} />
     }
     return (
@@ -90,7 +88,7 @@ export default function LoginPage() {
                 <span className={classes.span} >
                     <ThemeProvider theme={theme} >
                         <TextValidator
-                            label='Email ose username'
+                            label='Email'
                             fullWidth
                             margin='normal'
                             required
@@ -99,7 +97,7 @@ export default function LoginPage() {
                             InputLabelProps={{
                                 shrink: true
                             }}
-                            value={credentials.email}
+                            value={state.email}
                             onChange={handleChange}
                             inputProps={{
                                 inputMode: 'text',
@@ -111,11 +109,11 @@ export default function LoginPage() {
                         <TextValidator
                             label='Password'
                             fullWidth
-                            type={credentials.passwordShown ? 'text' : 'password'}
+                            type={state.passwordShown ? 'text' : 'password'}
                             margin='normal'
                             required
                             name='password'
-                            value={credentials.password}
+                            value={state.password}
                             onChange={handleChange}
                             variant='outlined'
                             InputLabelProps={{
@@ -136,7 +134,7 @@ export default function LoginPage() {
                                             onMouseDown={handleMouseDownPassword}
                                             edge="end"
                                         >
-                                            {credentials.passwordShown ? <Visibility /> : <VisibilityOff />}
+                                            {state.passwordShown ? <Visibility /> : <VisibilityOff />}
                                         </IconButton>
                                     </InputAdornment>
                                 )
