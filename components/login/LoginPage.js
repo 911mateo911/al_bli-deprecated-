@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { signIn } from 'next-auth/client'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator'
 import { makeStyles, createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 import Avatar from '@material-ui/core/Avatar';
@@ -12,6 +13,9 @@ import Button from '@material-ui/core/Button'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import Visibility from '@material-ui/icons/Visibility'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
+import Loader from '../Loader'
+import Snackbar from '../newProduct/Snackbar'
+import infinity from '../../public/infinity.svg'
 import { FlashMsgContext, FlashDispatchContext } from '../contexts/flashMsgs.context'
 
 export const theme = createMuiTheme({
@@ -25,6 +29,11 @@ export const theme = createMuiTheme({
     }
 })
 
+const flashMessages = {
+    success: 'Mirese u ktheve!',
+    error: 'Email ose password nuk eshte i sakte!'
+}
+
 const useStyles = makeStyles(styles)
 
 export default function LoginPage() {
@@ -32,10 +41,12 @@ export default function LoginPage() {
     const [credentials, changeCredentials] = useState({
         email: '',
         password: '',
-        passwordShown: false
+        passwordShown: false,
+        loading: false
     })
     const dispatch = useContext(FlashDispatchContext)
     const snackbarOpen = useContext(FlashMsgContext)
+    const router = useRouter()
     function handleChange(e) {
         changeCredentials({ ...credentials, [e.target.name]: e.target.value })
     }
@@ -47,16 +58,29 @@ export default function LoginPage() {
     }
     async function handleSubmit() {
         const { email, password } = credentials
-        const res = await signIn('credentials', {
+        changeCredentials({ ...credentials, loading: true })
+        const req = await signIn('credentials', {
             email,
             password,
-            callbackUrl: '/kycu',
             redirect: false
         })
-        console.log(res)
+        const loggedIn = await req.error
+        const message = req.error ? 'error' : 'success'
+        dispatch({
+            type: 'addMessage',
+            message: flashMessages[message],
+            severity: message
+        })
+        dispatch({ type: 'showSnackbar' })
+        if (req.error) changeCredentials({ ...credentials, loading: false })
+        else router.replace('/')
+    }
+    if (credentials.loading) {
+        return <Loader src={infinity.src} />
     }
     return (
         <div className={classes.root}>
+            <Snackbar />
             <Avatar className={classes.icon} >
                 <LockOutlinedIcon />
             </Avatar>
