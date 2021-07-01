@@ -8,9 +8,6 @@ import dbConnection from '../utils/dbConnection'
 import Product from '../models/Product'
 import infinity from '../public/infinity.svg'
 import Loader from '../components/Loader'
-import "swiper/swiper.min.css"
-import "swiper/components/pagination/pagination.min.css"
-import "swiper/components/navigation/navigation.min.css"
 
 const styles = theme => ({
   root: {

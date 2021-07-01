@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Popover from '@material-ui/core/Popover'
 import { makeStyles } from '@material-ui/core/styles'
 import Avatar from '@material-ui/core/Avatar'
@@ -6,23 +6,31 @@ import styles from '../../styles/navbar/popover.styles'
 import List from '@material-ui/core/List'
 import { signOut } from "next-auth/client"
 import ListItem from '@material-ui/core/ListItem'
-import Button from '@material-ui/core/Button';
+import Button from '@material-ui/core/Button'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import Divider from '@material-ui/core/Divider'
-import EditIcon from '@material-ui/icons/Edit';
+import EditIcon from '@material-ui/icons/Edit'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
-import FavoriteIcon from '@material-ui/icons/Favorite';
+import FavoriteIcon from '@material-ui/icons/Favorite'
+import { FlashDispatchContext } from '../contexts/flashMsgs.context'
 
 const useStyles = makeStyles(styles)
 
-export default function PopoverElem({ open, close, anchor }) {
+export default function PopoverElem({ open, close, anchor, name, email, profilePicUrl }) {
     const id = open ? 'simple-popover' : undefined;
     const classes = useStyles()
+    const dispatch = useContext(FlashDispatchContext)
     function signOutAndClose() {
         close()
         signOut({ redirect: false })
+        dispatch({
+            type: 'addMessage',
+            message: 'Mirupafshim!',
+            severity: 'success'
+        })
+        dispatch({ type: 'showSnackbar' })
     }
     return (
         <Popover
@@ -44,9 +52,12 @@ export default function PopoverElem({ open, close, anchor }) {
         >
             <div className={classes.root} >
                 <span className={classes.profile} >
-                    <Avatar className={classes.avatar} >M</Avatar>
-                    <h4 className={classes.h4} >Mateo Malaj</h4>
-                    <h5 className={classes.h5} >malajmateo@gmail.com</h5>
+                    <Avatar className={classes.avatar} >
+                        {profilePicUrl ?
+                            <img className={classes.profilePic} src={profilePicUrl} /> : name[0].toUpperCase()}
+                    </Avatar>
+                    <h4 className={classes.h4} >{name}</h4>
+                    <h5 className={classes.h5} >{email}</h5>
                 </span>
                 <List component='nav' className={classes.list} >
                     <ListItem button>

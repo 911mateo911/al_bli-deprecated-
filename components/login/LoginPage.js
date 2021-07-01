@@ -71,7 +71,6 @@ export default function LoginPage({ isLoggedIn }) {
             password,
             redirect: false
         })
-        const loggedIn = await req.error
         const message = req.error ? 'error' : 'success'
         dispatch({
             type: 'addMessage',

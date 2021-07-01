@@ -44,6 +44,11 @@ const styles = theme => ({
     },
     button: {
         marginTop: '5px'
+    },
+    profilePic: {
+        width: '64px',
+        height: '64px',
+        objectFit: 'cover'
     }
 })
 

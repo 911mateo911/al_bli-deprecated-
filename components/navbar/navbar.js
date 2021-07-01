@@ -38,14 +38,16 @@ function Navbar() {
     })
     const LoginElem = Boolean(session) ?
         (<Avatar onClick={openPopover} className={classes.socialAvt}>
-            M
+            {session.user.profilePic ?
+                <img className={classes.profilePic} src={session.user.profilePic.url} /> : session.user.name[0].toUpperCase()}
         </Avatar>
         ) : <Link href='/kycu' >
             <a className={classes.loginBtn} >Hyr</a>
         </Link>
     const mobileLoginElem = Boolean(session) ?
         (<Avatar onClick={openPopover} className={classes.avatarMobile}>
-            M
+            {session.user.profilePic ?
+                <img className={classes.profilePic} src={session.user.profilePic.url} /> : session.user.name[0].toUpperCase()}
         </Avatar>)
         : <Link href='/kycu' >
             <a className={classes.mobileLoginBtn} >Hyr</a>
@@ -64,7 +66,6 @@ function Navbar() {
             <span className={classes.mobileWrap} >
                 <SearchIcon onClick={toggleSearch} className={classes.search} />
                 {!loading && mobileLoginElem}
-                <PopoverElem anchor={state.anchorEl} open={popoverOpen} close={closePopover} />
             </span>
             <SearchBar
                 open={state.searchOpen}
@@ -105,7 +106,16 @@ function Navbar() {
                     </ThemeProvider>
                 </FormControl>
                 {!loading && LoginElem}
-                <PopoverElem anchor={state.anchorEl} open={popoverOpen} close={closePopover} />
+                {
+                    (!loading && session) && <PopoverElem
+                        anchor={state.anchorEl}
+                        open={popoverOpen}
+                        close={closePopover}
+                        name={session.user.name}
+                        email={session.user.email}
+                        profilePicUrl={session.user.profilePic ? session.user.profilePic.url : ''}
+                    />
+                }
             </div>
         </div >
     )

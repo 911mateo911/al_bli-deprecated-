@@ -1,6 +1,6 @@
 import addKeywords from "./addKeywords"
 
-function extendData(data, files) {
+function extendData(data) {
     const formData = data
     function slugify(str) {
         const slugArr = str.split(" ")

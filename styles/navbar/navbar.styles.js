@@ -129,6 +129,7 @@ const styles = theme => ({
     },
     avatarMobile: {
         display: 'none',
+        cursor: 'pointer',
         [theme.breakpoints.down('xs')]: {
             display: 'flex'
         }
@@ -156,6 +157,11 @@ const styles = theme => ({
         '&:hover': {
             background: 'rgba(0,118,255,0.9)'
         }
+    },
+    profilePic: {
+        width: '40px',
+        heigt: '40px',
+        objectFit: 'cover'
     },
     mobileLoginBtn: {
         backgroundColor: '#0070f3',

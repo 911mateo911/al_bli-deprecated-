@@ -4,6 +4,7 @@ import styles from '../../styles/login/login.styles'
 import Avatar from '@material-ui/core/Avatar'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
+import { signIn } from 'next-auth/client'
 import infinity from '../../public/infinity.svg'
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator'
 import { makeStyles, ThemeProvider } from '@material-ui/core/styles'
@@ -29,12 +30,26 @@ const addValidation = (value) => {
     })
 }
 
-export default function RegisterPage() {
+const flashMessages = {
+    success: 'Miresevjen ne alBli!',
+    error: 'Pati nje problem.'
+}
+
+export default function RegisterPage({ isLoggedIn }) {
     const inputs = useContext(RegisterFormContext)
     const dispatch = useContext(RegisterFormDispatch)
     const flashDispatch = useContext(FlashDispatchContext)
     const router = useRouter()
     useEffect(() => {
+        if (isLoggedIn) {
+            flashDispatch({
+                type: 'addMessage',
+                message: 'Jeni i loguar tashme.',
+                severity: 'error'
+            })
+            flashDispatch({ type: 'showSnackbar' })
+            router.replace('/')
+        }
         addValidation(inputs.password)
     }, [])
     const classes = useStyles()
@@ -55,15 +70,25 @@ export default function RegisterPage() {
         Object.keys(clean(inputs)).forEach(key => form.append(key, clean(inputs)[key]))
         const request = await axios.post('/api/register-user', form)
         const response = await request.data
-        flashDispatch({
-            type: 'addMessage',
-            message: response.errorMsg || response.successMsg,
-            severity: response.message
-        })
-        flashDispatch({ type: 'showSnackbar' })
         inputs.profilePic = avatar
         if (response.message === 'error') setState({ ...state, loading: false })
-        if (response.message === 'success') router.replace(response.redirectTo)
+        if (response.message === 'success') {
+            const { email, password } = inputs
+            const req = await signIn('credentials', {
+                email,
+                password,
+                redirect: false
+            })
+            const message = req.error ? 'error' : 'success'
+            flashDispatch({
+                type: 'addMessage',
+                message: flashMessages[message],
+                severity: message
+            })
+            flashDispatch({ type: 'showSnackbar' })
+            if (message === 'error') setState({ ...state, loading: false })
+            if (message === 'success') router.replace('/')
+        }
     }
     if (state.loading) {
         return (<Loader src={infinity.src} />)

@@ -4,6 +4,7 @@ import dbConnection from '../../../utils/dbConnection'
 import User from '../../../models/User'
 import bcrypt from 'bcrypt'
 import CustomError from '../../../middlewares/customError'
+import validationSchema from '../../../validators/credentials.validation'
 
 export default NextAuth({
     providers: [
@@ -12,6 +13,10 @@ export default NextAuth({
             authorize: async (credentials) => {
                 try {
                     await dbConnection()
+                    const credentialsValidation = validationSchema.validate(credentials)
+                    if (credentialsValidation.error) {
+                        throw new CustomError('Ndodhi nje problem!', 400)
+                    }
                     const registeredUser = await User.findOne({ email: credentials.email })
                     if (!registeredUser) {
                         throw new CustomError('Email ose password nuk eshte i sakte', 400)
