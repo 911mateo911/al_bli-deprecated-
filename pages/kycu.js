@@ -1,7 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles"
 import dynamic from 'next/dynamic'
 import Loader from '../components/Loader'
-import infinity from '../public/infinity.svg'
 import { useSession } from "next-auth/client"
 
 const LoginPageForm = dynamic(
@@ -22,9 +21,7 @@ export default function Kycu() {
     const [session, loading] = useSession()
     const isLoggedIn = Boolean(session)
     if (loading) {
-        return (
-            <Loader src={infinity.src} />
-        )
+        return <Loader />
     }
     return (
         <div className={classes.root} >

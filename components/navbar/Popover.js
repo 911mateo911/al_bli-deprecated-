@@ -19,7 +19,6 @@ import { FlashDispatchContext } from '../contexts/flashMsgs.context'
 const useStyles = makeStyles(styles)
 
 export default function PopoverElem({ open, close, anchor, name, email, profilePicUrl }) {
-    const id = open ? 'simple-popover' : undefined;
     const classes = useStyles()
     const dispatch = useContext(FlashDispatchContext)
     function signOutAndClose() {
@@ -38,7 +37,6 @@ export default function PopoverElem({ open, close, anchor, name, email, profileP
             classes={{ paper: classes.paper }}
             open={open}
             onClose={close}
-            id={id}
             elevation={0}
             anchorEl={anchor}
             anchorOrigin={{

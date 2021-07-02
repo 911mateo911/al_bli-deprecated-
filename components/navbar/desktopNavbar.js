@@ -9,10 +9,10 @@ import InputAdornment from '@material-ui/core/InputAdornment'
 import SearchIcon from '@material-ui/icons/Search'
 import { ThemeProvider } from '@material-ui/core/styles'
 import InputLabel from '@material-ui/core/InputLabel'
+import { theme } from './searchBar'
 
 export default function desktopNavbar({
     classes,
-    theme,
     openPopover
 }) {
     const [session, loading] = useSession()
@@ -40,7 +40,7 @@ export default function desktopNavbar({
                     fullWidth
                 >
                     <ThemeProvider theme={theme}>
-                        <InputLabel shrink className={classes.label} htmlFor="input-with-icon-adornment">Kerko</InputLabel>
+                        <InputLabel shrink htmlFor="input-with-icon-adornment">Kerko</InputLabel>
                         <Input
                             placeholder='Kerko produkte'
                             id="input-with-icon-adornment"

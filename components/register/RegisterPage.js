@@ -5,7 +5,6 @@ import Avatar from '@material-ui/core/Avatar'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { signIn } from 'next-auth/client'
-import infinity from '../../public/infinity.svg'
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator'
 import { makeStyles, ThemeProvider } from '@material-ui/core/styles'
 import { theme } from '../login/LoginPage'
@@ -75,7 +74,15 @@ export default function RegisterPage({ isLoggedIn }) {
         const request = await axios.post('/api/register-user', form)
         const response = await request.data
         inputs.profilePic = avatar
-        if (response.message === 'error') stopLoading()
+        if (response.message === 'error') {
+            flashDispatch({
+                type: 'addMessage',
+                message: 'Pati nje problem!',
+                severity: 'error'
+            })
+            flashDispatch({ type: 'showSnackbar' })
+            stopLoading()
+        }
         if (response.message === 'success') {
             const { email, password } = inputs
             const req = await signIn('credentials', {
@@ -95,7 +102,7 @@ export default function RegisterPage({ isLoggedIn }) {
         }
     }
     if (state.loading || isLoggedIn) {
-        return (<Loader src={infinity.src} />)
+        return <Loader />
     }
     return (
         <div className={classes.root} >

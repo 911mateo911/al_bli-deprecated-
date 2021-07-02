@@ -1,5 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
+import infinity from '../public/infinity.svg'
 
 const styles = theme => ({
     loaderWrap: {
@@ -26,11 +27,11 @@ const styles = theme => ({
 
 const useStyles = makeStyles(styles)
 
-export default function Loader({ src, message }) {
+export default function Loader({ message }) {
     const classes = useStyles()
     return (
         <div className={classes.loaderWrap} >
-            <img alt='loading' className={classes.img} src={src} />
+            <img alt='loading' className={classes.img} src={infinity.src} />
             {message && <p className={classes.message} >{message}</p>}
         </div>
     )

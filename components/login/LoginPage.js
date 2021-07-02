@@ -14,7 +14,6 @@ import InputAdornment from '@material-ui/core/InputAdornment'
 import Visibility from '@material-ui/icons/Visibility'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
 import Loader from '../Loader'
-import infinity from '../../public/infinity.svg'
 import loginPageHook from '../hooks/loginPage.hook'
 import { FlashDispatchContext } from '../contexts/flashMsgs.context'
 
@@ -82,7 +81,7 @@ export default function LoginPage({ isLoggedIn }) {
         if (message === 'success') router.replace('/')
     }
     if (state.loading || isLoggedIn) {
-        return <Loader src={infinity.src} />
+        return <Loader />
     }
     return (
         <div className={classes.root}>

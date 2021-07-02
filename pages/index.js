@@ -6,7 +6,6 @@ import Cta from '../components/homepage/Cta'
 import { makeStyles } from '@material-ui/core/styles'
 import dbConnection from '../utils/dbConnection'
 import Product from '../models/Product'
-import infinity from '../public/infinity.svg'
 import Loader from '../components/Loader'
 
 const styles = theme => ({
@@ -20,9 +19,8 @@ const useStyles = makeStyles(styles)
 export default function Home({ posts }) {
   const classes = useStyles()
   const [isLoading, setLoading] = useState(false)
-  const { src: infinitySrc } = infinity
   if (isLoading) {
-    return <Loader src={infinitySrc} />
+    return <Loader />
   }
   return (
     <div className={classes.root} >

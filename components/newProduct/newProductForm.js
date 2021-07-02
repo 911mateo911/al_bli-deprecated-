@@ -14,7 +14,6 @@ import PriceInput from './PriceInput'
 import Keywords from './Keywords'
 import axios from 'axios'
 import Loader from '../Loader'
-import infinity from '../../public/infinity.svg'
 import { FlashDispatchContext } from '../contexts/flashMsgs.context'
 import FilePicker from './FIlePicker'
 import { FormContext, DispatchContext } from '../contexts/newProductForm.context'
@@ -69,7 +68,7 @@ export default function NewProductForm(props) {
         if (response.message === 'success') router.replace(response.redirectTo)
     }
     if (loading) {
-        return <Loader src={infinity.src} message='Po ngarkohet...' />
+        return <Loader message='Po ngarkohet...' />
     }
     return (
         <div className={classes.root} >
