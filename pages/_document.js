@@ -2,7 +2,6 @@ import React from 'react'
 import { createMuiTheme } from '@material-ui/core/styles'
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 import { ServerStyleSheets } from '@material-ui/core/styles'
-import hexagons from '../public/hexagons.png'
 
 const theme = createMuiTheme({
     palette: {
@@ -30,7 +29,7 @@ export default class MyDocument extends Document {
                         href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
                     />
                 </Head>
-                <body style={{ backgroundImage: `url(${hexagons.src})` }} >
+                <body>
                     <Main />
                     <NextScript />
                 </body>

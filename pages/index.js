@@ -21,15 +21,16 @@ export default function Home({ posts }) {
   const classes = useStyles()
   const [isLoading, setLoading] = useState(false)
   const { src: infinitySrc } = infinity
+  if (isLoading) {
+    return <Loader src={infinitySrc} />
+  }
   return (
-    isLoading ? <Loader src={infinitySrc} /> : (
-      <div className={classes.root} >
-        <Main />
-        <Features />
-        <LatestPosts posts={posts} setLoading={setLoading} />
-        <Cta />
-      </div>
-    )
+    <div className={classes.root} >
+      <Main />
+      <Features />
+      <LatestPosts posts={posts} setLoading={setLoading} />
+      <Cta />
+    </div>
   )
 }
 

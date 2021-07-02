@@ -7,18 +7,22 @@ import MenuDrawer from './menuDrawer'
 import SearchIcon from '@material-ui/icons/Search'
 import MenuIcon from '@material-ui/icons/Menu'
 
-export function LoginElem(user, openPopover, classes, isMobile) {
-    const loggedIn =
-        <Avatar onClick={openPopover} className={classes.socialAvt}>
-            {user.profilePic ?
-                <img className={classes.profilePic} src={user.profilePic.url} /> : user.name[0].toUpperCase()}
-        </Avatar>
+export function LoginElem(session, openPopover, classes, isMobile) {
     const loggedOutClass = isMobile ? classes.mobileLoginBtn : classes.loginBtn
-    const loggedOut =
-        (<Link href='/kycu' >
-            <a className={classes.mobileLoginBtn} >Hyr</a>
-        </Link>)
-    return Boolean(user) ? loggedIn : loggedOut
+    if (Boolean(session)) {
+        return (
+            <Avatar onClick={openPopover} className={classes.socialAvt}>
+                {session.user.profilePic ?
+                    <img className={classes.profilePic} src={session.user.profilePic.url} /> : session.user.name[0].toUpperCase()}
+            </Avatar>
+        )
+    } else {
+        return (
+            <Link href='/kycu' >
+                <a className={loggedOutClass} > Hyr</a >
+            </Link >
+        )
+    }
 }
 
 export default function mobileNavbar({
@@ -42,7 +46,7 @@ export default function mobileNavbar({
             </Link>
             <span className={classes.mobileWrap} >
                 <SearchIcon onClick={toggleSearch} className={classes.search} />
-                {!loading && LoginElem(session.user, openPopover, classes, true)}
+                {!loading && LoginElem(session, openPopover, classes, true)}
             </span>
             <Searchbar
                 open={searchOpen}

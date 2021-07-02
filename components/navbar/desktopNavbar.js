@@ -55,7 +55,7 @@ export default function desktopNavbar({
                         />
                     </ThemeProvider>
                 </FormControl>
-                {!loading && LoginElem(session.user, openPopover, classes, false)}
+                {!loading && LoginElem(session, openPopover, classes, false)}
             </div>
         </>
     )
