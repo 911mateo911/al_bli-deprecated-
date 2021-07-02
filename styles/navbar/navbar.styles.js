@@ -134,6 +134,11 @@ const styles = theme => ({
             display: 'flex'
         }
     },
+    inputWrap: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        display: 'flex'
+    },
     mobileWrap: {
         display: 'flex',
         alignItems: 'center',
