@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import VpnKeyIcon from '@material-ui/icons/VpnKey'
 import styles from '../../styles/login/login.styles'
 import Avatar from '@material-ui/core/Avatar'
@@ -19,6 +19,7 @@ import Visibility from '@material-ui/icons/Visibility'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
 import IconButton from '@material-ui/core/IconButton'
 import Loader from '../Loader'
+import loginPageHook from '../hooks/loginPage.hook'
 import { FlashDispatchContext } from '../contexts/flashMsgs.context'
 import { RegisterFormContext, RegisterFormDispatch } from '../contexts/registerForm.context'
 
@@ -53,16 +54,19 @@ export default function RegisterPage({ isLoggedIn }) {
         addValidation(inputs.password)
     }, [])
     const classes = useStyles()
-    const [state, setState] = useState({ passwordShown: false, loading: false })
-    function togglePassword() {
-        setState({ ...state, passwordShown: !state.passwordShown })
-    }
-    const handleMouseDownPassword = (event) => {
-        event.preventDefault()
-    }
+    const [state,
+        handleChange,
+        togglePassword,
+        handleMouseDownPassword,
+        startLoading,
+        stopLoading
+    ] = loginPageHook({
+        passwordShown: false,
+        loading: false
+    })
     async function handleSubmit(e) {
         e.preventDefault()
-        setState({ ...state, loading: true })
+        startLoading()
         const avatar = inputs.profilePic
         const form = new FormData()
         inputs.profilePic.slice(0, 1).forEach(e => form.append('profilePic', e))
@@ -71,7 +75,7 @@ export default function RegisterPage({ isLoggedIn }) {
         const request = await axios.post('/api/register-user', form)
         const response = await request.data
         inputs.profilePic = avatar
-        if (response.message === 'error') setState({ ...state, loading: false })
+        if (response.message === 'error') stopLoading()
         if (response.message === 'success') {
             const { email, password } = inputs
             const req = await signIn('credentials', {
@@ -86,11 +90,11 @@ export default function RegisterPage({ isLoggedIn }) {
                 severity: message
             })
             flashDispatch({ type: 'showSnackbar' })
-            if (message === 'error') setState({ ...state, loading: false })
+            if (message === 'error') stopLoading()
             if (message === 'success') router.replace('/')
         }
     }
-    if (state.loading) {
+    if (state.loading || isLoggedIn) {
         return (<Loader src={infinity.src} />)
     }
     return (

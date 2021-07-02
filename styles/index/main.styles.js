@@ -38,19 +38,6 @@ const styles = theme => ({
             fontSize: '3rem'
         }
     },
-    h3: {
-        fontFamily: 'Lato',
-        fontSize: '1.7rem',
-        [theme.breakpoints.down('md')]: {
-            fontSize: '1.3rem'
-        },
-        [theme.breakpoints.down('xs')]: {
-            fontSize: '1.1rem'
-        },
-        color: '#666666',
-        margin: 0,
-        fontWeight: '400'
-    },
     btnWrap: {
         flexBasis: '50%',
         marginTop: '-20px',

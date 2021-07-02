@@ -33,6 +33,7 @@
     "react-lazy-load-image-component": "^1.5.1",
     "react-material-ui-form-validator": "^2.1.4",
     "react-time-ago": "^6.2.2",
-    "swiper": "^6.7.0"
+    "swiper": "^6.7.0",
+    "typewriter-effect": "^2.18.0"
   }
 }

@@ -81,7 +81,7 @@ export default function LoginPage({ isLoggedIn }) {
         if (message === 'error') stopLoading()
         if (message === 'success') router.replace('/')
     }
-    if (state.loading) {
+    if (state.loading || isLoggedIn) {
         return <Loader src={infinity.src} />
     }
     return (

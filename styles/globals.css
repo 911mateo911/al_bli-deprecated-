@@ -23,7 +23,29 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+
+.Typewriter__wrapper {
+  font-family: 'Lato';
+  font-size: 1.7rem;
+  color: #666666;
+  margin: 0;
+  font-weight: 400;
+}
+
+.Typewriter__cursor {
+  font-size: 1.7rem;
+}
+
 /* Firefox */
 input[type="number"] {
   -moz-appearance: textfield;
+}
+
+@media (max-width: 1279.95px) {
+  .Typewriter__wrapper {
+    font-size: 1.3rem;
+  }
+  .Typewriter__cursor {
+    font-size: 1.3rem;
+  }
 }

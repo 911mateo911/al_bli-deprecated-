@@ -4,6 +4,7 @@ import hands from '../../public/hands.png'
 import styles from '../../styles/index/main.styles'
 import Link from 'next/link'
 import Image from 'next/image'
+import Typewriter from 'typewriter-effect'
 import Snackbar from '../newProduct/Snackbar'
 
 const useStyles = makeStyles(styles)
@@ -18,7 +19,14 @@ export default function Main() {
                 <img className={classes.mainImg} src={handsSrc} />
                 <span className={classes.mainHead} >
                     <h1 className={classes.h1} >Tregto dhe ti.</h1>
-                    <h3 className={classes.h3} >Shit cfare nuk te duhet, bli gjithcka!</h3>
+                    <Typewriter
+                        options={{
+                            strings: ['Shit cfare nuk te duhet!', 'Bli gjithcka!', 'Fito para!'],
+                            autoStart: true,
+                            loop: true,
+                            delay: 30
+                        }}
+                    />
                 </span>
             </main>
             <div className={classes.mainBtn} >
