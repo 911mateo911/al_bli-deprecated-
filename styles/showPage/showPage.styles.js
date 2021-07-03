@@ -77,7 +77,15 @@ const styles = theme => ({
     settings: {
         margin: '0 0 0 10px',
         color: '#0070f3',
-        cursor: 'pointer'
+        cursor: 'pointer',
+        transition: 'all 0.3s ease'
+    },
+    settingsTilt: {
+        margin: '0 0 0 10px',
+        color: '#0070f3',
+        cursor: 'pointer',
+        transform: 'rotate(45deg)',
+        transition: 'all 0.3s ease'
     }
 })
 
