@@ -57,7 +57,7 @@ export default function NewProductForm({ isLoggedIn }) {
                 severity: 'error'
             })
             flashDispatch({ type: 'showSnackbar' })
-            router.replace('/kycu')
+            router.push('/kycu')
         }
     }, [])
     async function handleSubmit(e) {
