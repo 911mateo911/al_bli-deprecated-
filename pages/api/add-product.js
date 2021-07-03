@@ -1,5 +1,6 @@
 import dbConnection from "../../utils/dbConnection"
 import Product from "../../models/Product"
+import { getSession } from "next-auth/client"
 import formidable from "formidable"
 import validationSchema from '../../validators/newproductForm.validation'
 import CustomError from '../../middlewares/customError'
@@ -38,6 +39,10 @@ const uploadImagesToCloudinary = async files => {
 export default async function handler(req, res) {
   try {
     await dbConnection()
+    const session = await getSession({ req })
+    if (!Boolean(session)) {
+      throw new CustomError('Ndodhi nje gabim', 400)
+    }
     const form = formidable({ multiples: true })
     form.parse(req, async (err, fields, files) => {
       try {
@@ -47,6 +52,7 @@ export default async function handler(req, res) {
         if (product.error) {
           throw new CustomError('Ndodhi nje gabim', 400)
         }
+        data.seller = session.user._id
         if (files.photos) {
           const images = [files.photos].flat().slice(0, 10)
           const imageSrcs = await uploadImagesToCloudinary(images)
@@ -68,7 +74,7 @@ export default async function handler(req, res) {
   } catch (e) {
     res.send({
       message: 'error',
-      errorMsg: 'Ndodhi nje gabim!'
+      errorMsg: e.msg
     })
   }
 }

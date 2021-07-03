@@ -2,6 +2,10 @@ import mongoose from 'mongoose'
 
 const ProductSchema = new mongoose.Schema({
     name: String,
+    seller: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
     date: {
         type: Date
     },

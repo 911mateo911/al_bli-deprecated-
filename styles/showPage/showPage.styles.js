@@ -73,6 +73,11 @@ const styles = theme => ({
         fontSmoothing: 'antialiased',
         fontWeight: '500',
         textAlign: 'left'
+    },
+    settings: {
+        margin: '0 0 0 10px',
+        color: '#0070f3',
+        cursor: 'pointer'
     }
 })
 
