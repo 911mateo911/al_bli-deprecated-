@@ -6,16 +6,19 @@ import Snackbar from '../components/newProduct/Snackbar'
 import "swiper/swiper.min.css"
 import "swiper/components/pagination/pagination.min.css"
 import "swiper/components/navigation/navigation.min.css"
+import { RouterProvider } from '../components/contexts/routeHistory.context'
 
 function MyApp({ Component, pageProps }) {
   return (
     <>
       <Provider session={pageProps.session} >
-        <FlashMsgProvider>
-          <Navbar />
-          <Component {...pageProps} />
-          <Snackbar />
-        </FlashMsgProvider>
+        <RouterProvider>
+          <FlashMsgProvider>
+            <Navbar />
+            <Component {...pageProps} />
+            <Snackbar />
+          </FlashMsgProvider>
+        </RouterProvider>
       </Provider>
     </>
   )

@@ -78,7 +78,7 @@ export default function LoginPage({ isLoggedIn }) {
         })
         dispatch({ type: 'showSnackbar' })
         if (message === 'error') stopLoading()
-        if (message === 'success') router.replace('/')
+        if (message === 'success') router.back()
     }
     if (state.loading || isLoggedIn) {
         return <Loader />

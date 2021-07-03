@@ -26,7 +26,7 @@ export default function SnackbarMsg() {
             anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
             className={classes.snackbar}
             open={snackbar.open}
-            autoHideDuration={2000}
+            autoHideDuration={2200}
             onClose={() => dispatch({ type: 'hideSnackbar' })}
         >
             <Alert onClose={() => dispatch({ type: 'hideSnackbar' })} severity={snackbar.severity}>

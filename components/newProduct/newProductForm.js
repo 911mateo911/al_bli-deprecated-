@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import styles from '../../styles/newProduct/productForm.styles'
 import { SelectValidator, ValidatorForm } from 'react-material-ui-form-validator'
@@ -42,13 +42,24 @@ export const clean = obj => {
     return obj
 }
 
-export default function NewProductForm(props) {
+export default function NewProductForm({ isLoggedIn }) {
     const classes = useStyles()
     const inputs = useContext(FormContext)
     const dispatch = useContext(DispatchContext)
     const router = useRouter()
     const [loading, setLoading] = useState(false)
     const flashDispatch = useContext(FlashDispatchContext)
+    useEffect(() => {
+        if (!isLoggedIn) {
+            flashDispatch({
+                type: 'addMessage',
+                message: 'Duhet te kyceni per te vazhduar!',
+                severity: 'error'
+            })
+            flashDispatch({ type: 'showSnackbar' })
+            router.replace('/kycu')
+        }
+    }, [])
     async function handleSubmit(e) {
         e.preventDefault()
         setLoading(true)
@@ -67,9 +78,8 @@ export default function NewProductForm(props) {
         if (response.message === 'error') setLoading(false)
         if (response.message === 'success') router.replace(response.redirectTo)
     }
-    if (loading) {
-        return <Loader message='Po ngarkohet...' />
-    }
+    if (!isLoggedIn) return <Loader />
+    if (loading) return <Loader message='Po ngarkohet...' />
     return (
         <div className={classes.root} >
             <h1 className={classes.h1} >Posto produktin tend:</h1>

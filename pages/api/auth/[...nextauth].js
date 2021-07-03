@@ -23,7 +23,6 @@ export default NextAuth({
                     }
                     const user = await bcrypt.compare(credentials.password, registeredUser.password)
                     if (user) {
-                        registeredUser.image = registeredUser
                         return registeredUser
                     } else {
                         throw new CustomError('Email ose password nuk eshte i sakte', 400)
