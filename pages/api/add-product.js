@@ -2,6 +2,7 @@ import dbConnection from "../../utils/dbConnection"
 import Product from "../../models/Product"
 import { getSession } from "next-auth/client"
 import formidable from "formidable"
+import sharp from 'sharp'
 import validationSchema from '../../validators/newproductForm.validation'
 import CustomError from '../../middlewares/customError'
 import extendedData from '../../middlewares/extendProductData'
@@ -14,8 +15,17 @@ cloudinary.config({
 })
 
 const uploadImagesToCloudinary = async files => {
-  const promises = files.map(img => new Promise((resolve, reject) => {
-    cloudinary.v2.uploader.upload(img.path,
+  const promises = files.map(img => new Promise(async (resolve, reject) => {
+    let image = ''
+    await sharp(img.path).resize({
+      fit: sharp.fit.contain,
+      height: 600
+    }).withMetadata().toBuffer().then(img => {
+      const base64 = img.toString('base64')
+      image = `data:image/jpeg;base64,${base64}`
+    })
+    const uploadStream = cloudinary.v2.uploader.upload(
+      image,
       {
         folder: 'alBli',
         transformation: [{
@@ -32,7 +42,6 @@ const uploadImagesToCloudinary = async files => {
         })
       })
   }))
-
   return Promise.all(promises).then(result => { return result }).catch(e => { return [] })
 }
 
