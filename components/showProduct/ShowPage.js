@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, memo } from 'react'
 import styles from '../../styles/showPage/showPage.styles'
 import { makeStyles } from '@material-ui/core/styles'
 import Carousel from './Carousel'
@@ -21,7 +21,7 @@ const timeAgo = new TimeAgo('sq')
 
 const useStyles = makeStyles(styles)
 
-export default function ShowPage({ product }) {
+function ShowPage({ product }) {
     const state = useContext(ShowPageContext)
     const dispatch = useContext(ShowPageDispatch)
     const classes = useStyles()
@@ -52,7 +52,6 @@ export default function ShowPage({ product }) {
         currency,
         email
     } = product
-    console.log('component rerender')
     return (
         <div className={classes.root} >
             <Carousel product={product} />
@@ -95,3 +94,5 @@ export default function ShowPage({ product }) {
         </div >
     )
 }
+
+export default memo(ShowPage)

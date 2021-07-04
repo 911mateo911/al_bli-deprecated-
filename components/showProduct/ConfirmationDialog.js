@@ -39,6 +39,7 @@ export default function ConfirmationDialog({
             severity: req.data.message
         })
         dispatch({ type: 'showSnackbar' })
+        console.log(req.data.message)
         if (req.data.message === 'error') showPageDispatch({ type: 'stopLoading' })
         if (req.data.message === 'success') router.replace('/')
     }

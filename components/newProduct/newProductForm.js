@@ -35,7 +35,7 @@ const flashMessages = {
 
 export const clean = obj => {
     for (let key in obj) {
-        if (obj[key] === '') {
+        if (obj[key] === '' || obj[key] === []) {
             delete obj[key]
         }
     }
@@ -63,12 +63,14 @@ export default function NewProductForm({ isLoggedIn }) {
     async function handleSubmit(e) {
         e.preventDefault()
         setLoading(true)
+        const data = inputs
         const form = new FormData()
-        inputs.photos.forEach(e => form.append('photos', e)) // adding photos to form data
-        inputs.photos = '' // made here so it will be cleaned with the below method
-        Object.keys(clean(inputs)).forEach(key => form.append(key, clean(inputs)[key])) // appending keys to form data
+        data.photos.forEach(e => form.append('photos', e)) // adding photos to form data
+        data.photos = '' // made here so it will be cleaned with the below method
+        Object.keys(clean(data)).forEach(key => form.append(key, clean(data)[key])) // appending keys to form data
         const request = await axios.post('/api/add-product', form)
         const response = await request.data
+        data.photos = []
         flashDispatch({
             type: 'addMessage',
             message: flashMessages[response.message],

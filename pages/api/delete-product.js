@@ -10,13 +10,6 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_SECRET
 })
 
-const deleteImagesFromCloudinary = async imgs => {
-    const promises = imgs.map(img => new Promise((resolve, reject) => {
-        cloudinary.v2.uploader.destroy(img.filename)
-    }))
-    return Promise.all(promises)
-}
-
 export default async function handler(req, res) {
     try {
         await dbConnection()
@@ -28,13 +21,16 @@ export default async function handler(req, res) {
             throw new CustomError('Ju nuk keni autorizim per kete veprim!')
         }
         if (foundProduct.photos.length) {
-            await deleteImagesFromCloudinary()
+            for (let photo of foundProduct.photos) {
+                await cloudinary.v2.uploader.destroy(photo.filename)
+            }
         }
         await Product.findOneAndDelete({ _id: id })
         res.send({
             message: 'success'
         })
     } catch (e) {
+        console.log(e)
         res.send({
             message: 'error',
             errorMsg: 'Ndodhi nje gabim.'
