@@ -1,18 +1,19 @@
 import React from 'react'
-import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/client'
-import Loader from '../../../components/Loader'
 import ShowPage from '../../../components/showProduct/ShowPage'
 import dbConnection from '../../../utils/dbConnection'
 import Product from '../../../models/Product'
+import { ShowPageProvider } from '../../../components/contexts/showPage.context'
+import dialogHook from '../../../components/hooks/dialog.hook'
 
 export default function foundProduct({ product }) {
-    const router = useRouter()
     const gotProduct = JSON.parse(product)
-    const [session, loading] = useSession()
-    if (loading) return <Loader />
     return (
-        <ShowPage product={gotProduct} session={session} />
+        <ShowPageProvider>
+            <ShowPage
+                product={gotProduct}
+            />
+        </ShowPageProvider>
     )
 }
 

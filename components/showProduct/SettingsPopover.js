@@ -16,9 +16,14 @@ const useStyles = makeStyles(styles)
 export default function SettingsPopover({
     popoverOpen,
     closePopover,
+    openDialog,
     anchorEl
 }) {
     const classes = useStyles()
+    function handleDelete() {
+        closePopover()
+        openDialog()
+    }
     return (
         <Popover
             className={classes.popover}
@@ -46,7 +51,7 @@ export default function SettingsPopover({
                         </ListItemAvatar>
                         <ListItemText primary='Ndrysho' />
                     </ListItem>
-                    <ListItem className={classes.listItem} button>
+                    <ListItem className={classes.listItem} button onClick={handleDelete}>
                         <ListItemAvatar>
                             <Avatar>
                                 <DeleteIcon />
