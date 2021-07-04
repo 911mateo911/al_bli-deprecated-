@@ -61,10 +61,11 @@ function ShowPage({ product }) {
             />
             <div className={classes.details} >
                 <span className={classes.user} >
-                    <Avatar alt={name} src='https://images.unsplash.com/photo-1571224736343-7182962ae3e7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=633&q=80' />
+                    {seller.profilePic ?
+                        <Avatar src={seller.profilePic.url} /> : <Avatar>{name[0].toUpperCase()}</Avatar>}
                     <h4 className={classes.username} >{name}</h4>
                     <p className={classes.date} >{timeAgo.format(Date.parse(date))}</p>
-                    {Boolean(session) && (session.user._id === seller && <SettingsIcon
+                    {Boolean(session) && (session.user._id === seller._id && <SettingsIcon
                         onClick={e => dispatch({ type: 'openPopover', target: e.currentTarget })}
                         className={popoverOpen ? classes.settingsTilt : classes.settings}
                     />)}
@@ -83,7 +84,7 @@ function ShowPage({ product }) {
                 <div className={classes.description} >
                     {description}
                 </div>
-                {Boolean(session) && (session.user._id === seller && <SettingsPopover
+                {Boolean(session) && (session.user._id === seller._id && <SettingsPopover
                     popoverOpen={popoverOpen}
                     closePopover={() => dispatch({ type: 'closePopover' })}
                     anchorEl={state.anchorEl}

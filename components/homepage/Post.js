@@ -19,13 +19,13 @@ import styles from '../../styles/index/post.styles'
 
 const useStyles = makeStyles(styles)
 
-export default function Post({ profilePic, name, setLoading, title, date, price, currency, id, slug }) {
+export default function Post({ photo, profilePic, name, setLoading, title, date, price, currency, id, slug }) {
     const classes = useStyles()
     const router = useRouter()
     const getAvatar = () => {
         return (
-            profilePic.length ?
-                <Avatar className={classes.avatar} src={profilePic} /> :
+            profilePic ?
+                <Avatar className={classes.avatar} src={profilePic.url} /> :
                 <Avatar className={classes.avatar}>
                     {name[0].toUpperCase()}
                 </Avatar>
@@ -35,7 +35,8 @@ export default function Post({ profilePic, name, setLoading, title, date, price,
         setLoading(true)
         router.push(`produkt/${id}/${slug}`)
     }
-    const cardTitle = title.length > 33 ? `${title.slice(0,30)}...` : title
+    const image = photo ? photo.url : 'https://res.cloudinary.com/dxtjwhnoz/image/upload/v1624539769/no-photos_p4vnkf.png'
+    const cardTitle = title.length > 33 ? `${title.slice(0, 30)}...` : title
     return (
         <Card className={classes.root} >
             <CardHeader
@@ -45,7 +46,7 @@ export default function Post({ profilePic, name, setLoading, title, date, price,
             />
             <CardActionArea onClick={handleClick} >
                 <CardMedia
-                    image='https://res.cloudinary.com/dxtjwhnoz/image/upload/v1620413209/alHotel/vofgvdpwve5nbvx6agky.webp'
+                    image={image}
                     className={classes.media}
                 />
                 <CardContent>

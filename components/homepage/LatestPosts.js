@@ -51,13 +51,14 @@ export default function LatestPosts({ posts, setLoading }) {
                     return (
                         <SwiperSlide className={classes.slide} key={i} >
                             <Post
-                                profilePic=''
+                                profilePic={e.seller.profilePic || ''}
                                 name={e.name}
                                 title={e.title}
                                 price={e.price}
                                 currency={e.currency}
                                 setLoading={setLoading}
                                 id={e._id}
+                                photo={e.photos[0] || ''}
                                 slug={e.slug}
                                 date={timeAgo.format(Date.parse(e.date))}
                             />

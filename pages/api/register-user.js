@@ -1,6 +1,7 @@
 import dbConnection from '../../utils/dbConnection'
 import User from '../../models/User'
 import bcrypt from 'bcrypt'
+import sharp from 'sharp'
 import formidable from 'formidable'
 import CustomError from '../../middlewares/customError'
 import validationSchema from '../../validators/registerForm.validation'
@@ -13,8 +14,16 @@ cloudinary.config({
 })
 
 const uploadProfilePic = async pic => {
-    return new Promise((resolve, reject) => {
-        cloudinary.v2.uploader.upload(pic.path, {
+    return new Promise(async (resolve, reject) => {
+        let image = ''
+        await sharp(pic.path).resize({
+            fit: sharp.fit.contain,
+            height: 600
+        }).withMetadata().toBuffer().then(img => {
+            const base64 = img.toString('base64')
+            image = `data:image/jpeg;base64,${base64}`
+        })
+        cloudinary.v2.uploader.upload(image, {
             folder: 'alBli'
         }, (err, res) => {
             if (err) reject({ message: 'error' })

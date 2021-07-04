@@ -77,7 +77,7 @@ export default function RegisterPage({ isLoggedIn }) {
         if (response.message === 'error') {
             flashDispatch({
                 type: 'addMessage',
-                message: 'Pati nje problem!',
+                message: response.errorMsg || flashMessages[response.message],
                 severity: 'error'
             })
             flashDispatch({ type: 'showSnackbar' })

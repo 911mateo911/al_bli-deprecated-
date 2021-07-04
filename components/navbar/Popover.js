@@ -50,10 +50,9 @@ export default function PopoverElem({ open, close, anchor, name, email, profileP
         >
             <div className={classes.root} >
                 <span className={classes.profile} >
-                    <Avatar className={classes.avatar} >
-                        {profilePicUrl ?
-                            <img className={classes.profilePic} src={profilePicUrl} /> : name[0].toUpperCase()}
-                    </Avatar>
+                    {profilePicUrl ?
+                        <Avatar className={classes.avatar} src={profilePicUrl} />
+                        : <Avatar className={classes.avatar} >{name[0].toUpperCase()}</Avatar>}
                     <h4 className={classes.h4} >{name}</h4>
                     <h5 className={classes.h5} >{email}</h5>
                 </span>

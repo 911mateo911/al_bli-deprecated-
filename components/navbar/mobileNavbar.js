@@ -11,10 +11,17 @@ export function LoginElem(session, openPopover, classes, isMobile) {
     const loggedOutClass = isMobile ? classes.mobileLoginBtn : classes.loginBtn
     if (Boolean(session)) {
         return (
-            <Avatar onClick={openPopover} className={classes.socialAvt}>
-                {session.user.profilePic ?
-                    <img className={classes.profilePic} src={session.user.profilePic.url} /> : session.user.name[0].toUpperCase()}
-            </Avatar>
+            session.user.profilePic ? <Avatar
+                onClick={openPopover}
+                className={classes.socialAvt}
+                src={session.user.profilePic.url}
+            /> :
+                <Avatar
+                    onClick={openPopover}
+                    className={classes.socialAvt}
+                >
+                    {session.user.name[0].toUpperCase()}
+                </Avatar>
         )
     } else {
         return (

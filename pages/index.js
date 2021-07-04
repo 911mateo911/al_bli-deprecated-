@@ -40,7 +40,7 @@ export async function getServerSideProps(context) {
         rating: -1,
         date: -1
       })
-      .limit(10)
+      .limit(10).populate('seller', { profilePic: 1 })
     return {
       props: {
         posts: JSON.stringify(latestPosts)
