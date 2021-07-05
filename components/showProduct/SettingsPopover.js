@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Popover from '@material-ui/core/Popover'
 import { makeStyles } from '@material-ui/core/styles'
 import styles from '../../styles/showPage/settings.styles'
 import ListItemText from '@material-ui/core/ListItemText'
+import { ShowPageContext, ShowPageDispatch } from '../contexts/showPage.context'
 import List from '@material-ui/core/List'
 import DeleteIcon from '@material-ui/icons/Delete';
 import Avatar from '@material-ui/core/Avatar'
@@ -13,25 +14,26 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar'
 
 const useStyles = makeStyles(styles)
 
-export default function SettingsPopover({
-    popoverOpen,
-    closePopover,
-    openDialog,
-    anchorEl
-}) {
+export default function SettingsPopover() {
     const classes = useStyles()
+    const state = useContext(ShowPageContext)
+    const dispatch = useContext(ShowPageDispatch)
+    const popoverOpen = Boolean(state.anchorEl)
     function handleDelete() {
-        closePopover()
-        openDialog()
+        dispatch({ type: 'closePopover' })
+        dispatch({ type: 'openDialog' })
+    }
+    function handleClose() {
+        dispatch({ type: 'closePopover' })
     }
     return (
         <Popover
             className={classes.popover}
             classes={{ paper: classes.paper }}
             open={popoverOpen}
-            onClose={closePopover}
+            onClose={handleClose}
             elevation={0}
-            anchorEl={anchorEl}
+            anchorEl={state.anchorEl}
             anchorOrigin={{
                 vertical: 'bottom',
                 horizontal: 'left'

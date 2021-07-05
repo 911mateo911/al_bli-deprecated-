@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { Swiper, SwiperSlide } from "swiper/react"
 import { makeStyles } from '@material-ui/core/styles'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
@@ -13,7 +13,7 @@ SwiperCore.use([Pagination, Navigation])
 
 const useStyles = makeStyles(styles)
 
-export default function Carousel({ product }) {
+function Carousel({ product }) {
     const classes = useStyles()
     const renderImgs = product.photos.map((img, i) => {
         return (
@@ -54,3 +54,5 @@ export default function Carousel({ product }) {
         </span>
     )
 }
+
+export default memo(Carousel)

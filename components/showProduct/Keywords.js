@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import Chip from '@material-ui/core/Chip'
 import Avatar from '@material-ui/core/Avatar'
 import { makeStyles } from '@material-ui/core/styles'
@@ -6,7 +6,7 @@ import styles from '../../styles/showPage/keywords.styles'
 
 const useStyles = makeStyles(styles)
 
-export default function Keywords({ list }) {
+function Keywords({ list }) {
     const classes = useStyles()
     return (
         <span className={classes.root} >
@@ -16,7 +16,7 @@ export default function Keywords({ list }) {
                     className={classes.key}
                     label={k}
                     key={i}
-                    onClick={e => console.log(e)}
+                    onClick={e => console.log('shtipe keyword')}
                     avatar={
                         <Avatar
                             className={classes.chipAvatar} >
@@ -28,3 +28,5 @@ export default function Keywords({ list }) {
         </span>
     )
 }
+
+export default memo(Keywords)

@@ -7,11 +7,10 @@ import { ShowPageProvider } from '../../../components/contexts/showPage.context'
 import dialogHook from '../../../components/hooks/dialog.hook'
 
 export default function foundProduct({ product }) {
-    const gotProduct = JSON.parse(product)
     return (
         <ShowPageProvider>
             <ShowPage
-                product={gotProduct}
+                product={product}
             />
         </ShowPageProvider>
     )
