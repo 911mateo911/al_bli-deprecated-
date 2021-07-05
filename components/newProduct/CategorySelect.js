@@ -7,19 +7,20 @@ import Select from '@material-ui/core/Select';
 import { DispatchContext } from '../contexts/newProductForm.context'
 import categories from './utils/categories'
 
-function CategorySelect({ value }) {
+export const allCategories = categories.map(c => {
     const bgWhite = { backgroundColor: '#f2f2f2' }
+    const categoryName = <ListSubheader value='' style={bgWhite} color='primary' >
+        {c.emri}
+    </ListSubheader>
+    const subCategories = c.nenkategori.map(e => <MenuItem value={e} >{e}</MenuItem>)
+    return [
+        categoryName,
+        subCategories
+    ]
+})
+
+function CategorySelect({ value }) {
     const dispatch = useContext(DispatchContext)
-    const allCategories = categories.map(c => {
-        const categoryName = <ListSubheader value='' style={bgWhite} color='primary' >
-            {c.emri}
-        </ListSubheader>
-        const subCategories = c.nenkategori.map(e => <MenuItem value={e} >{e}</MenuItem>)
-        return [
-            categoryName,
-            subCategories
-        ]
-    })
     return (
         <>
             <SelectValidator

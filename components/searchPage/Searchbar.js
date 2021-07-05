@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import IconButton from '@material-ui/core/IconButton'
 import { makeStyles } from '@material-ui/core/styles'
 import InputAdornment from '@material-ui/core/InputAdornment'
@@ -6,6 +6,9 @@ import SearchIcon from '@material-ui/icons/Search'
 import { ThemeProvider } from '@material-ui/core/styles'
 import OutlinedInput from '@material-ui/core/OutlinedInput'
 import { theme } from '../navbar/searchBar'
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator'
+import CategoryAdornment from './CategoryAdornment'
+import { SearchDispatch, SearchContext } from '../contexts/search.context'
 
 const styles = theme => ({
     root: {
@@ -19,28 +22,47 @@ const styles = theme => ({
     },
     search: {
         color: '#0070f3'
+    },
+    input: {
+        paddingRight: '4px !important'
     }
 })
 
 const useStyles = makeStyles(styles)
 
+function handleChange(e, dispatch) {
+    dispatch({ type: 'setQuery', value: e.target.value })
+}
+
 export default function Searchbar() {
+    const state = useContext(SearchContext)
+    const dispatch = useContext(SearchDispatch)
     const classes = useStyles()
     return (
-        <ThemeProvider theme={theme}>
-            <OutlinedInput
-                className={classes.root}
-                placeholder='Kerko'
-                id="input-with-icon-adornment"
-                margin='none'
-                endAdornment={
-                    <InputAdornment position="end">
-                        <IconButton>
-                            <SearchIcon className={classes.search} />
-                        </IconButton>
-                    </InputAdornment>
-                }
-            />
-        </ThemeProvider>
+        <ValidatorForm className={classes.root} noValidate onSubmit={() => console.log('sasdss')} >
+            <ThemeProvider theme={theme}>
+                <TextValidator
+                    fullWidth
+                    placeholder='Kerko'
+                    variant='outlined'
+                    value={state.query}
+                    margin='none'
+                    onChange={e => handleChange(e, dispatch)}
+                    InputProps={{
+                        endAdornment: (
+                            <>
+                                <CategoryAdornment category={state.category} />
+                                <InputAdornment position="end">
+                                    <IconButton>
+                                        <SearchIcon className={classes.search} />
+                                    </IconButton>
+                                </InputAdornment>
+                            </>
+                        ),
+                        classes: { root: classes.input }
+                    }}
+                />
+            </ThemeProvider>
+        </ValidatorForm>
     )
 }

@@ -1,8 +1,9 @@
-const reducer = (action, state) => {
+const reducer = (state, action) => {
     const actions = {
-        search: { ...state, query: action.value }
+        setQuery: { ...state, query: action.value },
+        setCategory: { ...state, category: action.value }
     }
-    return actions[action]
+    return actions[action.type]
 }
 
 export default reducer

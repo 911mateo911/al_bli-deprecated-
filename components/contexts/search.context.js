@@ -2,7 +2,10 @@ import { useContext, useReducer, createContext } from 'react'
 import reducer from '../reducers/search.reducer'
 
 const initialValues = {
-    query: ''
+    query: '',
+    category: 'all',
+    redirected: false,
+    products: []
 }
 
 export const SearchContext = createContext()
