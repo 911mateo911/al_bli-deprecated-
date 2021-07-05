@@ -35,7 +35,7 @@ export default function ConfirmationDialog({
         const req = await axios.post('/api/delete-product', body)
         dispatch({
             type: 'addMessage',
-            message: flashMessages[req.data.message],
+            message: req.data.errorMsg || flashMessages[req.data.message],
             severity: req.data.message
         })
         dispatch({ type: 'showSnackbar' })

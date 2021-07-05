@@ -33,7 +33,7 @@ export default async function handler(req, res) {
         console.log(e)
         res.send({
             message: 'error',
-            errorMsg: 'Ndodhi nje gabim.'
+            errorMsg: e.msg
         })
     }
 }
