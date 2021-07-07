@@ -16,11 +16,9 @@ const styles = theme => ({
         [theme.breakpoints.down('sm')]: {
             width: '50%'
         },
-        [theme.breakpoints.down('xs')]: {
-            width: '75%'
-        },
-        [theme.breakpoints.down(theme.breakpoints.values.xs + '400')]: {
-            width: '95%'
+        [theme.breakpoints.down(theme.breakpoints.values.xs + 800)]: {
+            width: '40%',
+            margin: 0
         }
     }
 })

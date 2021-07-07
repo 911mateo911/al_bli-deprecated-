@@ -21,6 +21,9 @@ export async function getServerSideProps(context) {
         const { productID } = context.query
         await dbConnection()
         const foundProduct = await Product.findById(productID).populate('seller', { profilePic: 1 })
+        if (!foundProduct) {
+            throw new Error()
+        }
         return {
             props: {
                 product: JSON.stringify(foundProduct)

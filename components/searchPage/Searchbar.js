@@ -6,6 +6,9 @@ import SearchIcon from '@material-ui/icons/Search'
 import { ThemeProvider } from '@material-ui/core/styles'
 import OutlinedInput from '@material-ui/core/OutlinedInput'
 import { theme } from '../navbar/searchBar'
+import axios from 'axios'
+import CityAdornment from './CityAdornment'
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator'
 import CategoryAdornment from './CategoryAdornment'
 import { SearchDispatch, SearchContext } from '../contexts/search.context'
@@ -25,6 +28,12 @@ const styles = theme => ({
     },
     input: {
         paddingRight: '4px !important'
+    },
+    adornment: {
+        display: 'flex',
+        marginTop: '10px',
+        justifyContent: 'space-evenly',
+        alignItems: 'center'
     }
 })
 
@@ -34,12 +43,20 @@ function handleChange(e, dispatch) {
     dispatch({ type: 'setQuery', value: e.target.value })
 }
 
+async function handleSubmit(state, dispatch) {
+    const { query, category, city, page } = state
+    const request = await axios.post('api/search-products', { query, category, city, page })
+    dispatch({ type: 'setProducts', value: request.data.products })
+    dispatch({ type: 'resetPage' })
+}
+
 export default function Searchbar() {
     const state = useContext(SearchContext)
     const dispatch = useContext(SearchDispatch)
     const classes = useStyles()
+    const mediaQuery = useMediaQuery('(max-width: 800px)')
     return (
-        <ValidatorForm className={classes.root} noValidate onSubmit={() => console.log('sasdss')} >
+        <ValidatorForm className={classes.root} noValidate onSubmit={() => handleSubmit(state, dispatch)} >
             <ThemeProvider theme={theme}>
                 <TextValidator
                     fullWidth
@@ -47,13 +64,20 @@ export default function Searchbar() {
                     variant='outlined'
                     value={state.query}
                     margin='none'
+                    validators={['required']}
+                    errorMessages={['Kerkohet!']}
                     onChange={e => handleChange(e, dispatch)}
                     InputProps={{
                         endAdornment: (
                             <>
-                                <CategoryAdornment category={state.category} />
+                                {!mediaQuery && (
+                                    <>
+                                        <CityAdornment city={state.city} />
+                                        <CategoryAdornment category={state.category} />
+                                    </>
+                                )}
                                 <InputAdornment position="end">
-                                    <IconButton>
+                                    <IconButton type='submit' >
                                         <SearchIcon className={classes.search} />
                                     </IconButton>
                                 </InputAdornment>
@@ -63,6 +87,12 @@ export default function Searchbar() {
                     }}
                 />
             </ThemeProvider>
+            {mediaQuery && (
+                <div className={classes.adornment} >
+                    <CityAdornment city={state.city} />
+                    <CategoryAdornment category={state.category} />
+                </div>
+            )}
         </ValidatorForm>
     )
 }

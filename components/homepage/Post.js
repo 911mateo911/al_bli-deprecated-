@@ -35,7 +35,7 @@ export default function Post({ photo, profilePic, name, setLoading, title, date,
         setLoading(true)
         router.push(`produkt/${id}/${slug}`)
     }
-    const image = photo ? photo.url : 'https://res.cloudinary.com/dxtjwhnoz/image/upload/v1624539769/no-photos_p4vnkf.png'
+    const image = photo ? photo.url : 'https://res.cloudinary.com/dxtjwhnoz/image/upload/c_mpad,h_2160,w_3840/v1624539769/no-photos_p4vnkf.png'
     const cardTitle = title.length > 33 ? `${title.slice(0, 30)}...` : title
     return (
         <Card className={classes.root} >

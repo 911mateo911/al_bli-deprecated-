@@ -4,8 +4,12 @@ import reducer from '../reducers/search.reducer'
 const initialValues = {
     query: '',
     category: 'all',
+    city: 'all',
     redirected: false,
-    products: []
+    products: [],
+    page: 0,
+    gridLoading: false,
+    scrollLoading: false
 }
 
 export const SearchContext = createContext()

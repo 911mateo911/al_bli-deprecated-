@@ -26,7 +26,11 @@ const ProductSchema = new mongoose.Schema({
         type: String,
         default: 'Shitet'
     }],
+    sluggedKeywords: String,
     slug: String,
+    elasticSearch: [{
+        type: String
+    }],
     siperfaqe: String,
     nrDhoma: String,
     adresa: String,
