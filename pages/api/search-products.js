@@ -29,15 +29,14 @@ export default async function handler(req, res) {
         const product = await Product
             .find({
                 $or: [
+                    { elasticSearch: { $all: getElasticSearch(escapeQueryOperators(query)) } },
                     { title: { $regex: escapeQueryOperators(query), $options: 'i' } },
-                    { sluggedKeywords: { $regex: escapeQueryOperators(query), $options: 'i' } },
-                    { elasticSearch: { $in: getElasticSearch(escapeQueryOperators(query)) } }
+                    { sluggedKeywords: { $regex: escapeQueryOperators(query), $options: 'i' } }
                 ],
                 ...config
             })
             .limit(10).skip(page * 10).sort({
-                rating: -1,
-                date: -1
+                rating: -1
             })
             .populate('seller', { profilePic: 1 })
         if (!product) {

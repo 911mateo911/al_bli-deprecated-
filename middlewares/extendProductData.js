@@ -5,7 +5,7 @@ export function getElasticSearch(str) {
     const result = []
     splitted.map(e => {
         for (let i = 0; i < e.length; i++) {
-            result.push(e.slice(0, i + 1))
+            result.push(e.slice(0, i + 3))
         }
     })
     return result
