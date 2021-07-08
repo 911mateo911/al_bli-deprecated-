@@ -1,21 +1,35 @@
-import React, { useContext } from 'react'
+import React, { useContext, memo, useState } from 'react'
 import { useSession } from 'next-auth/client'
 import { LoginElem } from './mobileNavbar'
 import Input from '@material-ui/core/Input'
 import FormControl from '@material-ui/core/FormControl'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import IconButton from '@material-ui/core/IconButton'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import SearchIcon from '@material-ui/icons/Search'
 import { ThemeProvider } from '@material-ui/core/styles'
 import InputLabel from '@material-ui/core/InputLabel'
 import { theme } from './searchBar'
+import { SearchDispatch } from '../contexts/search.context'
 
-export default function desktopNavbar({
+function handleSubmit(state, setState, dispatch, router) {
+    dispatch({ type: 'setCategory', value: 'all' })
+    dispatch({ type: 'setCity', value: 'all' })
+    dispatch({ type: 'setRedirected', value: true })
+    dispatch({ type: 'setQuery', value: state })
+    setState('')
+    router.push('/kerko')
+}
+
+function desktopNavbar({
     classes,
     openPopover
 }) {
     const [session, loading] = useSession()
+    const [state, setState] = useState('')
+    const dispatch = useContext(SearchDispatch)
+    const router = useRouter()
     return (
         <>
             <div className={classes.linkWrap} >
@@ -45,9 +59,15 @@ export default function desktopNavbar({
                             placeholder='Kerko produkte'
                             id="input-with-icon-adornment"
                             margin='none'
+                            value={state}
+                            onChange={e => setState(e.target.value)}
                             endAdornment={
                                 <InputAdornment position="end">
-                                    <IconButton>
+                                    <IconButton
+                                        onClick={() => handleSubmit(
+                                            state, setState, dispatch, router
+                                        )}
+                                    >
                                         <SearchIcon />
                                     </IconButton>
                                 </InputAdornment>
@@ -60,3 +80,5 @@ export default function desktopNavbar({
         </>
     )
 }
+
+export default memo(desktopNavbar)

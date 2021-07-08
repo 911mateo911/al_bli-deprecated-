@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import Divider from '@material-ui/core/Divider'
 import { SearchDispatch } from '../contexts/search.context'
 import doubleRing from '../../public/doubleRing.svg'
+import singleRing from '../../public/singleRing.svg'
 import TimeAgo from 'javascript-time-ago'
 import sq from 'javascript-time-ago/locale/sq'
 TimeAgo.addLocale(sq)
