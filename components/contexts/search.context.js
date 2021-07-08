@@ -8,8 +8,10 @@ const initialValues = {
     redirected: false,
     products: [],
     page: 0,
+    initialGreet: true,
     gridLoading: false,
-    scrollLoading: false
+    scrollLoading: false,
+    pageLoading: false
 }
 
 export const SearchContext = createContext()

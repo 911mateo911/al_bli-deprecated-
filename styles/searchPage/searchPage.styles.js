@@ -1,7 +1,7 @@
 const styles = theme => ({
     root: {
         display: 'flex',
-        width: '70%',
+        width: '90%',
         margin: 'auto',
         justifyContent: 'center',
         flexDirection: 'column',
@@ -27,6 +27,13 @@ const styles = theme => ({
     },
     divider: {
         width: '100%'
+    },
+    h2: {
+        margin: 0,
+        marginTop: '20px',
+        fontFamily: 'Source Sans Pro',
+        fontWeight: '500',
+        textAlign: 'center'
     }
 })
 
