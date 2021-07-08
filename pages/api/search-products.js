@@ -25,6 +25,9 @@ export default async function handler(req, res) {
     try {
         await dbConnection()
         const { query, page, city, category } = req.body
+        if (query === '') {
+            throw new CustomError('Ju lutem jepni nje kriter', 400)
+        }
         const config = getConfig({ category, city })
         const product = await Product
             .find({

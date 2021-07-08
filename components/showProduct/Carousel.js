@@ -5,6 +5,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import styles from '../../styles/showPage/carousel.styles'
 import ProdDetails from './ProdDetails'
 import "swiper/swiper.min.css"
+import singleRingScaled from '../../public/singleRingScaled.svg'
 import "swiper/components/pagination/pagination.min.css"
 import "swiper/components/navigation/navigation.min.css"
 import 'react-lazy-load-image-component/src/effects/black-and-white.css'
@@ -24,6 +25,7 @@ function Carousel({ product }) {
                     src={img.url}
                     effect='black-and-white'
                     className={classes.img}
+                    placeholderSrc={singleRingScaled.src}
                 />
             </SwiperSlide>
         )

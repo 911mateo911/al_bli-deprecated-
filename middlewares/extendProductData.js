@@ -1,14 +1,14 @@
 import addKeywords from "./addKeywords"
 
 export function getElasticSearch(str) {
-    const splitted = str.split(' ')
-    const result = []
+    const splitted = str.toLowerCase().split(' ')
+    const result = new Set()
     splitted.map(e => {
         for (let i = 0; i < e.length; i++) {
-            result.push(e.slice(0, i + 3))
+            result.add(e.slice(0, i + 2))
         }
     })
-    return result
+    return Array.from(result)
 }
 
 function slugify(str) {

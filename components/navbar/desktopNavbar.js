@@ -4,6 +4,7 @@ import { LoginElem } from './mobileNavbar'
 import Input from '@material-ui/core/Input'
 import FormControl from '@material-ui/core/FormControl'
 import Link from 'next/link'
+import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator'
 import { useRouter } from 'next/router'
 import IconButton from '@material-ui/core/IconButton'
 import InputAdornment from '@material-ui/core/InputAdornment'
@@ -13,7 +14,8 @@ import InputLabel from '@material-ui/core/InputLabel'
 import { theme } from './searchBar'
 import { SearchDispatch } from '../contexts/search.context'
 
-function handleSubmit(state, setState, dispatch, router) {
+export function handleSubmit(e, state, setState, dispatch, router) {
+    e.preventDefault()
     dispatch({ type: 'setCategory', value: 'all' })
     dispatch({ type: 'setCity', value: 'all' })
     dispatch({ type: 'setRedirected', value: true })
@@ -53,27 +55,31 @@ function desktopNavbar({
                 <FormControl
                     fullWidth
                 >
-                    <ThemeProvider theme={theme}>
-                        <InputLabel shrink htmlFor="input-with-icon-adornment">Kerko</InputLabel>
-                        <Input
-                            placeholder='Kerko produkte'
-                            id="input-with-icon-adornment"
-                            margin='none'
-                            value={state}
-                            onChange={e => setState(e.target.value)}
-                            endAdornment={
-                                <InputAdornment position="end">
-                                    <IconButton
-                                        onClick={() => handleSubmit(
-                                            state, setState, dispatch, router
-                                        )}
-                                    >
-                                        <SearchIcon />
-                                    </IconButton>
-                                </InputAdornment>
-                            }
-                        />
-                    </ThemeProvider>
+                    <ValidatorForm onSubmit={e => handleSubmit(e, state, setState, dispatch, router)} >
+                        <ThemeProvider theme={theme}>
+                            <TextValidator
+                                fullWidth
+                                placeholder='Kerko produkte'
+                                id="input-with-icon-adornment"
+                                margin='none'
+                                value={state}
+                                onChange={e => setState(e.target.value)}
+                                InputProps={{
+                                    endAdornment: (
+                                        <InputAdornment position="end">
+                                            <IconButton
+                                                type='submit'
+                                            >
+                                                <SearchIcon />
+                                            </IconButton>
+                                        </InputAdornment>
+                                    )
+                                }}
+                                validators={['required']}
+                                errorMessages={['']}
+                            />
+                        </ThemeProvider>
+                    </ValidatorForm>
                 </FormControl>
                 {!loading && LoginElem(session, openPopover, classes, false)}
             </div>

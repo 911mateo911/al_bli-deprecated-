@@ -56,7 +56,7 @@ export default function CarDetails({ cmimi,
             {bigBox(city, getImg('city-variant-outline.svg'), 'Qyteti')}
             {box(marka, getImg('car.svg'), 'Marka')}
             {box(modeli, getImg('car-info.svg'), 'Modeli')}
-            {box(formattedDate(date), getImg('calendar-month-outline.svg'), 'Viti')}
+            {bigBox(formattedDate(date), getImg('calendar-month-outline.svg'), 'Viti')}
             {box(km, getImg('map-marker-distance.svg'), 'Kilometra')}
             {box(karburanti, getImg('gas-station.svg'), 'Karburanti')}
             {box(transmisioni, getImg('speedometer.svg'), 'Transmisioni')}
