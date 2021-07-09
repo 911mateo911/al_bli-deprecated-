@@ -5,7 +5,9 @@ const reducer = (state, action) => {
         openDialog: { ...state, dialogOpen: true },
         closeDialog: { ...state, dialogOpen: false },
         startLoading: { ...state, loading: true },
-        stopLoading: { ...state, loading: false }
+        stopLoading: { ...state, loading: false },
+        openShareDialog: { ...state, shareDialogOpen: true },
+        closeShareDialog: { ...state, shareDialogOpen: false }
     }
     return actions[action.type]
 }

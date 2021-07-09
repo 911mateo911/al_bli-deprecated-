@@ -1,14 +1,18 @@
 import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Accordion from '@material-ui/core/Accordion'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
 import AccordionDetails from '@material-ui/core/AccordionDetails'
 import AccordionSummary from '@material-ui/core/AccordionSummary'
+import IconButton from '@material-ui/core/IconButton'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import Typography from '@material-ui/core/Typography'
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import AlternateEmailIcon from '@material-ui/icons/AlternateEmail'
 import WhatsAppIcon from '@material-ui/icons/WhatsApp'
 import CallIcon from '@material-ui/icons/Call'
 import List from '@material-ui/core/List'
+import FileCopyIcon from '@material-ui/icons/FileCopy'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
@@ -60,24 +64,46 @@ export default function Contact({ email, whatsapp, telephone }) {
                 </AccordionSummary>
                 <AccordionDetails>
                     <List component='nav' className={classes.list} >
-                        <ListItem button>
-                            <ListItemIcon>
-                                <AlternateEmailIcon />
-                            </ListItemIcon>
-                            <ListItemText primary={email} />
-                        </ListItem>
-                        <ListItem button>
-                            <ListItemIcon>
-                                <CallIcon />
-                            </ListItemIcon>
-                            <ListItemText primary={telephone} />
-                        </ListItem>
-                        <ListItem button >
-                            <ListItemIcon>
-                                <WhatsAppIcon />
-                            </ListItemIcon>
-                            <ListItemText primary={whatsapp} />
-                        </ListItem>
+
+                        <CopyToClipboard text={email} >
+                            <ListItem button>
+                                <ListItemIcon>
+                                    <AlternateEmailIcon />
+                                </ListItemIcon>
+                                <ListItemText primary={email} />
+                                <ListItemSecondaryAction>
+                                    <IconButton>
+                                        <FileCopyIcon />
+                                    </IconButton>
+                                </ListItemSecondaryAction>
+                            </ListItem>
+                        </CopyToClipboard>
+                        <CopyToClipboard text={telephone} >
+                            <ListItem button>
+                                <ListItemIcon>
+                                    <CallIcon />
+                                </ListItemIcon>
+                                <ListItemText primary={telephone} />
+                                <ListItemSecondaryAction>
+                                    <IconButton>
+                                        <FileCopyIcon />
+                                    </IconButton>
+                                </ListItemSecondaryAction>
+                            </ListItem>
+                        </CopyToClipboard>
+                        <CopyToClipboard text={whatsapp}>
+                            <ListItem button >
+                                <ListItemIcon>
+                                    <WhatsAppIcon />
+                                </ListItemIcon>
+                                <ListItemText primary={whatsapp} />
+                                <ListItemSecondaryAction>
+                                    <IconButton>
+                                        <FileCopyIcon />
+                                    </IconButton>
+                                </ListItemSecondaryAction>
+                            </ListItem>
+                        </CopyToClipboard>
                     </List>
                 </AccordionDetails>
             </Accordion>

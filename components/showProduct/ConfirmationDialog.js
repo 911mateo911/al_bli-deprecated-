@@ -11,7 +11,7 @@ import { ShowPageDispatch, ShowPageContext } from '../contexts/showPage.context'
 import { useRouter } from 'next/router'
 import { FlashDispatchContext } from '../contexts/flashMsgs.context'
 
-const Transition = React.forwardRef(function Transition(props, ref) {
+export const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />
 })
 
