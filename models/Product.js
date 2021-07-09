@@ -31,6 +31,9 @@ const ProductSchema = new mongoose.Schema({
     elasticSearch: [{
         type: String
     }],
+    favouritedBy: [{
+        type: String
+    }],
     siperfaqe: String,
     nrDhoma: String,
     adresa: String,

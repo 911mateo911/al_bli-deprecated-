@@ -72,9 +72,11 @@ export default function Contact({ email, whatsapp, telephone }) {
                                 </ListItemIcon>
                                 <ListItemText primary={email} />
                                 <ListItemSecondaryAction>
-                                    <IconButton>
-                                        <FileCopyIcon />
-                                    </IconButton>
+                                    <CopyToClipboard text={email} >
+                                        <IconButton>
+                                            <FileCopyIcon />
+                                        </IconButton>
+                                    </CopyToClipboard>
                                 </ListItemSecondaryAction>
                             </ListItem>
                         </CopyToClipboard>
@@ -85,9 +87,11 @@ export default function Contact({ email, whatsapp, telephone }) {
                                 </ListItemIcon>
                                 <ListItemText primary={telephone} />
                                 <ListItemSecondaryAction>
-                                    <IconButton>
-                                        <FileCopyIcon />
-                                    </IconButton>
+                                    <CopyToClipboard text={telephone} >
+                                        <IconButton>
+                                            <FileCopyIcon />
+                                        </IconButton>
+                                    </CopyToClipboard>
                                 </ListItemSecondaryAction>
                             </ListItem>
                         </CopyToClipboard>
@@ -98,9 +102,11 @@ export default function Contact({ email, whatsapp, telephone }) {
                                 </ListItemIcon>
                                 <ListItemText primary={whatsapp} />
                                 <ListItemSecondaryAction>
-                                    <IconButton>
-                                        <FileCopyIcon />
-                                    </IconButton>
+                                    <CopyToClipboard text={whatsapp} >
+                                        <IconButton>
+                                            <FileCopyIcon />
+                                        </IconButton>
+                                    </CopyToClipboard>
                                 </ListItemSecondaryAction>
                             </ListItem>
                         </CopyToClipboard>

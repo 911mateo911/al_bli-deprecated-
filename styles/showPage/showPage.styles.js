@@ -87,12 +87,6 @@ const styles = theme => ({
         transform: 'rotate(45deg)',
         transition: 'all 0.3s ease'
     },
-    heart: {
-        margin: '0 0 0 -10px'
-    },
-    heartRed: {
-        color: '#f44336'
-    },
     share: {
         margin: '0 0 0 10px'
     }

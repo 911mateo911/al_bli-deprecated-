@@ -1,10 +1,10 @@
 import React, { useState, useContext, memo } from 'react'
 import styles from '../../styles/showPage/showPage.styles'
 import { makeStyles } from '@material-ui/core/styles'
-import FavoriteIcon from '@material-ui/icons/Favorite'
 import IconButton from '@material-ui/core/IconButton'
-import ShareIcon from '@material-ui/icons/Share'
+import ShareProduct from './ShareProduct'
 import Carousel from './Carousel'
+import AddtoFavourite from './AddtoFavourite'
 import ShareDialog from './ShareDialog'
 import { useSession } from 'next-auth/client'
 import Loader from '../Loader'
@@ -48,6 +48,7 @@ function ShowPage({ product }) {
         name,
         title,
         telephone,
+        favouritedBy,
         whatsapp,
         category,
         slug,
@@ -65,8 +66,8 @@ function ShowPage({ product }) {
                 id={_id}
             />
             <ShareDialog
+                open={state.shareDialogOpen}
                 url={window.location.href}
-                quote={title}
             />
             <div className={classes.details} >
                 <span className={classes.user} >
@@ -74,16 +75,13 @@ function ShowPage({ product }) {
                         <Avatar src={seller.profilePic.url} /> : <Avatar>{name[0].toUpperCase()}</Avatar>}
                     <h4 className={classes.username} >{name}</h4>
                     <p className={classes.date} >{timeAgo.format(Date.parse(date))}</p>
-                    <IconButton
-                        className={classes.share}
-                        onClick={() => dispatch({ type: 'openShareDialog' })}
-                    >
-                        <ShareIcon />
-                    </IconButton>
+                    <ShareProduct classes={classes} />
                     {Boolean(session) && (session.user._id !== seller._id &&
-                        (<IconButton className={classes.heart} >
-                            <FavoriteIcon className={classes.heartRed} />
-                        </IconButton>))}
+                        <AddtoFavourite
+                            favourite={favouritedBy.indexOf(session.user._id) !== -1}
+                            productId={_id}
+                            accountId={session.user._id}
+                        />)}
                     {Boolean(session) && (session.user._id === seller._id && <Settings classes={classes} />)}
                 </span>
                 <Divider className={classes.divider} />
