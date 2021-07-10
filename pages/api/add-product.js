@@ -57,11 +57,11 @@ export default async function handler(req, res) {
       try {
         const data = fields
         data.keywords = fields.keywords.split(',')
-        data.favouritedBy = []
         const product = validationSchema.validate(data)
         if (product.error) {
           throw new CustomError('Ndodhi nje gabim', 400)
         }
+        data.favouritedBy = []
         data.seller = session.user._id
         if (files.photos) {
           const images = [files.photos].flat().slice(0, 10)

@@ -18,7 +18,7 @@ const useStyles = makeStyles(styles)
 async function handleClick(state, setState, productId, accountId) {
     setState({ favourite: !state.favourite, disabled: true })
     const request = await axios.post('/api/toggle-fav', { productId, accountId })
-    setState({ ...state, disabled: false })
+    setState({ favourite: !state.favourite, disabled: false })
 }
 
 export default function AddtoFavourite({ favourite, productId, accountId }) {
@@ -30,7 +30,7 @@ export default function AddtoFavourite({ favourite, productId, accountId }) {
             className={classes.heart}
             onClick={() => handleClick(state, setState, productId, accountId)}
         >
-            <FavoriteIcon className={state ? classes.heartRed : ''} />
+            <FavoriteIcon className={state.favourite ? classes.heartRed : ''} />
         </IconButton>
     )
 }

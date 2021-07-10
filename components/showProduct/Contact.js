@@ -41,6 +41,9 @@ const styles = theme => ({
     list: {
         width: '100%',
         marginTop: '-10px'
+    },
+    copy: {
+        padding: '2px'
     }
 })
 
@@ -74,7 +77,7 @@ export default function Contact({ email, whatsapp, telephone }) {
                                 <ListItemSecondaryAction>
                                     <CopyToClipboard text={email} >
                                         <IconButton>
-                                            <FileCopyIcon />
+                                            <FileCopyIcon className={classes.copy} />
                                         </IconButton>
                                     </CopyToClipboard>
                                 </ListItemSecondaryAction>
@@ -89,7 +92,7 @@ export default function Contact({ email, whatsapp, telephone }) {
                                 <ListItemSecondaryAction>
                                     <CopyToClipboard text={telephone} >
                                         <IconButton>
-                                            <FileCopyIcon />
+                                            <FileCopyIcon className={classes.copy} />
                                         </IconButton>
                                     </CopyToClipboard>
                                 </ListItemSecondaryAction>
@@ -104,7 +107,7 @@ export default function Contact({ email, whatsapp, telephone }) {
                                 <ListItemSecondaryAction>
                                     <CopyToClipboard text={whatsapp} >
                                         <IconButton>
-                                            <FileCopyIcon />
+                                            <FileCopyIcon className={classes.copy} />
                                         </IconButton>
                                     </CopyToClipboard>
                                 </ListItemSecondaryAction>
