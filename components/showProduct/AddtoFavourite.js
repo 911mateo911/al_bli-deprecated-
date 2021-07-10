@@ -21,13 +21,13 @@ async function handleClick(state, setState, productId, accountId) {
     setState({ favourite: !state.favourite, disabled: false })
 }
 
-export default function AddtoFavourite({ favourite, productId, accountId }) {
+export default function AddtoFavourite({ favourite, productId, accountId, inPost }) {
     const [state, setState] = useState({ favourite, disabled: false })
     const classes = useStyles()
     return (
         <IconButton
             disabled={state.disabled}
-            className={classes.heart}
+            className={inPost ? '' : classes.heart}
             onClick={() => handleClick(state, setState, productId, accountId)}
         >
             <FavoriteIcon className={state.favourite ? classes.heartRed : ''} />

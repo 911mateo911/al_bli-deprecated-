@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { useRouter } from 'next/router'
+import { useSession } from 'next-auth/client'
 import clsx from 'clsx'
 import Card from '@material-ui/core/Card'
 import CardHeader from '@material-ui/core/CardHeader'
@@ -16,12 +17,14 @@ import ShareIcon from '@material-ui/icons/Share'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import CardActionArea from '@material-ui/core/CardActionArea'
 import styles from '../../styles/index/post.styles'
+import AddtoFavourite from '../showProduct/AddtoFavourite'
 
 const useStyles = makeStyles(styles)
 
-export default function Post({ photo, profilePic, name, setLoading, title, date, price, currency, id, slug }) {
+export default function Post({ photo, favouritedBy, profilePic, name, setLoading, title, date, price, currency, id, slug }) {
     const classes = useStyles()
     const router = useRouter()
+    const [session, loading] = useSession()
     const getAvatar = () => {
         return (
             profilePic ?
@@ -54,9 +57,13 @@ export default function Post({ photo, profilePic, name, setLoading, title, date,
                 </CardContent>
             </CardActionArea>
             <CardActions disableSpacing>
-                <IconButton>
-                    <FavoriteIcon />
-                </IconButton>
+                {(Boolean(session) && !loading) &&
+                    <AddtoFavourite
+                        inPost
+                        productId={id}
+                        accountId={session.user._id}
+                        favourite={favouritedBy.indexOf(session.user._id) !== -1}
+                    />}
                 <IconButton>
                     <ShareIcon />
                 </IconButton>
