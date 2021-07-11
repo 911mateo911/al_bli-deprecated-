@@ -1,5 +1,4 @@
 import React, { useContext, useLayoutEffect, useEffect } from 'react'
-import { DispatchContext, FormContext } from '../../contexts/newProductForm.context'
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator'
 import { makeStyles } from '@material-ui/core/styles'
 import 'date-fns';
@@ -25,9 +24,8 @@ const addValidation = () => {
 
 const useStyles = makeStyles(styles)
 
-export default function Motorcycle() {
-    const dispatch = useContext(DispatchContext)
-    const input = useContext(FormContext)
+export default function Motorcycle({ dispatch, context }) {
+    const input = useContext(context)
     const classes = useStyles()
     useLayoutEffect(() => {
         return () => {

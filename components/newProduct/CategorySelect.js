@@ -19,8 +19,7 @@ export const allCategories = categories.map(c => {
     ]
 })
 
-function CategorySelect({ value }) {
-    const dispatch = useContext(DispatchContext)
+function CategorySelect({ value, dispatch }) {
     return (
         <>
             <SelectValidator

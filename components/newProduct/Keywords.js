@@ -1,10 +1,9 @@
-import React, { useContext } from 'react'
+import React, { useContext, memo } from 'react'
 import ChipInput from 'material-ui-chip-input'
 import { DispatchContext, FormContext } from '../contexts/newProductForm.context'
 
-export default function Keywords({ value }) {
-    const dispatch = useContext(DispatchContext)
-    const input = useContext(FormContext)
+function Keywords({ value, dispatch, context }) {
+    const input = useContext(context)
     return (
         <ChipInput
             fullWidth
@@ -25,3 +24,5 @@ export default function Keywords({ value }) {
         />
     )
 }
+
+export default memo(Keywords)

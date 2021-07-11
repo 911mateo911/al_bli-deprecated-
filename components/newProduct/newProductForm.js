@@ -149,10 +149,10 @@ export default function NewProductForm({ isLoggedIn }) {
                         </SelectValidator>
                     </FormControl>
                     <FormControl className={classes.select} margin='normal' variant='filled'>
-                        <CategorySelect value={inputs.category} />
+                        <CategorySelect value={inputs.category} dispatch={dispatch} />
                     </FormControl>
                 </div>
-                <SubCategories state={inputs.category} />
+                <SubCategories dispatch={dispatch} context={FormContext} state={inputs.category} />
                 <TextInput
                     label='Titulli'
                     type=''
@@ -171,7 +171,7 @@ export default function NewProductForm({ isLoggedIn }) {
                     value={inputs.description}
                 />
                 <FilePicker files={inputs.photos} />
-                <Keywords value={inputs.keywords} />
+                <Keywords value={inputs.keywords} dispatch={dispatch} context={FormContext} />
                 <PriceInput
                     label='Cmimi'
                     name='price'

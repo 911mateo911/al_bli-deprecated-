@@ -18,6 +18,7 @@ export function LoginElem(session, openPopover, classes, isMobile) {
             /> :
                 <Avatar
                     onClick={openPopover}
+                    style={{ backgroundColor: session.user.avatarColor }}
                     className={classes.socialAvt}
                 >
                     {session.user.name[0].toUpperCase()}

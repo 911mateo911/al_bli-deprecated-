@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import { useRouter } from 'next/router'
 import Popover from '@material-ui/core/Popover'
 import { makeStyles } from '@material-ui/core/styles'
 import styles from '../../styles/showPage/settings.styles'
@@ -14,11 +15,16 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar'
 
 const useStyles = makeStyles(styles)
 
-export default function SettingsPopover() {
+export default function SettingsPopover({ productId }) {
     const classes = useStyles()
     const state = useContext(ShowPageContext)
     const dispatch = useContext(ShowPageDispatch)
     const popoverOpen = Boolean(state.anchorEl)
+    const router = useRouter()
+    function handleEdit() {
+        dispatch({ type: 'startLoading' })
+        router.push(`/produkt/ndrysho/${productId}`)
+    }
     function handleDelete() {
         dispatch({ type: 'closePopover' })
         dispatch({ type: 'openDialog' })
@@ -45,7 +51,7 @@ export default function SettingsPopover() {
         >
             <div className={classes.root}>
                 <List className={classes.list} >
-                    <ListItem className={classes.listItem} button>
+                    <ListItem className={classes.listItem} button onClick={handleEdit}>
                         <ListItemAvatar>
                             <Avatar>
                                 <EditIcon />

@@ -1,5 +1,4 @@
 import React, { useContext, useLayoutEffect, useEffect } from 'react'
-import { DispatchContext, FormContext } from '../../contexts/newProductForm.context'
 import { TextValidator } from 'react-material-ui-form-validator'
 import { makeStyles } from '@material-ui/core/styles'
 import FormControl from '@material-ui/core/FormControl';
@@ -15,10 +14,9 @@ const styles = theme => ({
 
 const useStyles = makeStyles(styles)
 
-export default function Phones() {
+export default function Phones({ dispatch, context }) {
     const classes = useStyles()
-    const dispatch = useContext(DispatchContext)
-    const input = useContext(FormContext)
+    const input = useContext(context)
     useLayoutEffect(() => {
         return () => {
             dispatch({ type: 'onDelete', name: 'prodhuesi' })

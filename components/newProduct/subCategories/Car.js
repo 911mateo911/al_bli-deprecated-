@@ -31,10 +31,9 @@ export function formattedDate(dt) {
 
 const useStyles = makeStyles(styles)
 
-export default function Car() {
-    const dispatch = useContext(DispatchContext)
-    const input = useContext(FormContext)
+export default function Car({ dispatch, context }) {
     const classes = useStyles()
+    const input = useContext(context)
     useLayoutEffect(() => {
         return () => {
             dispatch({ type: 'onDelete', name: 'marka' })

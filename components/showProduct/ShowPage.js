@@ -98,7 +98,7 @@ function ShowPage({ product }) {
                 <div className={classes.description} >
                     {description}
                 </div>
-                {Boolean(session) && (session.user._id === seller._id && <SettingsPopover />)}
+                {Boolean(session) && (session.user._id === seller._id && <SettingsPopover productId={_id} />)}
                 <Divider className={classes.divider} />
             </div>
         </div >
