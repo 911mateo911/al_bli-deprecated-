@@ -1,11 +1,11 @@
 import React, { useContext, useLayoutEffect, useEffect } from 'react'
-import 'date-fns';
-import { DispatchContext, FormContext } from '../../contexts/newProductForm.context'
+import 'date-fns'
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator'
 import { makeStyles } from '@material-ui/core/styles'
 import FormControl from '@material-ui/core/FormControl';
 import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
-import DateFnsUtils from '@date-io/date-fns';
+import DateFnsUtils from '@date-io/date-fns'
+import FilledInput from './FilledInput'
 
 const styles = theme => ({
     root: {
@@ -13,10 +13,13 @@ const styles = theme => ({
     }
 })
 
-const addValidation = () => {
+export const textValidation = () => {
     ValidatorForm.addValidationRule(`isText`, (value) => {
         return /^[a-z '-]+$/i.test(value)
     })
+}
+
+export const numberValidation = () => {
     ValidatorForm.addValidationRule(`isNumber`, (value) => {
         return /^\d+$/.test(value)
     })
@@ -45,44 +48,25 @@ export default function Car({ dispatch, context }) {
         };
     }, [])
     useEffect(() => {
-        addValidation()
         dispatch({ type: 'onChange', name: 'viti', value: formattedDate(new Date()) })
     }, [])
     return (
         <div className={classes.root} >
-            <TextValidator
-                label='Marka'
-                name='marka'
-                fullWidth
-                variant='filled'
-                InputLabelProps={{
-                    shrink: true
-                }}
-                margin='normal'
+            <FilledInput
                 value={input.marka || ''}
-                inputProps={{
-                    maxLength: 50
-                }}
-                validators={['required', `isText`]}
-                errorMessages={['Kerkohet!', 'Marka nuk eshte korrekte!']}
-                onChange={e => dispatch({ type: 'onChange', name: e.target.name, value: e.target.value })}
+                dispatch={dispatch}
+                type='text'
+                name='marka'
+                label='Marka'
+                inputLength={50}
             />
-            <TextValidator
+            <FilledInput
                 label='Modeli'
                 name='modeli'
-                fullWidth
-                variant='filled'
-                InputLabelProps={{
-                    shrink: true
-                }}
-                margin='normal'
+                type='text'
+                dispatch={dispatch}
+                inputLength={50}
                 value={input.modeli || ''}
-                inputProps={{
-                    maxLength: 50
-                }}
-                validators={['required']}
-                errorMessages={['Kerkohet!']}
-                onChange={e => dispatch({ type: 'onChange', name: e.target.name, value: e.target.value })}
             />
             <FormControl required={true} fullWidth >
                 <MuiPickersUtilsProvider
@@ -100,57 +84,38 @@ export default function Car({ dispatch, context }) {
                     />
                 </MuiPickersUtilsProvider>
             </FormControl>
-            <TextValidator
+            <FilledInput
+                inputLength={10}
+                type='numeric'
                 label='Kilometra'
                 name='kilometra'
-                fullWidth
-                variant='filled'
-                InputLabelProps={{
-                    shrink: true
-                }}
-                margin='normal'
                 value={input.kilometra || ''}
-                inputProps={{
-                    inputMode: 'numeric',
-                    maxLength: 10
-                }}
-                validators={['required', `isNumber`]}
-                errorMessages={['Kerkohet!', 'Kilometrat nuk jane korrekte!']}
-                onChange={e => dispatch({ type: 'onChange', name: e.target.name, value: e.target.value })}
+                dispatch={dispatch}
+                validate
+                validator='isNumber'
+                validatorMsg='Kilometrat nuk jane korrekte!'
             />
-            <TextValidator
-                label='Karburanti'
+            <FilledInput
                 name='karburanti'
-                fullWidth
-                variant='filled'
-                InputLabelProps={{
-                    shrink: true
-                }}
-                margin='normal'
+                label='Karburanti'
                 value={input.karburanti || ''}
-                inputProps={{
-                    maxLength: 30
-                }}
-                validators={['required', `isText`]}
-                errorMessages={['Kerkohet!', 'Karburanti nuk eshte korrekt!']}
-                onChange={e => dispatch({ type: 'onChange', name: e.target.name, value: e.target.value })}
+                inputLength={30}
+                dispatch={dispatch}
+                validate
+                type='text'
+                validator='isText'
+                validatorMsg='Karburanti nuk eshte korrekt!'
             />
-            <TextValidator
+            <FilledInput
                 label='Transmisioni'
                 name='transmisioni'
-                fullWidth
-                variant='filled'
-                InputLabelProps={{
-                    shrink: true
-                }}
-                margin='normal'
+                validate
                 value={input.transmisioni || ''}
-                inputProps={{
-                    maxLength: 30
-                }}
-                validators={['required', `isText`]}
-                errorMessages={['Kerkohet!', 'Te dhenat nuk jane korrekte!']}
-                onChange={e => dispatch({ type: 'onChange', name: e.target.name, value: e.target.value })}
+                type='text'
+                validator='isText'
+                validatorMsg='Te dhenat nuk jane korrekte!'
+                dispatch={dispatch}
+                inputLength={30}
             />
         </div>
     )

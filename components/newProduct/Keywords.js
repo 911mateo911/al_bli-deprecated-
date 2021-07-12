@@ -1,9 +1,7 @@
 import React, { useContext, memo } from 'react'
 import ChipInput from 'material-ui-chip-input'
-import { DispatchContext, FormContext } from '../contexts/newProductForm.context'
 
-function Keywords({ value, dispatch, context }) {
-    const input = useContext(context)
+function Keywords({ value, dispatch }) {
     return (
         <ChipInput
             fullWidth

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, memo } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { makeStyles } from '@material-ui/core'
 import styles from '../../styles/newProduct/filePicker.styles'
@@ -15,7 +15,7 @@ SwiperCore.use([Pagination])
 
 const useStyles = makeStyles(styles)
 
-export default function FilePicker({ files }) {
+function FilePicker({ files }) {
     const dispatch = useContext(DispatchContext)
     const {
         getRootProps,
@@ -97,3 +97,5 @@ export default function FilePicker({ files }) {
         </>
     )
 }
+
+export default memo(FilePicker)

@@ -155,7 +155,7 @@ export default function EditPage({ product }) {
                             dispatch={dispatch}
                             value={inputs.description}
                         />
-                        <Keywords value={inputs.keywords} dispatch={dispatch} context={FormContext} />
+                        <Keywords value={inputs.keywords} dispatch={dispatch} />
                     </ValidatorForm>
                 </DispatchContext.Provider>
             </FormContext.Provider>

@@ -171,7 +171,7 @@ export default function NewProductForm({ isLoggedIn }) {
                     value={inputs.description}
                 />
                 <FilePicker files={inputs.photos} />
-                <Keywords value={inputs.keywords} dispatch={dispatch} context={FormContext} />
+                <Keywords value={inputs.keywords} dispatch={dispatch} />
                 <PriceInput
                     label='Cmimi'
                     name='price'
