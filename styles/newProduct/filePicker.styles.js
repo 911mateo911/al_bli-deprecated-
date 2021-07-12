@@ -11,7 +11,7 @@ const styles = theme => ({
         border: '2px dashed #3291ff',
         padding: '10px',
         width: '100%',
-        margin: '10px',
+        margin: '10px auto',
         transition: 'all 0.5s ease',
         backgroundColor: '#F3F4F6',
         '&:hover': {

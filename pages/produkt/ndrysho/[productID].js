@@ -77,7 +77,6 @@ export async function getServerSideProps(context) {
         }
     } catch (e) {
         context.res.statuscode = 404
-        console.log(e)
         return {
             props: {
                 product: {
