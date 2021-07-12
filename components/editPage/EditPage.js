@@ -2,6 +2,7 @@ import React, { useEffect, useContext, createContext, useReducer } from 'react'
 import { useSession } from 'next-auth/client'
 import reducer from '../reducers/newProductForm.reducer'
 import { makeStyles } from '@material-ui/core/styles'
+import caution from '../../public/caution.png'
 import Keywords from '../newProduct/Keywords'
 import styles from '../../styles/newProduct/productForm.styles'
 import { useRouter } from 'next/router'
@@ -27,6 +28,13 @@ export default function EditPage({ product }) {
     const classes = useStyles()
     const [session, loading] = useSession()
     if (loading) return <Loader />
+    if (product.notAuthorized) return (
+        <Error
+            src={caution.src}
+            h1='Ndaluar!'
+            desc='Nuk keni autorizim per te kryer kete veprim.'
+        />
+    )
     if (product.error) {
         return (
             <Error
@@ -38,29 +46,14 @@ export default function EditPage({ product }) {
     }
     const router = useRouter()
     useEffect(() => {
-        try {
-            if (!Boolean(session)) {
-                flashDispatch({
-                    type: 'addMessage',
-                    message: 'Duhet te kyceni per te vazhduar!',
-                    severity: 'error'
-                })
-                flashDispatch({ type: 'showSnackbar' })
-                return router.push('/kycu')
-            }
-            const { seller } = JSON.parse(product)
-            if (session.user._id !== seller.toString()) {
-                flashDispatch({
-                    type: 'addMessage',
-                    message: 'Ju nuk keni autorizim per kete veprim.',
-                    severity: 'error'
-                })
-                flashDispatch({ type: 'showSnackbar' })
-                return router.back()
-            }
-        }
-        catch (e) {
-            return
+        if (!Boolean(session)) {
+            flashDispatch({
+                type: 'addMessage',
+                message: 'Duhet te kyceni per te vazhduar!',
+                severity: 'error'
+            })
+            flashDispatch({ type: 'showSnackbar' })
+            return router.push('/kycu')
         }
     }, [])
     const [inputs, dispatch] = useReducer(reducer, JSON.parse(product), () => JSON.parse(product))
