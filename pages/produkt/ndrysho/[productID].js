@@ -53,6 +53,14 @@ export async function getServerSideProps(context) {
         const req = context.req
         const session = await getSession({ req })
         if (!product) throw new Error()
+        if (!Boolean(session)) {
+            return {
+                redirect: {
+                    permanent: false,
+                    destination: "/kycu"
+                }
+            }
+        }
         if (session.user._id !== product.seller.toString()) {
             return {
                 props: {

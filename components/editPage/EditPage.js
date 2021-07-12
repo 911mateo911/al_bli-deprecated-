@@ -13,7 +13,6 @@ import FormControl from '@material-ui/core/FormControl'
 import shoes from '../../public/shoes.png'
 import TextInput from '../newProduct/TextInput'
 import MenuItem from '@material-ui/core/MenuItem'
-import Loader from '../Loader'
 import CategorySelect from '../newProduct/CategorySelect'
 import SubCategories from '../newProduct/subCategories'
 import EditPhotos from './EditPhotos'
@@ -26,8 +25,6 @@ const useStyles = makeStyles(styles)
 export default function EditPage({ product }) {
     const flashDispatch = useContext(FlashDispatchContext)
     const classes = useStyles()
-    const [session, loading] = useSession()
-    if (loading) return <Loader />
     if (product.notAuthorized) return (
         <Error
             src={caution.src}
@@ -45,17 +42,6 @@ export default function EditPage({ product }) {
         )
     }
     const router = useRouter()
-    useEffect(() => {
-        if (!Boolean(session)) {
-            flashDispatch({
-                type: 'addMessage',
-                message: 'Duhet te kyceni per te vazhduar!',
-                severity: 'error'
-            })
-            flashDispatch({ type: 'showSnackbar' })
-            return router.push('/kycu')
-        }
-    }, [])
     const [inputs, dispatch] = useReducer(reducer, JSON.parse(product), () => JSON.parse(product))
     return (
         <div className={classes.root} >
