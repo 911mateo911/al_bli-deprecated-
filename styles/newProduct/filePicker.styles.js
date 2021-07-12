@@ -68,6 +68,7 @@ const styles = theme => ({
         position: 'absolute',
         top: '10px',
         right: '2rem',
+        cursor: 'pointer',
         color: '#0070f3',
         padding: '.5rem',
         fontSize: '2.5rem',

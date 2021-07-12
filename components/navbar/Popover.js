@@ -5,6 +5,7 @@ import Avatar from '@material-ui/core/Avatar'
 import styles from '../../styles/navbar/popover.styles'
 import List from '@material-ui/core/List'
 import { signOut } from "next-auth/client"
+import { useRouter } from 'next/router'
 import ListItem from '@material-ui/core/ListItem'
 import Button from '@material-ui/core/Button'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
@@ -21,9 +22,11 @@ const useStyles = makeStyles(styles)
 export default function PopoverElem({ open, close, anchor, name, email, profilePicUrl }) {
     const classes = useStyles()
     const dispatch = useContext(FlashDispatchContext)
+    const router = useRouter()
     function signOutAndClose() {
         close()
         signOut({ redirect: false })
+        router.replace('/')
         dispatch({
             type: 'addMessage',
             message: 'Mirupafshim!',

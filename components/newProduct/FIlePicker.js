@@ -1,11 +1,10 @@
-import React, { useContext, useEffect, memo } from 'react'
+import React, { useEffect, memo } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { makeStyles } from '@material-ui/core'
 import styles from '../../styles/newProduct/filePicker.styles'
 import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/swiper.min.css"
 import Button from '@material-ui/core/Button'
-import { DispatchContext } from '../contexts/newProductForm.context'
 import ClearAllIcon from '@material-ui/icons/ClearAll'
 import "swiper/components/pagination/pagination.min.css"
 import 'react-lazy-load-image-component/src/effects/black-and-white.css'
@@ -15,8 +14,7 @@ SwiperCore.use([Pagination])
 
 const useStyles = makeStyles(styles)
 
-function FilePicker({ files }) {
-    const dispatch = useContext(DispatchContext)
+function FilePicker({ files, maxCount, dispatch }) {
     const {
         getRootProps,
         getInputProps
@@ -25,7 +23,7 @@ function FilePicker({ files }) {
         onDrop: acceptedFiles => {
             dispatch({
                 type: 'onSetPhotos',
-                photos: acceptedFiles.slice(0, 10).map(file => Object.assign(file, {
+                photos: acceptedFiles.slice(0, maxCount).map(file => Object.assign(file, {
                     preview: URL.createObjectURL(file)
                 }))
             })
@@ -61,7 +59,7 @@ function FilePicker({ files }) {
             <section className={classes.root}>
                 <div {...getRootProps({ className: 'dropzone' })}>
                     <input {...getInputProps()} />
-                    <h1 className={classes.h1} >Terhiq ose kliko ketu per te zgjedhur fotot.</h1>
+                    <h1 className={classes.h1} >Terhiq ose kliko ketu per te shtuar foto.</h1>
                     <div className={classes.img} style={{ background: `url(${imgUrl}) no-repeat center center / contain` }} ></div>
                 </div>
             </section>

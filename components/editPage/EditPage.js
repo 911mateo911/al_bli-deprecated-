@@ -15,6 +15,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 import Loader from '../Loader'
 import CategorySelect from '../newProduct/CategorySelect'
 import SubCategories from '../newProduct/subCategories'
+import EditPhotos from './EditPhotos'
 
 const FormContext = createContext()
 const DispatchContext = createContext()
@@ -154,6 +155,12 @@ export default function EditPage({ product }) {
                             validate
                             dispatch={dispatch}
                             value={inputs.description}
+                        />
+                        <EditPhotos
+                            toBeDeleted={inputs.toBeDeleted}
+                            dispatch={dispatch}
+                            photos={inputs.photos}
+                            images={inputs.images}
                         />
                         <Keywords value={inputs.keywords} dispatch={dispatch} />
                     </ValidatorForm>

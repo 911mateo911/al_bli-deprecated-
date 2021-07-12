@@ -37,8 +37,10 @@ function cleanObject(obj) {
     delete data.rating
     delete data.slug
     if (data.photos.length) {
-        data.photos = data.photos.map(e => e.url)
+        data.images = data.photos.map(e => e.url)
     }
+    data.photos = []
+    data.toBeDeleted = []
     return data
 }
 
