@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import FormControl from '@material-ui/core/FormControl';
 import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
+import FilledInput from './FilledInput';
 import { formattedDate } from './Car'
 
 const styles = theme => ({
@@ -28,39 +29,21 @@ export default function Phones({ dispatch, context }) {
     }, [])
     return (
         <div className={classes.root} >
-            <TextValidator
+            <FilledInput
                 label='Prodhuesi'
                 name='prodhuesi'
-                fullWidth
-                variant='filled'
-                InputLabelProps={{
-                    shrink: true
-                }}
-                margin='normal'
+                inputLength={50}
                 value={input.prodhuesi || ''}
-                inputProps={{
-                    maxLength: 50
-                }}
-                validators={['required']}
-                errorMessages={['Kerkohet!']}
-                onChange={e => dispatch({ type: 'onChange', name: e.target.name, value: e.target.value })}
+                type='text'
+                dispatch={dispatch}
             />
-            <TextValidator
+            <FilledInput
                 label='Modeli'
                 name='modeli'
-                fullWidth
-                variant='filled'
-                InputLabelProps={{
-                    shrink: true
-                }}
-                margin='normal'
                 value={input.modeli || ''}
-                inputProps={{
-                    maxLength: 50
-                }}
-                validators={['required']}
-                errorMessages={['Kerkohet!']}
-                onChange={e => dispatch({ type: 'onChange', name: e.target.name, value: e.target.value })}
+                dispatch={dispatch}
+                type='text'
+                inputLength={50}
             />
             <FormControl required={true} fullWidth >
                 <MuiPickersUtilsProvider

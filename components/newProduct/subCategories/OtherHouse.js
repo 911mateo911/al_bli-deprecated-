@@ -1,6 +1,7 @@
 import React, { useContext, useLayoutEffect, useEffect } from 'react'
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator'
 import { makeStyles } from '@material-ui/core/styles'
+import FilledInput from './FilledInput'
 
 const styles = theme => ({
     root: {
@@ -30,40 +31,24 @@ export default function OtherHouse({ dispatch, context }) {
     }, [])
     return (
         <div className={classes.root} >
-            <TextValidator
+            <FilledInput
                 label='Adresa'
                 name='adresa'
-                fullWidth
-                variant='filled'
-                InputLabelProps={{
-                    shrink: true
-                }}
-                margin='normal'
+                dispatch={dispatch}
+                type='text'
                 value={input.adresa || ''}
-                inputProps={{
-                    maxLength: 100
-                }}
-                validators={['required']}
-                errorMessages={['Kerkohet!']}
-                onChange={e => dispatch({ type: 'onChange', name: e.target.name, value: e.target.value })}
+                inputLength={100}
             />
-            <TextValidator
+            <FilledInput
                 label='Siperfaqe (m2)'
                 name='siperfaqe'
-                fullWidth
-                variant='filled'
-                InputLabelProps={{
-                    shrink: true
-                }}
-                margin='normal'
+                validate
+                dispatch={dispatch}
+                inputLength={10}
                 value={input.siperfaqe || ''}
-                inputProps={{
-                    maxLength: 10,
-                    inputMode: 'numeric'
-                }}
-                validators={['required', 'isNumber']}
-                errorMessages={['Kerkohet!', 'Siperfaqja nuk eshte e sakte!']}
-                onChange={e => dispatch({ type: 'onChange', name: e.target.name, value: e.target.value })}
+                type='numeric'
+                validator='isNumber'
+                validatorMsg='Siperfaqja nuk eshte e sakte!'
             />
         </div>
     )

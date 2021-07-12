@@ -149,7 +149,7 @@ export default function NewProductForm({ isLoggedIn }) {
                         </SelectValidator>
                     </FormControl>
                     <FormControl className={classes.select} margin='normal' variant='filled'>
-                        <CategorySelect value={inputs.category} dispatch={dispatch} />
+                        <CategorySelect value={inputs.category} context={FormContext} dispatch={dispatch} />
                     </FormControl>
                 </div>
                 <SubCategories dispatch={dispatch} context={FormContext} state={inputs.category} />

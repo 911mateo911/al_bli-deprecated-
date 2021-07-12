@@ -6,6 +6,7 @@ import { formattedDate } from './Car'
 import FormControl from '@material-ui/core/FormControl';
 import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
+import FilledInput from './FilledInput';
 
 const styles = theme => ({
     root: {
@@ -40,39 +41,21 @@ export default function Motorcycle({ dispatch, context }) {
     }, [])
     return (
         <div className={classes.root}>
-            <TextValidator
+            <FilledInput
                 label='Marka'
                 name='marka'
-                fullWidth
-                variant='filled'
-                InputLabelProps={{
-                    shrink: true
-                }}
-                margin='normal'
+                type='text'
+                inputLength={50}
+                dispatch={dispatch}
                 value={input.marka || ''}
-                inputProps={{
-                    maxLength: 50
-                }}
-                validators={['required']}
-                errorMessages={['Kerkohet!']}
-                onChange={e => dispatch({ type: 'onChange', name: e.target.name, value: e.target.value })}
             />
-            <TextValidator
+            <FilledInput
                 label='Modeli'
                 name='modeli'
-                fullWidth
-                variant='filled'
-                InputLabelProps={{
-                    shrink: true
-                }}
-                margin='normal'
                 value={input.modeli || ''}
-                inputProps={{
-                    maxLength: 50
-                }}
-                validators={['required']}
-                errorMessages={['Kerkohet!']}
-                onChange={e => dispatch({ type: 'onChange', name: e.target.name, value: e.target.value })}
+                dispatch={dispatch}
+                inputLength={50}
+                type='text'
             />
             <FormControl required={true} fullWidth >
                 <MuiPickersUtilsProvider

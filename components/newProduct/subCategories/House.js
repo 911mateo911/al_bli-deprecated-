@@ -1,6 +1,7 @@
 import React, { useContext, useLayoutEffect, useEffect } from 'react'
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator'
 import { makeStyles } from '@material-ui/core/styles'
+import FilledInput from './FilledInput'
 
 const styles = theme => ({
     root: {
@@ -32,78 +33,49 @@ export default function House({ name, context, dispatch }) {
     }, [])
     return (
         <div className={classes.root} >
-            <TextValidator
+            <FilledInput
+                value={input.nrDhoma || ''}
                 label='Nr. i dhomave'
                 name='nrDhoma'
-                fullWidth
-                variant='filled'
-                InputLabelProps={{
-                    shrink: true
-                }}
-                margin='normal'
-                value={input.nrDhoma || ''}
-                inputProps={{
-                    maxLength: 2,
-                    inputMode: 'numeric'
-                }}
-                validators={['required', 'isNumber']}
-                errorMessages={['Kerkohet!', 'Numri i dhomave nuk eshte i sakte!']}
-                onChange={e => dispatch({ type: 'onChange', name: e.target.name, value: e.target.value })}
+                validate
+                validator='isNumber'
+                type='numeric'
+                inputLength={2}
+                validatorMsg='Numri i dhomave nuk eshte i sakte!'
+                dispatch={dispatch}
             />
-            <TextValidator
+            <FilledInput
                 label='Siperfaqe (m2)'
                 name='siperfaqe'
-                fullWidth
-                variant='filled'
-                InputLabelProps={{
-                    shrink: true
-                }}
-                margin='normal'
+                dispatch={dispatch}
+                inputLength={10}
                 value={input.siperfaqe || ''}
-                inputProps={{
-                    maxLength: 10,
-                    inputMode: 'numeric'
-                }}
-                validators={['required', 'isNumber']}
-                errorMessages={['Kerkohet!', 'Siperfaqja nuk eshte e sakte!']}
-                onChange={e => dispatch({ type: 'onChange', name: e.target.name, value: e.target.value })}
+                validate
+                validator='isNumber'
+                type='numeric'
+                validatorMsg='Siperfaqja nuk eshte e sakte!'
             />
+
             {name === 'house' && (
-                <TextValidator
+                <FilledInput
                     label='Nr. i kateve'
                     name='kate'
-                    fullWidth
-                    variant='filled'
-                    InputLabelProps={{
-                        shrink: true
-                    }}
-                    margin='normal'
+                    inputLength={2}
                     value={input.kate || ''}
-                    inputProps={{
-                        maxLength: 2,
-                        inputMode: 'numeric'
-                    }}
-                    validators={['required', 'isNumber']}
-                    errorMessages={['Kerkohet!', 'Nr. i kateve nuk eshte i sakte!']}
-                    onChange={e => dispatch({ type: 'onChange', name: e.target.name, value: e.target.value })}
+                    type='numeric'
+                    validate
+                    dispatch={dispatch}
+                    validator='isNumber'
+                    validatorMsg='Nr. i kateve nuk eshte i sakte!'
                 />
             )}
-            <TextValidator
+            <FilledInput
                 label='Adresa'
                 name='adresa'
-                fullWidth
-                variant='filled'
-                InputLabelProps={{
-                    shrink: true
-                }}
-                margin='normal'
+                inputLength={70}
+                dispatch={dispatch}
+                type='text'
                 value={input.adresa || ''}
-                inputProps={{
-                    maxLength: 70
-                }}
-                validators={['required']}
-                errorMessages={['Kerkohet!']}
-                onChange={e => dispatch({ type: 'onChange', name: e.target.name, value: e.target.value })}
             />
         </div>
     )
