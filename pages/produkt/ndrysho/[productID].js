@@ -19,11 +19,11 @@ const styles = theme => ({
 
 const useStyles = makeStyles(styles)
 
-export default function EditingPage({ product }) {
+export default function EditingPage({ product, id }) {
     const classes = useStyles()
     return (
         <div className={classes.root} >
-            <EditPage product={product} />
+            <EditPage product={product} id={id} />
         </div>
     )
 }
@@ -34,9 +34,11 @@ function cleanObject(obj) {
     delete data._id
     delete data.elasticSearch
     delete data.date
+    delete data.seller
     delete data.favouritedBy
     delete data.rating
     delete data.slug
+    delete data.sluggedKeywords
     if (data.photos.length) {
         data.images = data.photos.map(e => e.url)
     }
@@ -72,7 +74,8 @@ export async function getServerSideProps(context) {
         }
         return {
             props: {
-                product: JSON.stringify(cleanObject(JSON.stringify(product)))
+                product: JSON.stringify(cleanObject(JSON.stringify(product))),
+                id: productID
             }
         }
     } catch (e) {

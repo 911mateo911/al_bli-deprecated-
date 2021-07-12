@@ -28,7 +28,8 @@ const schema = Joi.object({
     subPjeseKembimi: Joi.string().optional(),
     subMakinaBujqesore: Joi.string().optional(),
     subDekorime: Joi.string().optional(),
-    photos: Joi.array().optional().max(10)
+    photos: Joi.array().optional().max(10),
+    toBeDeleted: Joi.array().optional().max(10)
 }).required()
 
 export default schema

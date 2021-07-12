@@ -14,7 +14,7 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_SECRET
 })
 
-const uploadImagesToCloudinary = async files => {
+export const uploadImagesToCloudinary = async files => {
   const promises = files.map(img => new Promise(async (resolve, reject) => {
     let image = ''
     await sharp(img.path).resize({

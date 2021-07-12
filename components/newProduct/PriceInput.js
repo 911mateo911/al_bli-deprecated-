@@ -4,7 +4,6 @@ import Select from '@material-ui/core/Select'
 import InputLabel from '@material-ui/core/InputLabel'
 import MenuItem from '@material-ui/core/MenuItem'
 import FormControl from '@material-ui/core/FormControl'
-import { DispatchContext } from '../contexts/newProductForm.context'
 import regex from './utils/regexValues'
 import { makeStyles, createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 
@@ -39,9 +38,8 @@ const addValidation = (name, value) => {
     })
 }
 
-function PriceInput({ label, value, currency }) {
+function PriceInput({ label, value, currency, dispatch }) {
     const classes = useStyles()
-    const dispatch = useContext(DispatchContext)
     useEffect(() => {
         addValidation('price', value)
     }, [])

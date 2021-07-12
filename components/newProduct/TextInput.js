@@ -19,7 +19,7 @@ export const theme = createMuiTheme({
 
 const addValidation = (name, value) => {
     ValidatorForm.addValidationRule(`is${name}`, (value) => {
-        return regex[name].regex.test(value.trim())
+        return regex[name].regex.test(value.toString().trim())
     })
 }
 

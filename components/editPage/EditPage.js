@@ -1,7 +1,10 @@
-import React, { useEffect, useContext, createContext, useReducer } from 'react'
+import React, { useEffect, useContext, createContext, useState, useReducer } from 'react'
 import { useSession } from 'next-auth/client'
 import reducer from '../reducers/newProductForm.reducer'
-import { makeStyles } from '@material-ui/core/styles'
+import axios from 'axios'
+import Loader from '../Loader'
+import { makeStyles, ThemeProvider } from '@material-ui/core/styles'
+import PriceInput from '../newProduct/PriceInput'
 import caution from '../../public/caution.png'
 import Keywords from '../newProduct/Keywords'
 import styles from '../../styles/newProduct/productForm.styles'
@@ -16,15 +19,23 @@ import MenuItem from '@material-ui/core/MenuItem'
 import CategorySelect from '../newProduct/CategorySelect'
 import SubCategories from '../newProduct/subCategories'
 import EditPhotos from './EditPhotos'
+import Button from '@material-ui/core/Button'
+import { clean, theme } from '../newProduct/newProductForm'
 
 const FormContext = createContext()
 const DispatchContext = createContext()
 
 const useStyles = makeStyles(styles)
 
-export default function EditPage({ product }) {
+const flashMessages = {
+    success: 'Produkti u ndryshua me sukses.',
+    error: 'Ndodhi nje problem!'
+}
+
+export default function EditPage({ product, id }) {
     const flashDispatch = useContext(FlashDispatchContext)
     const classes = useStyles()
+    const [loading, setLoading] = useState(false)
     if (product.notAuthorized) return (
         <Error
             src={caution.src}
@@ -41,8 +52,37 @@ export default function EditPage({ product }) {
             />
         )
     }
-    const router = useRouter()
     const [inputs, dispatch] = useReducer(reducer, JSON.parse(product), () => JSON.parse(product))
+    const router = useRouter()
+    async function handleSubmit(e) {
+        e.preventDefault()
+        setLoading(true)
+        const data = inputs
+        const images = [...data.images]
+        const form = new FormData()
+        data.photos.forEach(e => form.append('photos', e))
+        data.toBeDeleted.forEach(e => form.append('toBeDeleted', e))
+        data.photos = ''
+        data.toBeDeleted = ''
+        data.images = ''
+        Object.keys(clean(data)).forEach(key => form.append(key, clean(data)[key])) // appending keys to form data
+        form.append('id', id)
+        const request = axios.post('/api/edit-product', form)
+        const response = await request.data
+        data.photos = []
+        flashDispatch({
+            type: 'addMessage',
+            message: flashMessages[response.message],
+            severity: response.message
+        })
+        flashDispatch({ type: 'showSnackbar' })
+        if (response.message === 'error') {
+            data.images = images
+            setLoading(false)
+        }
+        if (response.message === 'success') router.replace(response.redirectTo)
+    }
+    if (loading) return <Loader message='Po ngarkohet...' />
     return (
         <div className={classes.root} >
             <FormContext.Provider value={inputs} >
@@ -51,7 +91,7 @@ export default function EditPage({ product }) {
                     <ValidatorForm
                         noValidate
                         className={classes.form}
-                        onSubmit={() => console.log('asdsasaasasd')}
+                        onSubmit={handleSubmit}
                     >
                         <TextInput
                             label='Emer Mbiemer'
@@ -75,7 +115,7 @@ export default function EditPage({ product }) {
                             validate
                             dispatch={dispatch}
                             name='telephone'
-                            value={inputs.telephone}
+                            value={inputs.telephone || ''}
                         />
                         <TextInput
                             label='Whatsapp'
@@ -142,6 +182,22 @@ export default function EditPage({ product }) {
                             images={inputs.images}
                         />
                         <Keywords value={inputs.keywords} dispatch={dispatch} />
+                        <PriceInput
+                            label='Cmimi'
+                            name='price'
+                            dispatch={dispatch}
+                            value={inputs.price}
+                            currency={inputs.currency}
+                        />
+                        <ThemeProvider theme={theme} >
+                            <Button
+                                className={classes.submitBtn}
+                                color='primary'
+                                type='submit'
+                                variant='contained'
+                            >Ruaj
+                            </Button>
+                        </ThemeProvider>
                     </ValidatorForm>
                 </DispatchContext.Provider>
             </FormContext.Provider>

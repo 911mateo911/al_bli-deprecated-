@@ -20,7 +20,7 @@ import { FormContext, DispatchContext } from '../contexts/newProductForm.context
 
 const useStyles = makeStyles(styles)
 
-const theme = createMuiTheme({
+export const theme = createMuiTheme({
     palette: {
         primary: {
             main: '#3291ff'
@@ -191,6 +191,7 @@ export default function NewProductForm({ isLoggedIn }) {
                 <PriceInput
                     label='Cmimi'
                     name='price'
+                    dispatch={dispatch}
                     value={inputs.price}
                     currency={inputs.currency}
                 />
