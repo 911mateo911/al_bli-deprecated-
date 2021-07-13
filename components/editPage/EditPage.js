@@ -63,24 +63,23 @@ export default function EditPage({ product, id }) {
         data.photos.forEach(e => form.append('photos', e))
         data.toBeDeleted.forEach(e => form.append('toBeDeleted', e))
         data.photos = ''
-        data.toBeDeleted = ''
         data.images = ''
         Object.keys(clean(data)).forEach(key => form.append(key, clean(data)[key])) // appending keys to form data
         form.append('id', id)
-        const request = axios.post('/api/edit-product', form)
+        const request = await axios.post('/api/edit-product', form)
         const response = await request.data
         data.photos = []
-        flashDispatch({
-            type: 'addMessage',
-            message: flashMessages[response.message],
-            severity: response.message
-        })
-        flashDispatch({ type: 'showSnackbar' })
-        if (response.message === 'error') {
-            data.images = images
-            setLoading(false)
-        }
-        if (response.message === 'success') router.replace(response.redirectTo)
+        // flashDispatch({
+        //     type: 'addMessage',
+        //     message: flashMessages[response.message],
+        //     severity: response.message
+        // })
+        // flashDispatch({ type: 'showSnackbar' })
+        // if (response.message === 'error') {
+        //     data.images = images
+        //     setLoading(false)
+        // }
+        // if (response.message === 'success') router.replace(response.redirectTo)
     }
     if (loading) return <Loader message='Po ngarkohet...' />
     return (
