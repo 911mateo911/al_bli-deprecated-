@@ -39,6 +39,7 @@ function cleanObject(obj) {
     delete data.rating
     delete data.slug
     delete data.sluggedKeywords
+    data.images = []
     if (data.photos.length) {
         data.images = data.photos.map(e => e.url)
     }

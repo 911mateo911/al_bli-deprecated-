@@ -19,11 +19,13 @@ const styles = theme => ({
             color: '#0070f3'
         },
         '.swiper-pagination': {
-            bottom: '0 !important'
+            bottom: '0 !important',
+            height: 'fit-content'
         }
     },
     root: {
-        width: '100%'
+        width: '100%',
+        textAlign: 'center'
     },
     swiper: {
         margin: 0
@@ -107,7 +109,7 @@ function EditPhotos({ photos, dispatch, images, toBeDeleted }) {
     })
     return (
         <div className={classes.root} >
-            {images.length && <Swiper
+            {images.length > 0 && <Swiper
                 hashNavigation={{
                     "watchState": true
                 }}

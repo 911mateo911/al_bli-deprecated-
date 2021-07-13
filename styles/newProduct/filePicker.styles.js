@@ -76,7 +76,9 @@ const styles = theme => ({
         backgroundColor: 'white'
     },
     deleteAll: {
-        marginTop: '10px',
+        margin: '10px auto 0 auto',
+        justifySelf: 'center',
+        alignSelf: 'center',
         border: '1px solid #F87171',
         fontSize: '13px',
         fontFamily: 'Source Sans Pro',

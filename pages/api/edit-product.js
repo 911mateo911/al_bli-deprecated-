@@ -73,22 +73,18 @@ export default async function handler(req, res) {
                 await Product.updateOne({ _id: id },
                     { $set: newProduct }
                 )
-                // search the photos to be deleted here and try to upload provided photos
-                // check for vulnerabilities
                 res.send({
                     message: 'success',
                     redirectTo: `/produkt/${product._id}/${newProduct.slug}`
                 })
             } catch (e) {
-                console.log(e)
                 res.send({
                     message: 'error',
-                    errorMsg: e.msg
+                    errorMsg: 'Ndodhi nje gabim!'
                 })
             }
         })
     } catch (e) {
-        console.log(e)
         res.send({
             message: 'error',
             errorMsg: e.msg
