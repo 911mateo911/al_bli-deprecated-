@@ -69,17 +69,17 @@ export default function EditPage({ product, id }) {
         const request = await axios.post('/api/edit-product', form)
         const response = await request.data
         data.photos = []
-        // flashDispatch({
-        //     type: 'addMessage',
-        //     message: flashMessages[response.message],
-        //     severity: response.message
-        // })
-        // flashDispatch({ type: 'showSnackbar' })
-        // if (response.message === 'error') {
-        //     data.images = images
-        //     setLoading(false)
-        // }
-        // if (response.message === 'success') router.replace(response.redirectTo)
+        flashDispatch({
+            type: 'addMessage',
+            message: flashMessages[response.message],
+            severity: response.message
+        })
+        flashDispatch({ type: 'showSnackbar' })
+        if (response.message === 'error') {
+            data.images = images
+            setLoading(false)
+        }
+        if (response.message === 'success') router.replace(response.redirectTo)
     }
     if (loading) return <Loader message='Po ngarkohet...' />
     return (

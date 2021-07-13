@@ -14,6 +14,18 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_SECRET
 })
 
+function getConfig(oldData) {
+    const data = JSON.parse(oldData)
+    const toDelete = ['_id', '__v', 'seller', 'favouritedBy', 'rating']
+    // the keys to not be deleted
+    Object.keys(data).forEach(key => !toDelete.includes(key) || delete data[key])
+    // if it is in toDelete, delete that key
+    const config = {}
+    Object.keys(data).forEach(key => config[key] = '')
+    // pasting keys to config
+    return config
+}
+
 export default async function handler(req, res) {
     try {
         await dbConnection()
@@ -24,7 +36,8 @@ export default async function handler(req, res) {
                 const data = fields
                 data.keywords = fields.keywords.split(',')
                 data.toBeDeleted = fields.toBeDeleted.split(',')
-                const product = await Product.findById(data.id)
+                const id = data.id
+                const product = await Product.findById(id)
                 if (!Boolean(session) || session.user._id !== product.seller.toString()) {
                     throw new CustomError('Ju nuk keni autorizim per kete veprim!', 400)
                 }
@@ -48,13 +61,30 @@ export default async function handler(req, res) {
                     const imageSrcs = await uploadImagesToCloudinary(images)
                     data.photos = imageSrcs.concat(product.photos)
                     // concating new photos with old ones
+                } else {
+                    data.photos = product.photos
                 }
-                
-                console.log(extendedData(data))
+                const newProduct = extendedData(data)
+                await Product.updateOne({ _id: id },
+                    {
+                        $unset: getConfig(JSON.stringify(product)),
+                    }
+                )
+                await Product.updateOne({ _id: id },
+                    { $set: newProduct }
+                )
                 // search the photos to be deleted here and try to upload provided photos
                 // check for vulnerabilities
+                res.send({
+                    message: 'success',
+                    redirectTo: `/produkt/${product._id}/${newProduct.slug}`
+                })
             } catch (e) {
                 console.log(e)
+                res.send({
+                    message: 'error',
+                    errorMsg: e.msg
+                })
             }
         })
     } catch (e) {

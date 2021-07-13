@@ -30,7 +30,8 @@ const initialValues = {
     subPjeseKembimi: '',
     subMakinaBujqesore: '',
     subDekorime: '',
-    photos: []
+    photos: [],
+    toBeDeleted: ''
 }
 
 export const FormContext = createContext()
