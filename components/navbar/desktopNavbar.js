@@ -20,6 +20,7 @@ export function handleSubmit(e, state, setState, dispatch, router) {
     dispatch({ type: 'setCity', value: 'all' })
     dispatch({ type: 'setRedirected', value: true })
     dispatch({ type: 'setQuery', value: state })
+    dispatch({ type: 'setGridLoading', value: true })
     setState('')
     router.push('/kerko')
 }

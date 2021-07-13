@@ -56,7 +56,7 @@ export default async function handler(req, res) {
                     data.profilePic = profileUrl
                 }
                 const salt = await bcrypt.genSalt(10)
-                data.avatarColor = materialColors[Math.floor(Math.random() * 7)]
+                data.avatarColor = materialColors[Math.floor(Math.random() * materialColors.length)]
                 data.password = await bcrypt.hash(data.password, salt)
                 const newUser = new User(data)
                 await newUser.save()

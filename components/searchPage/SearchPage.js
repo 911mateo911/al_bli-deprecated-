@@ -19,7 +19,6 @@ export default function SearchPage() {
             dispatch({ type: 'setPageLoading', value: false })
         }
         if (state.redirected) {
-            dispatch({ type: 'setGridLoading', value: true })
             dispatch({ type: 'setRedirected', value: false })
             const { query, category, city, page } = state
             const request = await axios.post('api/search-products', { query, category, city, page })

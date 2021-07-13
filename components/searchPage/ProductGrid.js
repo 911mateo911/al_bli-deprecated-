@@ -69,6 +69,7 @@ function ProductGrid({ products, gridLoading }) {
                             className={classes.root}
                         >
                             <Post
+                                favouritedBy={e.favouritedBy}
                                 profilePic={e.seller.profilePic || ''}
                                 name={e.name}
                                 title={e.title}
