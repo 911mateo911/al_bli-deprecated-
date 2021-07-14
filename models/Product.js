@@ -1,10 +1,11 @@
 import mongoose from 'mongoose'
+import User from './User'
 
 const ProductSchema = new mongoose.Schema({
     name: String,
     seller: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        ref: User
     },
     date: {
         type: Date
