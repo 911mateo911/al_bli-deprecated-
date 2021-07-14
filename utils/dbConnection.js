@@ -22,7 +22,7 @@ async function dbConnect() {
             useCreateIndex: true,
             serverSelectionTimeoutMS: 8000
         }
-        cached.promise = mongoose.connect(MONGODB_URI, options).then((mongoose) => {
+        cached.promise = mongoose.connect(process.env.MONGODB_URL, options).then((mongoose) => {
             return mongoose
         })
     }
