@@ -30,7 +30,6 @@ export async function getServerSideProps(context) {
             }
         }
     } catch (e) {
-        console.log(e)
         context.res.statuscode = 404
         return {
             props: {
