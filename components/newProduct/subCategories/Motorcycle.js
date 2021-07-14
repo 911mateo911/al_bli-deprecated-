@@ -1,7 +1,6 @@
 import React, { useContext, useLayoutEffect, useEffect } from 'react'
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator'
 import { makeStyles } from '@material-ui/core/styles'
-import 'date-fns';
 import { formattedDate } from './Car'
 import FormControl from '@material-ui/core/FormControl';
 import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
