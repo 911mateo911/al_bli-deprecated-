@@ -5,12 +5,13 @@ import infinity from '../public/infinity.svg'
 const styles = theme => ({
     loaderWrap: {
         width: '100%',
-        height: 'calc(100vh - 70px)',
+        height: 'calc(100vh - 70px - 91px)',
         display: 'flex',
         marginTop: '70px',
-        background: 'rgba(255,255,255,0.5)',
+        backgroundColor: 'white',
         justifyContent: 'center',
         alignItems: 'center',
+        zIndex: '90',
         flexDirection: 'column'
     },
     img: {

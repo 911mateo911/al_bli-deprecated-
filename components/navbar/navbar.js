@@ -44,6 +44,7 @@ function Navbar() {
                     anchor={state.anchorEl}
                     open={popoverOpen}
                     close={closePopover}
+                    color={session.user.avatarColor}
                     name={session.user.name}
                     email={session.user.email}
                     profilePicUrl={session.user.profilePic ? session.user.profilePic.url : ''}

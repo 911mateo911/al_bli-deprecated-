@@ -53,6 +53,7 @@ export default function LatestPosts({ posts, setLoading }) {
                             <Post
                                 profilePic={e.seller.profilePic || ''}
                                 name={e.name}
+                                seller={e.seller}
                                 title={e.title}
                                 favouritedBy={e.favouritedBy}
                                 price={e.price}

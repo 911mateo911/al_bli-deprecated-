@@ -72,6 +72,7 @@ function ProductGrid({ products, gridLoading }) {
                                 favouritedBy={e.favouritedBy}
                                 profilePic={e.seller.profilePic || ''}
                                 name={e.name}
+                                seller={e.seller}
                                 title={e.title}
                                 price={e.price}
                                 currency={e.currency}

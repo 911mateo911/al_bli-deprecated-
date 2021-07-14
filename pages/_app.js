@@ -1,4 +1,5 @@
 import '../styles/globals.css'
+import Footer from '../components/footer/Footer'
 import { Provider } from "next-auth/client"
 import Navbar from '../components/navbar/navbar'
 import { FlashMsgProvider } from '../components/contexts/flashMsgs.context'
@@ -17,6 +18,7 @@ function MyApp({ Component, pageProps }) {
             <Navbar />
             <Component {...pageProps} />
             <Snackbar />
+            <Footer />
           </SearchProvider>
         </FlashMsgProvider>
       </Provider>

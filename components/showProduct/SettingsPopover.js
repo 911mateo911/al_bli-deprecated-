@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import Popover from '@material-ui/core/Popover'
 import { makeStyles } from '@material-ui/core/styles'
 import styles from '../../styles/showPage/settings.styles'
+import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import ListItemText from '@material-ui/core/ListItemText'
 import { ShowPageContext, ShowPageDispatch } from '../contexts/showPage.context'
 import List from '@material-ui/core/List'
@@ -74,6 +75,14 @@ export default function SettingsPopover({ productId }) {
                             </Avatar>
                         </ListItemAvatar>
                         <ListItemText primary='Promovo (se shpejti)' />
+                    </ListItem>
+                    <ListItem className={classes.listItem} button>
+                        <ListItemAvatar>
+                            <Avatar>
+                                <MonetizationOnIcon />
+                            </Avatar>
+                        </ListItemAvatar>
+                        <ListItemText primary='Nxir ne oferte (se shpejti)' />
                     </ListItem>
                 </List>
             </div>

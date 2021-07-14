@@ -8,10 +8,6 @@ const styles = theme => ({
             boxShadow: '0 4px 14px 0 rgb(0 0 0 / 10%)'
         }
     },
-    media: {
-        height: 0,
-        paddingTop: '56.25%',
-    },
     h3: {
         fontFamily: 'Lato',
         fontWeight: '500',
@@ -46,6 +42,10 @@ const styles = theme => ({
         color: '#111',
         fontSize: '1.1rem',
         fontWeight: '700'
+    },
+    media: {
+        height: 0,
+        paddingTop: '56.25%'
     }
 })
 

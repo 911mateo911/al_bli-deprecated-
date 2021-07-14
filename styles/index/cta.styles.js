@@ -1,14 +1,14 @@
 const styles = theme => ({
     root: {
         padding: '1.5rem 5%',
-        borderBottom: '1px solid rgba(0,0,0,0.1)',
+        borderTop: '1px solid rgba(0,0,0,0.1)',
         display: 'flex',
         justifyContent: 'space-evenly',
         alignItems: 'center',
         width: '90%',
         margin: '10px auto',
         marginTop: '0',
-        marginBottom: '1000px',
+        marginBottom: '10px',
         [theme.breakpoints.down('md')]: {
             width: '100%',
             padding: '1.5rem 0'

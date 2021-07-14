@@ -72,7 +72,7 @@ function ShowPage({ product }) {
             <div className={classes.details} >
                 <span className={classes.user} >
                     {seller.profilePic ?
-                        <Avatar src={seller.profilePic.url} /> : <Avatar>{name[0].toUpperCase()}</Avatar>}
+                        <Avatar src={seller.profilePic.url} /> : <Avatar style={{backgroundColor: '#3291ff'}} >{name[0].toUpperCase()}</Avatar>}
                     <h4 className={classes.username} >{name}</h4>
                     <p className={classes.date} >{timeAgo.format(Date.parse(date))}</p>
                     <ShareProduct classes={classes} />

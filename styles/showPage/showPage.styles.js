@@ -1,6 +1,7 @@
 const styles = theme => ({
     root: {
         marginTop: '70px',
+        minHeight: 'calc(100vh - 70px - 91px)',
         width: '95%',
         margin: 'auto',
         display: 'flex',
@@ -60,6 +61,7 @@ const styles = theme => ({
         fontFamily: 'Lato',
         margin: '10px 0 5px 0',
         width: '100%',
+        wordWrap: 'break-word',
         textRendering: 'optimizeLegibility',
         fontSmoothing: 'antialiased',
         textAlign: 'left'

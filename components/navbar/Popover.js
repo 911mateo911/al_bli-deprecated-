@@ -19,7 +19,14 @@ import { FlashDispatchContext } from '../contexts/flashMsgs.context'
 
 const useStyles = makeStyles(styles)
 
-export default function PopoverElem({ open, close, anchor, name, email, profilePicUrl }) {
+export default function PopoverElem({ open,
+    close,
+    anchor,
+    name,
+    email,
+    color,
+    profilePicUrl
+}) {
     const classes = useStyles()
     const dispatch = useContext(FlashDispatchContext)
     const router = useRouter()
@@ -34,6 +41,7 @@ export default function PopoverElem({ open, close, anchor, name, email, profileP
         })
         dispatch({ type: 'showSnackbar' })
     }
+    const style = { backgroundColor: color }
     return (
         <Popover
             className={classes.popover}
@@ -55,7 +63,7 @@ export default function PopoverElem({ open, close, anchor, name, email, profileP
                 <span className={classes.profile} >
                     {profilePicUrl ?
                         <Avatar className={classes.avatar} src={profilePicUrl} />
-                        : <Avatar className={classes.avatar} >{name[0].toUpperCase()}</Avatar>}
+                        : <Avatar style={style} className={classes.avatar} >{name[0].toUpperCase()}</Avatar>}
                     <h4 className={classes.h4} >{name}</h4>
                     <h5 className={classes.h5} >{email}</h5>
                 </span>

@@ -42,10 +42,8 @@ function desktopNavbar({
                 <Link href='/' >
                     <a className={classes.linkItem}>Shtepia</a>
                 </Link>
-                <Link href='/kategori' >
-                    <a className={classes.linkItem} >Kategori</a>
-                </Link>
-                <Link href='/new' >
+                <a className={classes.linkItem} >Kategori</a>
+                <Link href='/oferta' >
                     <a className={classes.linkItem} >Oferta</a>
                 </Link>
                 <Link href='/produkt/shto'>

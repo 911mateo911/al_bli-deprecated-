@@ -21,7 +21,19 @@ import AddtoFavourite from '../showProduct/AddtoFavourite'
 
 const useStyles = makeStyles(styles)
 
-export default function Post({ photo, favouritedBy, profilePic, name, setLoading, title, date, price, currency, id, slug }) {
+export default function Post({ photo,
+    favouritedBy,
+    profilePic,
+    name,
+    seller,
+    setLoading,
+    title,
+    date,
+    price,
+    currency,
+    id,
+    slug
+}) {
     const classes = useStyles()
     const router = useRouter()
     const [session, loading] = useSession()
@@ -57,7 +69,7 @@ export default function Post({ photo, favouritedBy, profilePic, name, setLoading
                 </CardContent>
             </CardActionArea>
             <CardActions disableSpacing>
-                {(Boolean(session) && !loading) &&
+                {(Boolean(session) && (session.user._id !== seller._id)) &&
                     <AddtoFavourite
                         inPost
                         productId={id}

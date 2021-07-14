@@ -1,6 +1,7 @@
 import React from 'react'
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import Link from 'next/link'
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
@@ -27,33 +28,39 @@ export default function MenuDrawer({ open, onClose }) {
                     <ChevronLeftIcon onClick={onClose} />
                 </ListItem>
                 <Divider />
-                <ListItem button>
-                    <ListItemIcon>
-                        <HomeIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Shtepia" />
-                </ListItem>
+                <Link href='/' >
+                    <ListItem button onClick={onClose} >
+                        <ListItemIcon>
+                            <HomeIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Shtepia" />
+                    </ListItem>
+                </Link>
                 <Divider />
-                <ListItem button>
+                <ListItem button >
                     <ListItemIcon>
                         <CategoryIcon />
                     </ListItemIcon>
                     <ListItemText primary="Kategori" />
                 </ListItem>
                 <Divider />
-                <ListItem button>
-                    <ListItemIcon>
-                        <LoyaltyIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Oferta" />
-                </ListItem>
+                <Link href='/oferta' >
+                    <ListItem button onClick={onClose} >
+                        <ListItemIcon>
+                            <LoyaltyIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Oferta" />
+                    </ListItem>
+                </Link>
                 <Divider />
-                <ListItem button>
-                    <ListItemIcon>
-                        <ShoppingCartIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Shit" />
-                </ListItem>
+                <Link href='/produkt/shto' >
+                    <ListItem button onClick={onClose} >
+                        <ListItemIcon>
+                            <ShoppingCartIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Shit" />
+                    </ListItem>
+                </Link>
                 <Divider />
             </List>
         </Drawer >

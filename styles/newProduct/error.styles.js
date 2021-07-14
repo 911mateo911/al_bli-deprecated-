@@ -2,6 +2,7 @@ const styles = theme => ({
     root: {
         width: '100%',
         height: 'fit-content',
+        minHeight: 'calc(100vh - 70px - 91px)',
         display: 'flex',
         marginTop: '70px',
         background: 'rgba(255,255,255,0.5)',
