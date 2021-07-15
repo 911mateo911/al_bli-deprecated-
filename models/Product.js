@@ -36,6 +36,7 @@ const ProductSchema = new mongoose.Schema({
         type: String
     }],
     siperfaqe: String,
+    kate: String,
     nrDhoma: String,
     adresa: String,
     marka: String,

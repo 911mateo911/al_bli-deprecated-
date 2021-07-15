@@ -3,11 +3,7 @@ import { FormProvider } from '../../components/contexts/newProductForm.context'
 import dynamic from 'next/dynamic'
 import { useSession } from 'next-auth/client'
 import Loader from '../../components/Loader'
-
-const NewProductForm = dynamic(
-    () => import('../../components/newProduct/newProductForm'),
-    { ssr: false }
-)
+import NewProductForm from '../../components/newProduct/newProductForm'
 
 export default function Shit() {
     const [session, loading] = useSession()

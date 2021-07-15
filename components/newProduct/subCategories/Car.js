@@ -1,4 +1,4 @@
-import React, { useContext, useLayoutEffect, useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator'
 import { makeStyles } from '@material-ui/core/styles'
 import FormControl from '@material-ui/core/FormControl';
@@ -36,19 +36,16 @@ const useStyles = makeStyles(styles)
 export default function Car({ dispatch, context }) {
     const classes = useStyles()
     const input = useContext(context)
-    useLayoutEffect(() => {
+    useEffect(() => {
         return () => {
+            dispatch({ type: 'onChange', name: 'viti', value: formattedDate(new Date()) })
             dispatch({ type: 'onDelete', name: 'marka' })
             dispatch({ type: 'onDelete', name: 'modeli' })
-            dispatch({ type: 'onDelete', name: 'viti' })
             dispatch({ type: 'onDelete', name: 'kilometra' })
             dispatch({ type: 'onDelete', name: 'karburanti' })
             dispatch({ type: 'onDelete', name: 'transmisioni' })
         };
-    }, [])
-    useEffect(() => {
-        dispatch({ type: 'onChange', name: 'viti', value: formattedDate(new Date()) })
-    }, [])
+    }, [input.category])
     return (
         <div className={classes.root} >
             <FilledInput
