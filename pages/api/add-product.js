@@ -75,7 +75,6 @@ export default async function handler(req, res) {
           redirectTo: `${newProduct._id}/${newProduct.slug}`
         })
       } catch (e) {
-        console.log(e)
         res.send({
           message: 'error',
           errorMsg: e.msg
@@ -83,7 +82,6 @@ export default async function handler(req, res) {
       }
     })
   } catch (e) {
-    console.log(e)
     res.send({
       message: 'error',
       errorMsg: e.msg
