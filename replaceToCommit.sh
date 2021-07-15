@@ -4,10 +4,14 @@ cp ~/Desktop/commitFiles/production/dbConnection.js ~/Desktop/"React Projects"/a
 echo "u replacua cbConnectioni"
 cp ~/Desktop/commitFiles/production/next.config.js ~/Desktop/"React Projects"/al-bli-local/al_bli
 echo "u replacua next konfigu"
-echo "shkruaj emrin e commitit"
-read commitName
+git rm -rf --cached .
+echo "hiq cached files"
 git add .
 echo "added all files"
 git checkout experimental
 echo "switched to experimental"
+echo "shkruaj emrin e commitit"
+read commitName
 git commit -m "Commiting with name $commitName"
+echo "u commitua"
+git push origin experimental
