@@ -3,6 +3,7 @@ import styles from '../../styles/navbar/navbar.styles'
 import { makeStyles } from '@material-ui/core/styles'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import PopoverElem from './Popover'
+import singleRing from '../../public/singleRing.svg'
 import DesktopNavbar from './desktopNavbar';
 import { useSession } from "next-auth/client"
 import navbarHook from '../hooks/navbar.hook'
@@ -38,6 +39,11 @@ function Navbar() {
             {!isMobile && <DesktopNavbar
                 classes={classes}
                 openPopover={openPopover}
+            />}
+            {loading && <img
+                alt='loading user'
+                className={classes.loadingAvt}
+                src={singleRing.src}
             />}
             {
                 (!loading && session) && <PopoverElem

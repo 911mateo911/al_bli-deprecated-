@@ -1,4 +1,4 @@
-import React, { useContext, useLayoutEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { SelectValidator } from 'react-material-ui-form-validator'
 import MenuItem from '@material-ui/core/MenuItem';
@@ -16,11 +16,11 @@ const useStyles = makeStyles(styles)
 export default function Subs({ subCategories, name, context, dispatch }) {
     const input = useContext(context)
     const classes = useStyles()
-    useLayoutEffect(() => {
+    useEffect(() => {
         return () => {
             dispatch({ type: 'onDelete', name })
         };
-    }, [])
+    }, [input.category])
     return (
         <FormControl margin='normal' className={classes.root} >
             <SelectValidator

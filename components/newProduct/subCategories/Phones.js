@@ -1,4 +1,4 @@
-import React, { useContext, useLayoutEffect, useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { TextValidator } from 'react-material-ui-form-validator'
 import { makeStyles } from '@material-ui/core/styles'
 import FormControl from '@material-ui/core/FormControl';
@@ -18,15 +18,13 @@ const useStyles = makeStyles(styles)
 export default function Phones({ dispatch, context }) {
     const classes = useStyles()
     const input = useContext(context)
-    useLayoutEffect(() => {
+    useEffect(() => {
         return () => {
+            dispatch({ type: 'onChange', name: 'viti', value: formattedDate(new Date()) })
             dispatch({ type: 'onDelete', name: 'prodhuesi' })
             dispatch({ type: 'onDelete', name: 'modeli' })
         };
-    }, [])
-    useEffect(() => {
-        dispatch({ type: 'onChange', name: 'viti', value: formattedDate(new Date()) })
-    }, [])
+    }, [input.category])
     return (
         <div className={classes.root} >
             <FilledInput

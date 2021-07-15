@@ -41,7 +41,7 @@ function FilledInput({
             }}
             validators={validate ? validators : ['required']}
             errorMessages={validate ? errorMessages : ['Kerkohet!']}
-            onChange={e => dispatch({ type: 'onChange', name: e.target.name, value: e.target.value.trim() })}
+            onChange={e => dispatch({ type: 'onChange', name: e.target.name, value: e.target.value })}
         />
     )
 }

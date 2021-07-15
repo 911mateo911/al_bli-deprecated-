@@ -15,10 +15,10 @@ function MyApp({ Component, pageProps }) {
     <>
       <Provider session={pageProps.session} >
         <Head>
-          <link rel="shortcut icon" href='siteLogo.png' type="image/x-icon" />
-          <link rel="apple-touch-icon" type="image/x-icon" sizes="180x180" href="siteLogo.png" />
-          <link rel="icon" type="image/png" sizes="32x32" href="siteLogo.png"/>
-          <link rel="icon" type="image/png" sizes="16x16" href="siteLogo.png"/>
+          <link rel="shortcut icon" href='favicon.png' type="image/x-icon" />
+          <link rel="apple-touch-icon" type="image/x-icon" sizes="180x180" href="favicon.png" />
+          <link rel="icon" type="image/png" sizes="32x32" href="favicon.png" />
+          <link rel="icon" type="image/png" sizes="16x16" href="favicon.png" />
         </Head>
         <FlashMsgProvider>
           <SearchProvider>

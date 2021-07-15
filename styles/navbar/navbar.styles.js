@@ -15,6 +15,10 @@ const styles = theme => ({
         },
         boxShadow: '0px 30px 60px rgb(0 0 0 / 4%)'
     },
+    loadingAvt: {
+        height: '40px',
+        width: '40px'
+    },
     linkWrap: {
         display: 'flex',
         justifyContent: 'space-evenly',

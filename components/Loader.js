@@ -23,7 +23,7 @@ const styles = theme => ({
         fontFamily: 'Lato',
         margin: '0',
         fontSize: '1.1rem',
-        marginTop: '-20px'
+        marginTop: '0px'
     }
 })
 

@@ -71,7 +71,7 @@ export default function ProdDetails({ category, product }) {
                 currency={product.currency}
                 nrDhoma={product.nrDhoma}
                 siperfaqe={product.siperfaqe}
-                nrKate={product.nrKate}
+                nrKate={product.kate}
                 adresa={product.adresa}
             />}
             {isOtherHouse() && <OtherHouseDetails

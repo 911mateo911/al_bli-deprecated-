@@ -19,7 +19,7 @@ export const uploadImagesToCloudinary = async files => {
     let image = ''
     await sharp(img.path).resize({
       fit: sharp.fit.contain,
-      height: 600
+      height: 400
     }).withMetadata().toBuffer().then(img => {
       const base64 = img.toString('base64')
       image = `data:image/jpeg;base64,${base64}`

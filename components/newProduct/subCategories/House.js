@@ -1,5 +1,4 @@
-import React, { useContext, useLayoutEffect, useEffect } from 'react'
-import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator'
+import React, { useContext, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import FilledInput from './FilledInput'
 
@@ -9,28 +8,19 @@ const styles = theme => ({
     }
 })
 
-const addValidation = () => {
-    ValidatorForm.addValidationRule(`isNumber`, (value) => {
-        return /^\d+$/.test(value)
-    })
-}
-
 const useStyles = makeStyles(styles)
 
 export default function House({ name, context, dispatch }) {
     const input = useContext(context)
     const classes = useStyles()
-    useLayoutEffect(() => {
+    useEffect(() => {
         return () => {
             dispatch({ type: 'onDelete', name: 'nrDhoma' })
             dispatch({ type: 'onDelete', name: 'siperfaqe' })
-            if (name === 'house') dispatch({ type: 'onDelete', name: 'kate' })
+            dispatch({ type: 'onDelete', name: 'kate' })
             dispatch({ type: 'onDelete', name: 'adresa' })
-        };
-    }, [])
-    useEffect(() => {
-        addValidation()
-    }, [])
+        }
+    }, [input.category])
     return (
         <div className={classes.root} >
             <FilledInput
