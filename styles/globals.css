@@ -23,6 +23,10 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+.page-Route {
+  margin-top: 70px;
+  min-height: calc(100vh - 70px - 91px);
+}
 
 .Typewriter__wrapper {
   font-family: 'Lato';

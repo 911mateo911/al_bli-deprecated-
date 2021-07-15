@@ -3,27 +3,17 @@ import React, { useState } from 'react'
 import Features from '../components/homepage/Features'
 import LatestPosts from '../components/homepage/LatestPosts'
 import Cta from '../components/homepage/Cta'
-import { makeStyles } from '@material-ui/core/styles'
 import dbConnection from '../utils/dbConnection'
 import Product from '../models/Product'
 import Loader from '../components/Loader'
 
-const styles = theme => ({
-  root: {
-    marginTop: '70px'
-  }
-})
-
-const useStyles = makeStyles(styles)
-
 export default function Home({ posts }) {
-  const classes = useStyles()
   const [isLoading, setLoading] = useState(false)
   if (isLoading) {
     return <Loader />
   }
   return (
-    <div className={classes.root} >
+    <div className='page-Route' >
       <Main />
       <Features />
       <LatestPosts posts={posts} setLoading={setLoading} />

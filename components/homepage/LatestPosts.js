@@ -10,6 +10,7 @@ import TimeAgo from 'javascript-time-ago'
 import sq from 'javascript-time-ago/locale/sq'
 import styles from '../../styles/index/latestPosts.styles'
 import shoes from '../../public/shoes.png'
+import Image from 'next/image'
 import SwiperCore, {
     Pagination, Navigation
 } from 'swiper/core'
@@ -26,7 +27,13 @@ export default function LatestPosts({ posts, setLoading }) {
         <>
             <h3 className={classes.h3} >Te fundit</h3>
             <div className={classes.errorWrap} >
-                <img className={classes.errorImg} src={shoesPng} />
+                <Image
+                    src={shoesPng}
+                    className={classes.errorImg}
+                    width={300}
+                    height={300}
+                    alt='Didnt get anything back'
+                />
                 <p className={classes.errorMsg} >Pati nje problem!</p>
             </div>
         </>

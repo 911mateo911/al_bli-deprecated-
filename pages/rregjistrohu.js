@@ -1,6 +1,5 @@
 import dynamic from 'next/dynamic'
 import { useSession } from 'next-auth/client'
-import { makeStyles } from "@material-ui/core/styles"
 import Loader from '../components/Loader'
 import { RegisterFormProvider } from '../components/contexts/registerForm.context'
 
@@ -9,23 +8,14 @@ const RegisterPageForm = dynamic(
     { ssr: false }
 )
 
-const styles = theme => ({
-    root: {
-        marginTop: '70px'
-    }
-})
-
-const useStyles = makeStyles(styles)
-
 export default function Rregjistrohu() {
-    const classes = useStyles()
     const [session, loading] = useSession()
     const isLoggedIn = Boolean(session)
     if (loading) {
         return <Loader />
     }
     return (
-        <div className={classes.root} >
+        <div className='page-Route' >
             <RegisterFormProvider>
                 <RegisterPageForm isLoggedIn={session} />
             </RegisterFormProvider>

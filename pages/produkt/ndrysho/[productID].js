@@ -1,4 +1,3 @@
-import { makeStyles } from "@material-ui/core/styles"
 import { getSession } from "next-auth/client"
 import dbConnection from "../../../utils/dbConnection"
 import Product from '../../../models/Product'
@@ -11,18 +10,9 @@ const EditPage = dynamic(
     { ssr: false }
 )
 
-const styles = theme => ({
-    root: {
-        marginTop: '70px'
-    }
-})
-
-const useStyles = makeStyles(styles)
-
 export default function EditingPage({ product, id }) {
-    const classes = useStyles()
     return (
-        <div className={classes.root} >
+        <div className='page-Route' >
             <EditPage product={product} id={id} />
         </div>
     )

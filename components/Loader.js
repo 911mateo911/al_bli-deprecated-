@@ -1,6 +1,7 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import infinity from '../public/infinity.svg'
+import Image from 'next/image'
 
 const styles = theme => ({
     loaderWrap: {
@@ -32,7 +33,13 @@ export default function Loader({ message }) {
     const classes = useStyles()
     return (
         <div className={classes.loaderWrap} >
-            <img alt='loading' className={classes.img} src={infinity.src} />
+            <Image
+                alt='loading'
+                className={classes.img}
+                src={infinity.src}
+                width={150}
+                height={150}
+            />
             {message && <p className={classes.message} >{message}</p>}
         </div>
     )

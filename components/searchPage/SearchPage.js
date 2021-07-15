@@ -19,10 +19,10 @@ export default function SearchPage() {
             dispatch({ type: 'setPageLoading', value: false })
         }
         if (state.redirected) {
+            dispatch({ type: 'closeInitialGreet' })
             dispatch({ type: 'setRedirected', value: false })
             const { query, category, city, page } = state
             const request = await axios.post('api/search-products', { query, category, city, page })
-            dispatch({ type: 'closeInitialGreet' })
             dispatch({ type: 'setProducts', value: request.data.products })
             dispatch({ type: 'resetPage' })
             dispatch({ type: 'setGridLoading', value: false })
