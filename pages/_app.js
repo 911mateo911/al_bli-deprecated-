@@ -6,6 +6,7 @@ import { FlashMsgProvider } from '../components/contexts/flashMsgs.context'
 import { SearchProvider } from '../components/contexts/search.context'
 import Snackbar from '../components/newProduct/Snackbar'
 import "swiper/swiper.min.css"
+import Head from 'next/head'
 import "swiper/components/pagination/pagination.min.css"
 import "swiper/components/navigation/navigation.min.css"
 
@@ -13,6 +14,12 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Provider session={pageProps.session} >
+        <Head>
+          <link rel="shortcut icon" href='siteLogo.png' type="image/x-icon" />
+          <link rel="apple-touch-icon" type="image/x-icon" sizes="180x180" href="siteLogo.png" />
+          <link rel="icon" type="image/png" sizes="32x32" href="siteLogo.png"/>
+          <link rel="icon" type="image/png" sizes="16x16" href="siteLogo.png"/>
+        </Head>
         <FlashMsgProvider>
           <SearchProvider>
             <Navbar />

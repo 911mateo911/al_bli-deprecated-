@@ -1,5 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
+import version from '../../version'
 import Link from 'next/link'
 
 const styles = theme => ({
@@ -43,7 +44,7 @@ export default function Footer() {
                     <a className={classes.p} >Shit</a>
                 </Link>
             </div>
-            <h1 className={classes.h1} >Proudly made by Mateo Malaj (v 0.8.0)</h1>
+            <h1 className={classes.h1} >Proudly made by Mateo Malaj (v {version})</h1>
         </>
     )
 }

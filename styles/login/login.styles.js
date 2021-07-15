@@ -7,7 +7,7 @@ const styles = theme => ({
         justifyContent: 'flex-start',
         alignItems: 'center',
         flexDirection: 'column',
-        minHeight: '90vh',
+        minHeight: 'calc(100vh - 70px - 91px)',
         [theme.breakpoints.down('sm')]: {
             paddingTop: '80px'
         },

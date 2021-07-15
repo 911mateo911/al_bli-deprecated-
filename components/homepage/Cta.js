@@ -15,6 +15,7 @@ export default function Cta() {
             <LazyLoadImage
                 className={classes.img}
                 src={rocketSrc}
+                alt='Jepi nje shtytje portofolit tend'
             />
             <span className={classes.cta} >
                 <h2 className={classes.h2} >Jepi nje shtytje portofolit tend!</h2>
