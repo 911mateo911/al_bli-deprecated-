@@ -10,6 +10,7 @@ import { makeStyles, ThemeProvider } from '@material-ui/core/styles'
 import { theme } from '../login/LoginPage'
 import Button from '@material-ui/core/Button'
 import axios from 'axios'
+import resizePhotos from '../newProduct/photoResizer'
 import { clean } from '../newProduct/newProductForm'
 import TextInput from '../newProduct/TextInput'
 import ProfilePicker from './ProfilePicker'
@@ -68,7 +69,8 @@ export default function RegisterPage({ isLoggedIn }) {
         startLoading()
         const avatar = inputs.profilePic
         const form = new FormData()
-        inputs.profilePic.slice(0, 1).forEach(e => form.append('profilePic', e))
+        const photos = await resizePhotos(inputs.profilePic.slice(0,1))
+        photos.forEach(e => form.append('profilePic', e))
         inputs.profilePic = ''
         Object.keys(clean(inputs)).forEach(key => form.append(key, clean(inputs)[key]))
         const request = await axios.post('/api/register-user', form)

@@ -19,6 +19,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 import CategorySelect from '../newProduct/CategorySelect'
 import SubCategories from '../newProduct/subCategories'
 import EditPhotos from './EditPhotos'
+import resizePhotos from '../newProduct/photoResizer'
 import Button from '@material-ui/core/Button'
 import { clean, theme } from '../newProduct/newProductForm'
 
@@ -60,7 +61,8 @@ export default function EditPage({ product, id }) {
         const data = inputs
         const images = [...data.images]
         const form = new FormData()
-        data.photos.forEach(e => form.append('photos', e))
+        const photos = await resizePhotos(data.photos)
+        photos.forEach(e => form.append('photos', e))
         data.toBeDeleted.forEach(e => form.append('toBeDeleted', e))
         data.photos = ''
         data.images = ''

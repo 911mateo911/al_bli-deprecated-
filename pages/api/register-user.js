@@ -19,7 +19,7 @@ const uploadProfilePic = async pic => {
         let image = ''
         await sharp(pic.path).resize({
             fit: sharp.fit.contain,
-            height: 600
+            height: 300
         }).withMetadata().toBuffer().then(img => {
             const base64 = img.toString('base64')
             image = `data:image/jpeg;base64,${base64}`
