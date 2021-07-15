@@ -13,3 +13,5 @@ echo "switched to experimental"
 echo "shkruaj emrin e commitit"
 read commitName
 git commit -m "Commiting with name $commitName"
+echo "u commitua"
+git push origin experimental
