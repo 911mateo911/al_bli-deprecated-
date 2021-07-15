@@ -8,6 +8,7 @@ import AddtoFavourite from './AddtoFavourite'
 import ShareDialog from './ShareDialog'
 import { useSession } from 'next-auth/client'
 import Loader from '../Loader'
+import HeadTags from '../seo/Head'
 import Avatar from '@material-ui/core/Avatar'
 import Divider from '@material-ui/core/Divider'
 import Keywords from './Keywords'
@@ -60,6 +61,12 @@ function ShowPage({ product }) {
     } = JSON.parse(product)
     return (
         <div className={classes.root} >
+            <HeadTags
+                title={`al-bli / ${title.slice(0, 40)}`}
+                description={description.slice(0, 100)}
+                keywords={keywords.join()}
+                author={name}
+            />
             <Carousel product={JSON.parse(product)} />
             <ConfirmationDialog
                 productName={title}
@@ -72,7 +79,7 @@ function ShowPage({ product }) {
             <div className={classes.details} >
                 <span className={classes.user} >
                     {seller.profilePic ?
-                        <Avatar src={seller.profilePic.url} /> : <Avatar style={{backgroundColor: '#3291ff'}} >{name[0].toUpperCase()}</Avatar>}
+                        <Avatar src={seller.profilePic.url} /> : <Avatar style={{ backgroundColor: '#3291ff' }} >{name[0].toUpperCase()}</Avatar>}
                     <h4 className={classes.username} >{name}</h4>
                     <p className={classes.date} >{timeAgo.format(Date.parse(date))}</p>
                     <ShareProduct classes={classes} />

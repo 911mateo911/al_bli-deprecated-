@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import hands from '../../public/hands.png'
 import styles from '../../styles/index/main.styles'
 import Link from 'next/link'
-import Image from 'next/image'
 import Typewriter from 'typewriter-effect'
 import Snackbar from '../newProduct/Snackbar'
 
@@ -16,7 +15,11 @@ export default function Main() {
         <>
             <Snackbar />
             <main className={classes.main} >
-                <img className={classes.mainImg} src={handsSrc} />
+                <img
+                    className={classes.mainImg}
+                    src={handsSrc}
+                    alt='al-bli handshake'
+                />
                 <span className={classes.mainHead} >
                     <h1 className={classes.h1} >Tregto dhe ti.</h1>
                     <Typewriter

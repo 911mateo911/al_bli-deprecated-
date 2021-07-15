@@ -1,7 +1,8 @@
 const styles = theme => ({
     root: {
         marginTop: '70px',
-        padding: '10px'
+        padding: '10px',
+        minHeight: 'calc(100vh - 70px - 91px)'
     },
     h1: {
         fontFamily: 'Source Sans Pro',
