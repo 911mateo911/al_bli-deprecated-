@@ -66,11 +66,17 @@ export default function NewProductForm({ isLoggedIn }) {
         setLoading(true)
         const data = inputs
         const form = new FormData()
+        const config = {
+            onUploadProgress: function (progressEvent) {
+                let percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total)
+                console.log(percentCompleted)
+            }
+        }
         const photos = await resizePhotos(data.photos)
         photos.forEach(e => form.append('photos', e)) // adding photos to form data
         data.photos = '' // made here so it will be cleaned with the below method
         Object.keys(clean(data)).forEach(key => form.append(key, clean(data)[key])) // appending keys to form data
-        const request = await axios.post('/api/add-product', form)
+        const request = await axios.post('/api/add-product', form, config)
         const response = await request.data
         data.photos = []
         flashDispatch({
