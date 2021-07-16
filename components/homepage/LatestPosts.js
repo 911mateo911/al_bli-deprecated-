@@ -40,6 +40,7 @@ export default function LatestPosts({ posts, setLoading }) {
     )
     if (posts.error) return errorMsg
     const latestPosts = JSON.parse(posts)
+    const cleanPosts = latestPosts.filter(e => e.seller != null)
     const isMobile = useMediaQuery('(max-width:600px)')
     return (
         <>
@@ -54,7 +55,7 @@ export default function LatestPosts({ posts, setLoading }) {
                     'clickable': true
                 }}
             >
-                {latestPosts.map((e, i) => {
+                {cleanPosts.map((e, i) => {
                     return (
                         <SwiperSlide className={classes.slide} key={i} >
                             <Post

@@ -36,7 +36,7 @@ export default function SearchPage() {
                 <h2 className={classes.h2} >Kerko c'te intereson shpejt dhe lehtesisht.</h2>
                 :
                 <ProductGrid
-                    products={state.products}
+                    products={state.products.filter(e => e.seller != null)}
                     gridLoading={state.gridLoading}
                 />
             }
