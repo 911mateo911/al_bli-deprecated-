@@ -37,6 +37,7 @@ export default function EditPage({ product, id }) {
     const flashDispatch = useContext(FlashDispatchContext)
     const classes = useStyles()
     const [loading, setLoading] = useState(false)
+    const [progress, setProgress] = useState(0)
     if (product.notAuthorized) return (
         <Error
             src={caution.src}
@@ -58,17 +59,24 @@ export default function EditPage({ product, id }) {
     async function handleSubmit(e) {
         e.preventDefault()
         setLoading(true)
+        setProgress(0)
         const data = inputs
         const images = [...data.images]
         const form = new FormData()
         const photos = await resizePhotos(data.photos)
+        const config = {
+            onUploadProgress: function (progressEvent) {
+                let percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total)
+                setProgress(percentCompleted)
+            }
+        }
         photos.forEach(e => form.append('photos', e))
         data.toBeDeleted.forEach(e => form.append('toBeDeleted', e))
         data.photos = ''
         data.images = ''
         Object.keys(clean(data)).forEach(key => form.append(key, clean(data)[key])) // appending keys to form data
         form.append('id', id)
-        const request = await axios.post('/api/edit-product', form)
+        const request = await axios.post('/api/edit-product', form, config)
         const response = await request.data
         data.photos = []
         flashDispatch({
@@ -83,7 +91,7 @@ export default function EditPage({ product, id }) {
         }
         if (response.message === 'success') router.replace(response.redirectTo)
     }
-    if (loading) return <Loader message='Po ngarkohet...' />
+    if (loading) return <Loader wProgress value={progress} message='Po ngarkohet...' />
     return (
         <div className={classes.root} >
             <FormContext.Provider value={inputs} >

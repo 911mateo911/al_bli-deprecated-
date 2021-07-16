@@ -1,7 +1,24 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles, withStyles } from '@material-ui/core/styles'
 import infinity from '../public/infinity.svg'
 import Image from 'next/image'
+import LinearProgress from '@material-ui/core/LinearProgress'
+
+const BorderLinearProgress = withStyles((theme) => ({
+    root: {
+        width: '95%',
+        marginTop: '10px',
+        height: 10,
+        borderRadius: 5,
+    },
+    colorPrimary: {
+        backgroundColor: theme.palette.grey[theme.palette.type === 'light' ? 200 : 700],
+    },
+    bar: {
+        borderRadius: 5,
+        backgroundColor: '#1a90ff',
+    },
+}))(LinearProgress)
 
 const styles = theme => ({
     loaderWrap: {
@@ -29,7 +46,7 @@ const styles = theme => ({
 
 const useStyles = makeStyles(styles)
 
-export default function Loader({ message }) {
+export default function Loader({ message, wProgress, value }) {
     const classes = useStyles()
     return (
         <div className={classes.loaderWrap} >
@@ -41,6 +58,7 @@ export default function Loader({ message }) {
                 height={150}
             />
             {message && <p className={classes.message} >{message}</p>}
+            {wProgress && <BorderLinearProgress variant="determinate" value={value} />}
         </div>
     )
 }
