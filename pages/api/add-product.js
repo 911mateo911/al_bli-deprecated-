@@ -2,6 +2,7 @@ import dbConnection from "../../utils/dbConnection"
 import Product from "../../models/Product"
 import { getSession } from "next-auth/client"
 import formidable from "formidable"
+import User from '../../models/User'
 import sharp from 'sharp'
 import validationSchema from '../../validators/newproductForm.validation'
 import CustomError from '../../middlewares/customError'
@@ -52,6 +53,8 @@ export default async function handler(req, res) {
     if (!Boolean(session)) {
       throw new CustomError('Ndodhi nje gabim', 400)
     }
+    const isUser = await User.findById(session.user._id)
+    if (!isUser) throw new CustomError('Ndodhi nje gabim', 400)
     const form = formidable({ multiples: true })
     form.parse(req, async (err, fields, files) => {
       try {
