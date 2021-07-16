@@ -16,6 +16,8 @@
     "@material-ui/pickers": "3.2.10",
     "@material-ui/styles": "^5.0.0-alpha.35",
     "axios": "^0.21.1",
+    "aws-sdk": "^2.948.0",
+    "nock": "^13.1.1",
     "bcrypt": "^5.0.1",
     "cloudinary": "^1.26.1",
     "clsx": "^1.1.1",
