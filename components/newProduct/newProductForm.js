@@ -49,6 +49,7 @@ export default function NewProductForm({ isLoggedIn }) {
     const dispatch = useContext(DispatchContext)
     const router = useRouter()
     const [loading, setLoading] = useState(false)
+    const [progress, setProgress] = useState(0)
     const flashDispatch = useContext(FlashDispatchContext)
     useEffect(() => {
         if (!isLoggedIn) {
@@ -64,12 +65,13 @@ export default function NewProductForm({ isLoggedIn }) {
     async function handleSubmit(e) {
         e.preventDefault()
         setLoading(true)
+        setProgress(0)
         const data = inputs
         const form = new FormData()
         const config = {
             onUploadProgress: function (progressEvent) {
                 let percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total)
-                console.log(percentCompleted)
+                setProgress(percentCompleted)
             }
         }
         const photos = await resizePhotos(data.photos)
@@ -89,7 +91,7 @@ export default function NewProductForm({ isLoggedIn }) {
         if (response.message === 'success') router.replace(response.redirectTo)
     }
     if (!isLoggedIn) return <Loader />
-    if (loading) return <Loader message='Po ngarkohet...' />
+    if (loading) return <Loader wProgress value={progress} message='Po ngarkohet...' />
     return (
         <div className={classes.root} >
             <h1 className={classes.h1} >Posto produktin tend:</h1>
