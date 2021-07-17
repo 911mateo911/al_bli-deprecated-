@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from '../../styles/index/features.styles'
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles(styles)
 

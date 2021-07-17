@@ -44,6 +44,7 @@ function handleChange(e, dispatch) {
 }
 
 async function handleSubmit(state, dispatch) {
+    dispatch({ type: 'closeInitialGreet' })
     dispatch({ type: 'setGridLoading', value: true })
     const { query, category, city, page } = state
     const request = await axios.post('api/search-products', { query, category, city, page })

@@ -29,6 +29,7 @@ const styles = theme => ({
         fontWeight: 600,
         overflow: 'hidden',
         textOverflow: 'ellipsis',
+        whiteSpace: 'nowrap',
         padding: '8px',
         backgroundColor: '#E5E7EB',
         borderRadius: '2px'
