@@ -54,7 +54,7 @@ export default async function handler(req, res) {
       throw new CustomError('Ndodhi nje gabim', 400)
     }
     const isUser = await User.findById(session.user._id)
-    if (!isUser) throw new CustomError('Ndodhi nje gabim', 400)
+    if (!isUser) throw new CustomError('Adresa nuk ekziston!', 400)
     const form = formidable({ multiples: true })
     form.parse(req, async (err, fields, files) => {
       try {

@@ -5,7 +5,8 @@ const initialValues = {
     loading: false,
     anchorEl: null,
     dialogOpen: false,
-    shareDialogOpen: false
+    shareDialogOpen: false,
+    fullScreenPhoto: false
 }
 
 export const ShowPageContext = createContext()

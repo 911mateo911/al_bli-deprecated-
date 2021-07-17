@@ -1,5 +1,7 @@
 import React, { memo } from 'react'
+import IconButton from '@material-ui/core/IconButton';
 import { Swiper, SwiperSlide } from "swiper/react"
+import FullscreenIcon from '@material-ui/icons/Fullscreen';
 import { makeStyles } from '@material-ui/core/styles'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import styles from '../../styles/showPage/carousel.styles'
@@ -14,7 +16,7 @@ SwiperCore.use([Pagination, Navigation])
 
 const useStyles = makeStyles(styles)
 
-function Carousel({ product }) {
+function Carousel({ product, dispatch }) {
     const classes = useStyles()
     const renderImgs = product.photos.map((img, i) => {
         return (
@@ -51,6 +53,11 @@ function Carousel({ product }) {
                         />
                     </SwiperSlide>
                 )}
+                <IconButton
+                    className={classes.fullScreen}
+                    onClick={() => dispatch({ type: 'openFullScreenPhotos' })}>
+                    <FullscreenIcon />
+                </IconButton>
             </Swiper >
             <ProdDetails product={product} category={product.category} />
         </span>
