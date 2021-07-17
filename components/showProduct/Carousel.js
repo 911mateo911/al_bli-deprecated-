@@ -18,10 +18,20 @@ const useStyles = makeStyles(styles)
 
 function Carousel({ product, dispatch }) {
     const classes = useStyles()
-    const renderImgs = product.photos.map((img, i) => {
+    const firstThree = product.photos.slice(0, 3).map((img, i) => {
+        return (<SwiperSlide
+            key={i}
+        >
+            <img
+                src={img.url}
+                className={classes.img}
+            />
+        </SwiperSlide>)
+    })
+    const lazyLoaded = product.photos.slice(3).map((img, i) => {
         return (
             <SwiperSlide
-                key={i}
+                key={i + 3}
             >
                 <LazyLoadImage
                     src={img.url}
@@ -32,6 +42,7 @@ function Carousel({ product, dispatch }) {
             </SwiperSlide>
         )
     })
+    const renderImgs = firstThree.concat(lazyLoaded)
     return (
         <span className={classes.span} >
             <Swiper
@@ -44,7 +55,7 @@ function Carousel({ product, dispatch }) {
                 }}
                 navigation={true}
                 className={classes.root} >
-                {product.photos.length > 0 ? renderImgs : (
+                {product.photos.length > 0 ? renderImgs.map(e => e) : (
                     <SwiperSlide>
                         <LazyLoadImage
                             src='https://res.cloudinary.com/dxtjwhnoz/image/upload/c_mpad,h_2160,w_3840/v1624539769/no-photos_p4vnkf.png'
@@ -53,11 +64,13 @@ function Carousel({ product, dispatch }) {
                         />
                     </SwiperSlide>
                 )}
-                <IconButton
-                    className={classes.fullScreen}
-                    onClick={() => dispatch({ type: 'openFullScreenPhotos' })}>
-                    <FullscreenIcon />
-                </IconButton>
+                {product.photos.length > 1 &&
+                    (<IconButton
+                        className={classes.fullScreen}
+                        onClick={() => dispatch({ type: 'openFullScreenPhotos' })}>
+                        <FullscreenIcon />
+                    </IconButton>)
+                }
             </Swiper >
             <ProdDetails product={product} category={product.category} />
         </span>
