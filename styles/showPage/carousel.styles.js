@@ -19,7 +19,8 @@ const styles = theme => ({
         }
     },
     root: {
-        margin: '0'
+        margin: '0',
+        position: 'relative'
     },
     img: {
         width: '100%',
@@ -27,6 +28,19 @@ const styles = theme => ({
         objectFit: 'cover',
         margin: 'auto',
         paddingBottom: '18px'
+    },
+    fullScreen: {
+        position: 'absolute',
+        bottom: '22px',
+        borderRadius: '5px 0 0 0',
+        color: '#3291ff',
+        padding: '8px',
+        backgroundColor: 'white',
+        right: '-1px',
+        zIndex: '100',
+        "&:hover": {
+            backgroundColor: 'white'
+        }
     }
 })
 

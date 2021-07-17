@@ -2,6 +2,7 @@ import React, { useState, useContext, memo } from 'react'
 import styles from '../../styles/showPage/showPage.styles'
 import { makeStyles } from '@material-ui/core/styles'
 import IconButton from '@material-ui/core/IconButton'
+import FullscreenCarousel from './FullscreenCarousel'
 import ShareProduct from './ShareProduct'
 import Carousel from './Carousel'
 import AddtoFavourite from './AddtoFavourite'
@@ -47,6 +48,7 @@ function ShowPage({ product }) {
         date,
         keywords,
         name,
+        photos,
         title,
         telephone,
         favouritedBy,
@@ -67,7 +69,14 @@ function ShowPage({ product }) {
                 keywords={keywords.join()}
                 author={name}
             />
-            <Carousel product={JSON.parse(product)} />
+            <FullscreenCarousel
+                dialogOpen={state.fullScreenPhoto}
+                photos={photos}
+            />
+            <Carousel
+                dispatch={dispatch}
+                product={JSON.parse(product)}
+            />
             <ConfirmationDialog
                 productName={title}
                 id={_id}

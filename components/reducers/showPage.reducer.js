@@ -7,7 +7,9 @@ const reducer = (state, action) => {
         startLoading: { ...state, loading: true },
         stopLoading: { ...state, loading: false },
         openShareDialog: { ...state, shareDialogOpen: true },
-        closeShareDialog: { ...state, shareDialogOpen: false }
+        closeShareDialog: { ...state, shareDialogOpen: false },
+        openFullScreenPhotos: { ...state, fullScreenPhoto: true },
+        closeFullScreenPhotos: { ...state, fullScreenPhoto: false }
     }
     return actions[action.type]
 }
