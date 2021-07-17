@@ -21,7 +21,8 @@ import AddtoFavourite from '../showProduct/AddtoFavourite'
 
 const useStyles = makeStyles(styles)
 
-export default function Post({ photo,
+export default function Post({ 
+    photo,
     favouritedBy,
     profilePic,
     name,

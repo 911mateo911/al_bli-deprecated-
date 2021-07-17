@@ -1,5 +1,4 @@
 import React, { useContext, memo } from 'react'
-import Post from '../homepage/Post'
 import Grid from '@material-ui/core/Grid'
 import { makeStyles } from '@material-ui/core/styles'
 import Divider from '@material-ui/core/Divider'
@@ -8,6 +7,7 @@ import doubleRing from '../../public/doubleRing.svg'
 import singleRing from '../../public/singleRing.svg'
 import TimeAgo from 'javascript-time-ago'
 import sq from 'javascript-time-ago/locale/sq'
+import HorizontalPost from './HorizontalPost'
 TimeAgo.addLocale(sq)
 const timeAgo = new TimeAgo('sq')
 
@@ -61,28 +61,24 @@ function ProductGrid({ products, gridLoading }) {
         <>
             <h1 className={classes.results} >Rezultate:</h1>
             <Divider className={classes.divider} />
-            <Grid container justify='center'>
+            <Grid container justify='space-evenly'>
                 {products.map((e, i) => {
                     return (
-                        <Grid
+                        <HorizontalPost
                             key={i}
-                            className={classes.root}
-                        >
-                            <Post
-                                favouritedBy={e.favouritedBy}
-                                profilePic={e.seller.profilePic || ''}
-                                name={e.name}
-                                seller={e.seller}
-                                title={e.title}
-                                price={e.price}
-                                currency={e.currency}
-                                setLoading={setLoading}
-                                id={e._id}
-                                photo={e.photos[0] || ''}
-                                slug={e.slug}
-                                date={timeAgo.format(Date.parse(e.date))}
-                            />
-                        </Grid>
+                            favouritedBy={e.favouritedBy}
+                            profilePic={e.seller.profilePic || ''}
+                            name={e.name}
+                            seller={e.seller}
+                            title={e.title}
+                            price={e.price}
+                            currency={e.currency}
+                            setLoading={setLoading}
+                            id={e._id}
+                            photo={e.photos[0] || ''}
+                            slug={e.slug}
+                            date={timeAgo.format(Date.parse(e.date))}
+                        />
                     )
                 })}
             </Grid>
