@@ -11,7 +11,9 @@ const initialValues = {
     initialGreet: true,
     gridLoading: false,
     scrollLoading: false,
-    pageLoading: false
+    pageLoading: false,
+    shareDialogOpen: false,
+    dialogUrl: ''
 }
 
 export const SearchContext = createContext()

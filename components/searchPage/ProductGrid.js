@@ -77,6 +77,7 @@ function ProductGrid({ products, gridLoading }) {
                             id={e._id}
                             photo={e.photos[0] || ''}
                             slug={e.slug}
+                            dispatch={dispatch}
                             date={timeAgo.format(Date.parse(e.date))}
                         />
                     )
