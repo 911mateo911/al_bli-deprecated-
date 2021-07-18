@@ -10,7 +10,10 @@ const reducer = (state, action) => {
         resetPage: { ...state, page: 0 },
         setGridLoading: { ...state, gridLoading: action.value },
         setScrollLoading: { ...state, scrollLoading: action.value },
-        setPageLoading: { ...state, pageLoading: action.value }
+        setPageLoading: { ...state, pageLoading: action.value },
+        openShareDialog: { ...state, shareDialogOpen: true },
+        closeShareDialog: { ...state, shareDialogOpen: false },
+        setDialogUrl: { ...state, dialogUrl: action.value }
     }
     return actions[action.type]
 }

@@ -5,6 +5,7 @@ import styles from '../../styles/searchPage/searchPage.styles'
 import Divider from '@material-ui/core/Divider'
 import axios from 'axios'
 import ProductGrid from './ProductGrid'
+import ShareDialog from '../showProduct/ShareDialog'
 import Loader from '../Loader'
 import { SearchContext, SearchDispatch } from '../contexts/search.context'
 
@@ -32,6 +33,11 @@ export default function SearchPage() {
     return (
         <div className={classes.root} >
             <Searchbar />
+            <ShareDialog
+                url={state.dialogUrl}
+                open={state.shareDialogOpen}
+                dispatch={dispatch}
+            />
             {state.initialGreet ?
                 <h2 className={classes.h2} >Kerko c'te intereson shpejt dhe lehtesisht.</h2>
                 :

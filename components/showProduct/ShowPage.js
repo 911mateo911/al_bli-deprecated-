@@ -84,6 +84,7 @@ function ShowPage({ product }) {
             <ShareDialog
                 open={state.shareDialogOpen}
                 url={window.location.href}
+                dispatch={dispatch}
             />
             <div className={classes.details} >
                 <span className={classes.user} >

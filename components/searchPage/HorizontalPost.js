@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import styles from '../../styles/horizontalPost/horizontalPost.styles'
 import { makeStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
@@ -9,7 +9,7 @@ import AddtoFavourite from '../showProduct/AddtoFavourite'
 import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/client'
 import CardHeader from '@material-ui/core/CardHeader'
-import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit'
 import CardActionArea from '@material-ui/core/CardActionArea'
 import CardMedia from '@material-ui/core/CardMedia'
 import CardContent from '@material-ui/core/CardContent'
@@ -18,7 +18,7 @@ import Avatar from '@material-ui/core/Avatar'
 
 const useStyles = makeStyles(styles)
 
-export default function HorizontalPost({
+function HorizontalPost({
     photo,
     favouritedBy,
     profilePic,
@@ -30,7 +30,8 @@ export default function HorizontalPost({
     price,
     currency,
     id,
-    slug
+    slug,
+    dispatch
 }) {
     const classes = useStyles()
     const router = useRouter()
@@ -48,6 +49,14 @@ export default function HorizontalPost({
     function handleClick() {
         setLoading(true)
         router.push(`produkt/${id}/${slug}`)
+    }
+    function openDialog(url) {
+        dispatch({ type: 'setDialogUrl', value: `${window.location.host}/produkt/${id}/${slug}` })
+        dispatch({ type: 'openShareDialog' })
+    }
+    function handleEdit() {
+        setLoading(true)
+        router.push(`produkt/ndrysho/${id}`)
     }
     return (
         <Card className={classes.root} >
@@ -72,11 +81,11 @@ export default function HorizontalPost({
                             favourite={favouritedBy.indexOf(session.user._id) !== -1}
                         />}
                     {(Boolean(session) && (session.user._id === seller._id)) &&
-                        <IconButton>
-                            <DeleteIcon />
+                        <IconButton onClick={handleEdit} >
+                            <EditIcon />
                         </IconButton>
                     }
-                    <IconButton>
+                    <IconButton onClick={openDialog}>
                         <ShareIcon />
                     </IconButton>
                 </div>
@@ -87,6 +96,8 @@ export default function HorizontalPost({
             <CardActions>
                 <h4 className={classes.price} >{`${price} ${currency}`}</h4>
             </CardActions>
-        </Card>
+        </Card >
     )
 }
+
+export default memo(HorizontalPost)

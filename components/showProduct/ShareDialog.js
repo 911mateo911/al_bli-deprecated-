@@ -8,7 +8,6 @@ import { Transition } from './ConfirmationDialog'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import IconButton from '@material-ui/core/IconButton'
 import FileCopyIcon from '@material-ui/icons/FileCopy'
-import { ShowPageContext, ShowPageDispatch } from '../contexts/showPage.context'
 
 const styles = theme => ({
     root: {
@@ -47,9 +46,8 @@ const styles = theme => ({
 
 const useStyles = makeStyles(styles)
 
-function ShareDialog({ open, url }) {
+function ShareDialog({ open, url, dispatch }) {
     const classes = useStyles()
-    const dispatch = useContext(ShowPageDispatch)
     return (
         <Dialog
             TransitionComponent={Transition}
