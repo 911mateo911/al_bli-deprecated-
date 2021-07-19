@@ -12,6 +12,15 @@ async function onRedirect(dispatch, state) {
     dispatch({ type: 'setGridLoading', value: false })
 }
 
+function onSearchFromNavbar(dispatch, state) {
+    dispatch({ type: 'setCategory', value: 'all' })
+    dispatch({ type: 'setCity', value: 'all' })
+    dispatch({ type: 'setRedirected', value: true })
+    dispatch({ type: 'setQuery', value: state })
+    dispatch({ type: 'setGridLoading', value: true })
+    dispatch({ type: 'resetPage' })
+}
+
 async function onInfiniteScroll(dispatch, state) {
     dispatch({ type: 'setScrollLoading', value: true })
     dispatch({ type: 'increasePage' })
@@ -39,4 +48,4 @@ async function onSearchInPage(dispatch, state) {
     dispatch({ type: 'setGridLoading', value: false })
 }
 
-export { onRedirect, onInfiniteScroll, onSearchInPage }
+export { onRedirect, onInfiniteScroll, onSearchInPage, onSearchFromNavbar }

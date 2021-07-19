@@ -5,6 +5,7 @@ import styles from '../../styles/index/main.styles'
 import Link from 'next/link'
 import Typewriter from 'typewriter-effect'
 import Snackbar from '../newProduct/Snackbar'
+import ZoomInHOC from './ZoomInHOC'
 
 const useStyles = makeStyles(styles)
 
@@ -34,12 +35,20 @@ export default function Main() {
             </main>
             <div className={classes.mainBtn} >
                 <span className={classes.btnWrap} >
-                    <Link href='/kerko' >
-                        <a className={classes.bli} >Bli</a>
-                    </Link>
-                    <Link href='/produkt/shto' >
-                        <a className={classes.shit} >Shit</a>
-                    </Link>
+                    <ZoomInHOC>
+                        <div>
+                            <Link href='/kerko' >
+                                <a className={classes.bli} >Bli</a>
+                            </Link>
+                        </div>
+                    </ZoomInHOC>
+                    <ZoomInHOC>
+                        <div>
+                            <Link href='/produkt/shto' >
+                                <a className={classes.shit} >Shit</a>
+                            </Link>
+                        </div>
+                    </ZoomInHOC>
                 </span>
             </div>
             <p className={classes.mainP} >Platforma al-Bli mundeson te shisni te gjitha produktet te cilat nuk ju nevojiten,
