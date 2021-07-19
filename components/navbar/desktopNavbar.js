@@ -13,15 +13,11 @@ import { ThemeProvider } from '@material-ui/core/styles'
 import InputLabel from '@material-ui/core/InputLabel'
 import { theme } from './searchBar'
 import { SearchDispatch } from '../contexts/search.context'
+import { onSearchFromNavbar } from '../searchPage/methods'
 
 export function handleSubmit(e, state, setState, dispatch, router) {
     e.preventDefault()
-    dispatch({ type: 'setCategory', value: 'all' })
-    dispatch({ type: 'setCity', value: 'all' })
-    dispatch({ type: 'setRedirected', value: true })
-    dispatch({ type: 'setQuery', value: state })
-    dispatch({ type: 'setGridLoading', value: true })
-    dispatch({ type: 'resetPage' })
+    onSearchFromNavbar(dispatch, state)
     setState('')
     router.push('/kerko')
 }

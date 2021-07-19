@@ -6,7 +6,7 @@ function VisibilityChecker() {
     const isEndOfPage = useRef()
     const onIntersection = entries => {
         if (entries[0].isIntersecting) {
-            dispatch({ type: 'setGetMore', value: true })
+            dispatch({ type: 'setGetMore', value: true }) // if intersecting call the function to get data
         }
     }
     const observer = new IntersectionObserver(onIntersection)
