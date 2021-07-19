@@ -11,6 +11,7 @@ import CityAdornment from './CityAdornment'
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator'
 import CategoryAdornment from './CategoryAdornment'
+import { onSearchInPage } from './methods'
 import { SearchDispatch, SearchContext } from '../contexts/search.context'
 
 const styles = theme => ({
@@ -44,14 +45,9 @@ function handleChange(e, dispatch) {
 }
 
 async function handleSubmit(state, dispatch) {
-    dispatch({ type: 'closeInitialGreet' })
-    dispatch({ type: 'setGridLoading', value: true })
-    const { query, category, city, page } = state
-    const request = await axios.post('api/search-products', { query, category, city, page })
-    dispatch({ type: 'closeInitialGreet' })
-    dispatch({ type: 'setProducts', value: request.data.products })
-    dispatch({ type: 'resetPage' })
-    dispatch({ type: 'setGridLoading', value: false })
+    if (!state.gridLoading) {
+        await onSearchInPage(dispatch, state)
+    }
 }
 
 export default function Searchbar() {

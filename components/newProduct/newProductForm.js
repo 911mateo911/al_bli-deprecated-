@@ -71,7 +71,7 @@ export default function NewProductForm({ isLoggedIn }) {
         const config = {
             onUploadProgress: function (progressEvent) {
                 let percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total)
-                setProgress(percentCompleted)
+                setProgress(percentCompleted - 20)
             }
         }
         const photos = await resizePhotos(data.photos)
@@ -88,7 +88,10 @@ export default function NewProductForm({ isLoggedIn }) {
         })
         flashDispatch({ type: 'showSnackbar' })
         if (response.message === 'error') setLoading(false)
-        if (response.message === 'success') router.replace(response.redirectTo)
+        if (response.message === 'success') {
+            setProgress(100)
+            router.replace(response.redirectTo)
+        }
     }
     if (!isLoggedIn) return <Loader />
     if (loading) return <Loader wProgress value={progress} message='Po ngarkohet...' />

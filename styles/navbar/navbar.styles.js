@@ -82,6 +82,9 @@ const styles = theme => ({
     search: {
         display: 'none',
         fontSize: '2rem',
+        padding: '0',
+        width: '32px',
+        height: '32px',
         color: '#374151',
         [theme.breakpoints.down('xs')]: {
             display: 'block'
