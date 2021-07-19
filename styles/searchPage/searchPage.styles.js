@@ -34,6 +34,9 @@ const styles = theme => ({
         fontFamily: 'Source Sans Pro',
         fontWeight: '500',
         textAlign: 'center'
+    },
+    scrollLoader: {
+        width: '70px'
     }
 })
 

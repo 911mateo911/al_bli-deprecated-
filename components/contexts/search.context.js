@@ -7,13 +7,15 @@ const initialValues = {
     city: 'all',
     redirected: false,
     products: [],
-    page: 0,
+    page: 1,
     initialGreet: true,
     gridLoading: false,
     scrollLoading: false,
     pageLoading: false,
     shareDialogOpen: false,
-    dialogUrl: ''
+    dialogUrl: '',
+    hasMore: true,
+    getMore: false,
 }
 
 export const SearchContext = createContext()

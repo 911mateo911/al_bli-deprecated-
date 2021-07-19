@@ -1,9 +1,11 @@
 import React from 'react'
 import { useSession } from 'next-auth/client'
+import { useRouter } from 'next/router'
 import Searchbar from './searchBar'
 import Avatar from '@material-ui/core/Avatar'
 import Link from 'next/link'
 import MenuDrawer from './menuDrawer'
+import IconButton from '@material-ui/core/IconButton'
 import SearchIcon from '@material-ui/icons/Search'
 import MenuIcon from '@material-ui/icons/Menu'
 
@@ -42,6 +44,7 @@ export default function mobileNavbar({
     toggleMenu
 }) {
     const [session, loading] = useSession()
+    const router = useRouter()
     return (
         <>
             <MenuDrawer
@@ -53,7 +56,13 @@ export default function mobileNavbar({
                 <p className={Boolean(session) ? classes.logo : classes.logoNoLogin} >al-<strong className={classes.bli} >Bli</strong></p>
             </Link>
             <span className={classes.mobileWrap} >
-                <SearchIcon onClick={toggleSearch} className={classes.search} />
+                <IconButton
+                    onClick={toggleSearch}
+                    disabled={router.pathname === '/kerko'}
+                    className={classes.search}
+                >
+                    <SearchIcon fontSize='large' />
+                </IconButton>
                 {!loading && LoginElem(session, openPopover, classes, true)}
             </span>
             <Searchbar

@@ -8,6 +8,7 @@ import singleRing from '../../public/singleRing.svg'
 import TimeAgo from 'javascript-time-ago'
 import sq from 'javascript-time-ago/locale/sq'
 import HorizontalPost from './HorizontalPost'
+import VisibilityChecker from './VisibilityChecker'
 TimeAgo.addLocale(sq)
 const timeAgo = new TimeAgo('sq')
 
@@ -83,6 +84,7 @@ function ProductGrid({ products, gridLoading }) {
                     )
                 })}
             </Grid>
+            <VisibilityChecker />
         </>
     )
 }

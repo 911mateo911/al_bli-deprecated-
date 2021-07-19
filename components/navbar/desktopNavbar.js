@@ -21,6 +21,7 @@ export function handleSubmit(e, state, setState, dispatch, router) {
     dispatch({ type: 'setRedirected', value: true })
     dispatch({ type: 'setQuery', value: state })
     dispatch({ type: 'setGridLoading', value: true })
+    dispatch({ type: 'resetPage' })
     setState('')
     router.push('/kerko')
 }
@@ -57,6 +58,7 @@ function desktopNavbar({
                     <ValidatorForm onSubmit={e => handleSubmit(e, state, setState, dispatch, router)} >
                         <ThemeProvider theme={theme}>
                             <TextValidator
+                                disabled={router.pathname === '/kerko'}
                                 fullWidth
                                 placeholder='Kerko produkte'
                                 id="input-with-icon-adornment"
