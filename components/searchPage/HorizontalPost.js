@@ -50,7 +50,7 @@ function HorizontalPost({
         setLoading(true)
         router.push(`produkt/${id}/${slug}`)
     }
-    function openDialog(url) {
+    function openDialog() {
         dispatch({ type: 'setDialogUrl', value: `${window.location.host}/produkt/${id}/${slug}` })
         dispatch({ type: 'openShareDialog' })
     }

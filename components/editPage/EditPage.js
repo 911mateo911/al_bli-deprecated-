@@ -6,6 +6,7 @@ import Loader from '../Loader'
 import { makeStyles, ThemeProvider } from '@material-ui/core/styles'
 import PriceInput from '../newProduct/PriceInput'
 import caution from '../../public/caution.png'
+import { BackDropDispatch } from '../contexts/backdrop.context'
 import Keywords from '../newProduct/Keywords'
 import styles from '../../styles/newProduct/productForm.styles'
 import { useRouter } from 'next/router'
@@ -38,6 +39,10 @@ export default function EditPage({ product, id }) {
     const classes = useStyles()
     const [loading, setLoading] = useState(false)
     const [progress, setProgress] = useState(0)
+    const backDropDSP = useContext(BackDropDispatch)
+    useEffect(() => {
+        backDropDSP({ type: 'closeBackDrop' })
+    }, [])
     if (product.notAuthorized) return (
         <Error
             src={caution.src}
@@ -67,7 +72,7 @@ export default function EditPage({ product, id }) {
         const config = {
             onUploadProgress: function (progressEvent) {
                 let percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total)
-                setProgress(percentCompleted)
+                setProgress(percentCompleted - 20)
             }
         }
         photos.forEach(e => form.append('photos', e))
@@ -89,7 +94,10 @@ export default function EditPage({ product, id }) {
             data.images = images
             setLoading(false)
         }
-        if (response.message === 'success') router.replace(response.redirectTo)
+        if (response.message === 'success') {
+            setProgress(100)
+            router.replace(response.redirectTo)
+        }
     }
     if (loading) return <Loader wProgress value={progress} message='Po ngarkohet...' />
     return (

@@ -1,5 +1,6 @@
-import React from 'react'
-import { makeStyles } from '@material-ui/core/styles';
+import React, { useEffect, useContext, memo } from 'react'
+import { BackDropDispatch } from '../contexts/backdrop.context'
+import { makeStyles } from '@material-ui/core/styles'
 import hands from '../../public/hands.png'
 import styles from '../../styles/index/main.styles'
 import Link from 'next/link'
@@ -9,9 +10,14 @@ import ZoomInHOC from './ZoomInHOC'
 
 const useStyles = makeStyles(styles)
 
-export default function Main() {
+function Main() {
     const classes = useStyles()
     const { src: handsSrc } = hands
+    const dispatch = useContext(BackDropDispatch)
+    useEffect(() => {
+        // just to be sure
+        dispatch({ type: 'closeBackDrop' })
+    }, [])
     return (
         <>
             <Snackbar />
@@ -57,3 +63,5 @@ export default function Main() {
         </>
     )
 }
+
+export default memo(Main)

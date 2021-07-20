@@ -1,4 +1,5 @@
-import React, { useState, useContext, memo } from 'react'
+import React, { useState, useContext, memo, useEffect } from 'react'
+import { BackDropDispatch } from '../contexts/backdrop.context'
 import styles from '../../styles/showPage/showPage.styles'
 import { makeStyles } from '@material-ui/core/styles'
 import IconButton from '@material-ui/core/IconButton'
@@ -30,10 +31,14 @@ const useStyles = makeStyles(styles)
 function ShowPage({ product }) {
     const state = useContext(ShowPageContext)
     const dispatch = useContext(ShowPageDispatch)
+    const toggleModalDsp = useContext(BackDropDispatch)
     const classes = useStyles()
+    useEffect(() => {
+        toggleModalDsp({ type: 'closeBackDrop' })
+    }, [])
     const [session, loading] = useSession()
     const popoverOpen = Boolean(state.anchorEl)
-    if (loading || state.loading) return <Loader />
+    if (loading) return <Loader />
     if (product.error) {
         return (
             <Error
@@ -122,4 +127,4 @@ function ShowPage({ product }) {
     )
 }
 
-export default ShowPage
+export default memo(ShowPage)

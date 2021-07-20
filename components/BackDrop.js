@@ -1,13 +1,17 @@
 import React, { useContext } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import Backdrop from '@material-ui/core/Backdrop'
+import Modal from '@material-ui/core/Modal'
 import infinity from '../public/infinity.svg'
 import { BackDropContext } from './contexts/backdrop.context'
+import Fade from '@material-ui/core/Fade'
 
 const styles = theme => ({
     root: {
         backgroundColor: 'white',
         marginTop: '70px',
+        [theme.breakpoints.down('xs')]: {
+            marginTop: '50px'
+        },
         display: 'flex',
         width: '100%',
         height: '100vh',
@@ -18,7 +22,14 @@ const styles = theme => ({
     },
     loader: {
         width: '100px',
-        marginBottom: '70px'
+        outline: 'none',
+        marginBottom: '70px',
+        [theme.breakpoints.down('xs')]: {
+            marginBottom: '50px'
+        },
+        '&:focus-visible': {
+            outline: 'none'
+        }
     }
 })
 
@@ -28,11 +39,16 @@ export default function BackDrop() {
     const state = useContext(BackDropContext)
     const classes = useStyles()
     return (
-        <Backdrop
+        <Modal
             open={state.open}
             className={classes.root}
+            hideBackdrop
         >
-            <img className={classes.loader} src={infinity.src} />
-        </Backdrop>
+            <Fade
+                in={state.open}
+            >
+                <img className={classes.loader} src={infinity.src} />
+            </Fade>
+        </Modal>
     )
 }

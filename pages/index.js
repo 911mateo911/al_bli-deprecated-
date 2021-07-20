@@ -1,5 +1,5 @@
 import Main from '../components/homepage/Main'
-import React, { useState } from 'react'
+import React from 'react'
 import Features from '../components/homepage/Features'
 import LatestPosts from '../components/homepage/LatestPosts'
 import Cta from '../components/homepage/Cta'
@@ -9,10 +9,6 @@ import Loader from '../components/Loader'
 import HeadTags from '../components/seo/Head'
 
 export default function Home({ posts }) {
-  const [isLoading, setLoading] = useState(false)
-  if (isLoading) {
-    return <Loader />
-  }
   return (
     <div className='page-Route' >
       <HeadTags
@@ -23,7 +19,7 @@ export default function Home({ posts }) {
       />
       <Main />
       <Features />
-      <LatestPosts posts={posts} setLoading={setLoading} />
+      <LatestPosts posts={posts} />
       <Cta />
     </div>
   )

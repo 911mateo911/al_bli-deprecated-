@@ -2,7 +2,6 @@ import { createContext, useReducer } from 'react'
 import reducer from '../reducers/showPage.reducer'
 
 const initialValues = {
-    loading: false,
     anchorEl: null,
     dialogOpen: false,
     shareDialogOpen: false,
