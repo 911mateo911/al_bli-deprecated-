@@ -14,7 +14,13 @@ function navbarHook(initialValue) {
     function closePopover() {
         setState({ ...state, anchorEl: null })
     }
-    return [state, toggleMenu, toggleSearch, openPopover, closePopover]
+    return [
+        state,
+        toggleMenu,
+        toggleSearch,
+        openPopover,
+        closePopover
+    ]
 }
 
 export default navbarHook

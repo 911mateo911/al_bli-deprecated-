@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styles from '../../styles/navbar/navbar.styles'
 import { makeStyles } from '@material-ui/core/styles'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
@@ -53,6 +53,7 @@ function Navbar() {
                     color={session.user.avatarColor}
                     name={session.user.name}
                     email={session.user.email}
+                    id={session.user._id}
                     profilePicUrl={session.user.profilePic ? session.user.profilePic.url : ''}
                 />
             }

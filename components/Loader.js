@@ -2,6 +2,7 @@ import React from 'react'
 import { makeStyles, withStyles } from '@material-ui/core/styles'
 import infinity from '../public/infinity.svg'
 import Image from 'next/image'
+import { CSSTransition } from 'react-transition-group'
 import LinearProgress from '@material-ui/core/LinearProgress'
 
 const BorderLinearProgress = withStyles((theme) => ({
@@ -33,8 +34,8 @@ const styles = theme => ({
         flexDirection: 'column'
     },
     img: {
-        width: '150px',
-        height: '150px'
+        width: '70px',
+        height: '70px'
     },
     message: {
         fontFamily: 'Lato',
@@ -54,8 +55,8 @@ export default function Loader({ message, wProgress, value }) {
                 alt='loading'
                 className={classes.img}
                 src={infinity.src}
-                width={150}
-                height={150}
+                width={100}
+                height={100}
             />
             {message && <p className={classes.message} >{message}</p>}
             {wProgress && <BorderLinearProgress variant="determinate" value={value} />}

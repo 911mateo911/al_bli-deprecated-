@@ -1,6 +1,8 @@
 import '../styles/globals.css'
 import Footer from '../components/footer/Footer'
 import { Provider } from "next-auth/client"
+import BackDrop from '../components/BackDrop'
+import { BackDropProvider } from '../components/contexts/backdrop.context'
 import Navbar from '../components/navbar/navbar'
 import { FlashMsgProvider } from '../components/contexts/flashMsgs.context'
 import { SearchProvider } from '../components/contexts/search.context'
@@ -22,10 +24,13 @@ function MyApp({ Component, pageProps }) {
         </Head>
         <FlashMsgProvider>
           <SearchProvider>
-            <Navbar />
-            <Component {...pageProps} />
-            <Snackbar />
-            <Footer />
+            <BackDropProvider>
+              <Navbar />
+              <Component {...pageProps} />
+              <Snackbar />
+              <BackDrop />
+              <Footer />
+            </BackDropProvider>
           </SearchProvider>
         </FlashMsgProvider>
       </Provider>
