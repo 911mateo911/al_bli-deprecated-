@@ -2,6 +2,7 @@ import React, { useEffect, useContext } from 'react'
 import dbConnection from '../../utils/dbConnection'
 import Product from '../../models/Product'
 import User from '../../models/User'
+import { ProfilePageProvider } from '../../components/contexts/profilePage.context'
 import ProfilePage from '../../components/profilePage/ProfilePage'
 import { BackDropDispatch } from '../../components/contexts/backdrop.context'
 
@@ -11,9 +12,11 @@ export default function UserPage({ user, products }) {
         dispatch({ type: 'closeBackDrop' })
     }, [])
     return (
-        <div className='page-Route' >
-            <ProfilePage user={user} products={products} />
-        </div>
+        <ProfilePageProvider>
+            <div className='page-Route' >
+                <ProfilePage user={user} products={products} />
+            </div>
+        </ProfilePageProvider>
     )
 }
 
@@ -31,7 +34,6 @@ export async function getServerSideProps(context) {
                 rating: -1,
                 date: -1
             })
-            .limit(10)
         user.password = undefined // check why delete operator didnt work here idk
         return {
             props: {
@@ -40,7 +42,6 @@ export async function getServerSideProps(context) {
             }
         }
     } catch (e) {
-        console.log(e)
         return {
             props: {
                 user: {

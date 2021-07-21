@@ -42,18 +42,29 @@ export default function Post({
     const [session, loading] = useSession()
     const dispatch = useContext(BackDropDispatch)
     const searchDSP = useContext(SearchDispatch)
+    function goTo() {
+        dispatch({ type: 'openBackDrop' })
+        router.push(`/perdorues/${seller._id}`)
+    }
     const getAvatar = () => {
         return (
             profilePic ?
-                <Avatar className={classes.avatar} src={profilePic.url} /> :
-                <Avatar className={classes.avatar}>
+                <Avatar
+                    onClick={goTo}
+                    className={classes.avatar}
+                    src={profilePic.url}
+                /> :
+                <Avatar
+                    className={classes.avatar}
+                    onClick={goTo}
+                >
                     {name[0].toUpperCase()}
                 </Avatar>
         )
     }
     function handleClick() {
         dispatch({ type: 'openBackDrop' })
-        router.push(`produkt/${id}/${slug}`)
+        router.push(`/produkt/${id}/${slug}`)
     }
     function handleShare() {
         searchDSP({ type: 'setDialogUrl', value: `${window.location.host}/produkt/${id}/${slug}` })
@@ -65,7 +76,7 @@ export default function Post({
         <Card className={classes.root} >
             <CardHeader
                 avatar={getAvatar()}
-                title={<h2 className={classes.name} >{name}</h2>}
+                title={<h2 onClick={goTo} className={classes.name} >{name}</h2>}
                 subheader={<h2 className={classes.date}>{date}</h2>}
             />
             <CardActionArea onClick={handleClick} >

@@ -20,9 +20,6 @@ const styles = theme => ({
         marginTop: '70px',
         fontSize: '1.6rem'
     },
-    root: {
-        margin: '2.5px'
-    },
     loader: {
         width: '100px',
         height: '100px',

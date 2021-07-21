@@ -19,6 +19,7 @@ const styles = theme => ({
     },
     avatar: {
         backgroundColor: '#3291ff',
+        cursor: 'pointer'
     },
     date: {
         fontFamily: 'Source Sans Pro',
@@ -32,7 +33,8 @@ const styles = theme => ({
         fontFamily: 'Source Sans Pro',
         color: 'rgba(0,0,0,0.9)',
         fontSize: '1rem',
-        fontWeight: '600'
+        fontWeight: '600',
+        cursor: 'pointer'
     },
     price: {
         margin: '0',
