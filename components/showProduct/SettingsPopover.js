@@ -6,6 +6,7 @@ import styles from '../../styles/showPage/settings.styles'
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import ListItemText from '@material-ui/core/ListItemText'
 import { ShowPageContext, ShowPageDispatch } from '../contexts/showPage.context'
+import { BackDropDispatch } from '../contexts/backdrop.context'
 import List from '@material-ui/core/List'
 import DeleteIcon from '@material-ui/icons/Delete';
 import Avatar from '@material-ui/core/Avatar'
@@ -20,10 +21,11 @@ export default function SettingsPopover({ productId }) {
     const classes = useStyles()
     const state = useContext(ShowPageContext)
     const dispatch = useContext(ShowPageDispatch)
+    const backDropDSP = useContext(BackDropDispatch)
     const popoverOpen = Boolean(state.anchorEl)
     const router = useRouter()
     function handleEdit() {
-        dispatch({ type: 'startLoading' })
+        backDropDSP({ type: 'openBackDrop' })
         router.push(`/produkt/ndrysho/${productId}`)
     }
     function handleDelete() {

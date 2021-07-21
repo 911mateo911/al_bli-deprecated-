@@ -27,9 +27,11 @@ function escapeHtml(unsafe) {
     return string.split('').filter(e => e !== '/').join('')
 }
 
-function extendData(data) {
+function extendData(data, wDate = true) {
     const formData = data
-    formData.date = new Date()
+    if (wDate) {
+        formData.date = new Date()
+    }
     formData.slug = escapeHtml(slugify(data.title))
     formData.elasticSearch = getElasticSearch(data.title)
     const titleKeywors = data.title.split(' ')

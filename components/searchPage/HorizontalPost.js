@@ -37,20 +37,31 @@ function HorizontalPost({
     const router = useRouter()
     const [session, loading] = useSession()
     const image = photo ? photo.url : 'https://res.cloudinary.com/dxtjwhnoz/image/upload/c_mpad,h_2160,w_3840/v1624539769/no-photos_p4vnkf.png'
+    function goTo() {
+        setLoading(true)
+        router.push(`/perdorues/${seller._id}`)
+    }
     const getAvatar = () => {
         return (
             profilePic ?
-                <Avatar className={classes.avatar} src={profilePic.url} /> :
-                <Avatar className={classes.avatar}>
+                <Avatar
+                    onClick={goTo}
+                    className={classes.avatar}
+                    src={profilePic.url}
+                /> :
+                <Avatar
+                    onClick={goTo}
+                    className={classes.avatar}
+                >
                     {name[0].toUpperCase()}
                 </Avatar>
         )
     }
     function handleClick() {
         setLoading(true)
-        router.push(`produkt/${id}/${slug}`)
+        router.push(`/produkt/${id}/${slug}`)
     }
-    function openDialog(url) {
+    function openDialog() {
         dispatch({ type: 'setDialogUrl', value: `${window.location.host}/produkt/${id}/${slug}` })
         dispatch({ type: 'openShareDialog' })
     }
@@ -62,7 +73,7 @@ function HorizontalPost({
         <Card className={classes.root} >
             <CardHeader
                 avatar={getAvatar()}
-                title={<h2 className={classes.name} >{name}</h2>}
+                title={<h2 onClick={goTo} className={classes.name} >{name}</h2>}
                 subheader={<h2 className={classes.date}>{date}</h2>}
             />
             <div className={classes.actionArea} >
@@ -90,7 +101,9 @@ function HorizontalPost({
                     </IconButton>
                 </div>
             </div>
-            <CardContent>
+            <CardContent
+                className={classes.content}
+            >
                 <h3 className={classes.h3} >{title}</h3>
             </CardContent>
             <CardActions>

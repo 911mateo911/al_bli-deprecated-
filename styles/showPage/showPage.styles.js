@@ -91,6 +91,9 @@ const styles = theme => ({
     },
     share: {
         margin: '0 0 0 10px'
+    },
+    avt: {
+        cursor: 'pointer'
     }
 })
 

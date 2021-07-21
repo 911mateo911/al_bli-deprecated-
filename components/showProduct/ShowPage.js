@@ -1,4 +1,5 @@
-import React, { useState, useContext, memo } from 'react'
+import React, { useState, useContext, memo, useEffect } from 'react'
+import { BackDropDispatch } from '../contexts/backdrop.context'
 import styles from '../../styles/showPage/showPage.styles'
 import { makeStyles } from '@material-ui/core/styles'
 import IconButton from '@material-ui/core/IconButton'
@@ -16,6 +17,8 @@ import Keywords from './Keywords'
 import Contact from './Contact'
 import TimeAgo from 'javascript-time-ago'
 import sq from 'javascript-time-ago/locale/sq'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 import SettingsPopover from './SettingsPopover'
 import Error from '../Error'
 import Settings from './Settings'
@@ -30,10 +33,14 @@ const useStyles = makeStyles(styles)
 function ShowPage({ product }) {
     const state = useContext(ShowPageContext)
     const dispatch = useContext(ShowPageDispatch)
+    const toggleModalDsp = useContext(BackDropDispatch)
     const classes = useStyles()
+    useEffect(() => {
+        toggleModalDsp({ type: 'closeBackDrop' })
+    }, [])
     const [session, loading] = useSession()
     const popoverOpen = Boolean(state.anchorEl)
-    if (loading || state.loading) return <Loader />
+    if (loading) return <Loader />
     if (product.error) {
         return (
             <Error
@@ -61,6 +68,11 @@ function ShowPage({ product }) {
         currency,
         email
     } = JSON.parse(product)
+    const router = useRouter()
+    function goTo() {
+        toggleModalDsp({ type: 'openBackDrop' })
+        router.push(`/perdorues/${seller._id}`)
+    }
     return (
         <div className={classes.root} >
             <HeadTags
@@ -89,8 +101,25 @@ function ShowPage({ product }) {
             <div className={classes.details} >
                 <span className={classes.user} >
                     {seller.profilePic ?
-                        <Avatar src={seller.profilePic.url} /> : <Avatar style={{ backgroundColor: '#3291ff' }} >{name[0].toUpperCase()}</Avatar>}
-                    <h4 className={classes.username} >{name}</h4>
+                        <Avatar
+                            className={classes.avt}
+                            onClick={goTo}
+                            src={seller.profilePic.url}
+                        /> :
+                        <Avatar
+                            className={classes.avt}
+                            onClick={goTo}
+                            style={{ backgroundColor: '#3291ff' }}
+                        >
+                            {name[0].toUpperCase()}
+                        </Avatar>
+                    }
+                    <h4
+                        className={[classes.username, classes.avt].join(' ')}
+                        onClick={goTo}
+                    >
+                        {name}
+                    </h4>
                     <p className={classes.date} >{timeAgo.format(Date.parse(date))}</p>
                     <ShareProduct classes={classes} />
                     {Boolean(session) && (session.user._id !== seller._id &&
@@ -122,4 +151,4 @@ function ShowPage({ product }) {
     )
 }
 
-export default ShowPage
+export default memo(ShowPage)

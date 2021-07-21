@@ -16,7 +16,7 @@ cloudinary.config({
 
 function getConfig(oldData) {
     const data = JSON.parse(oldData)
-    const toDelete = ['_id', '__v', 'seller', 'favouritedBy', 'rating']
+    const toDelete = ['_id', '__v', 'seller', 'favouritedBy', 'rating', 'date']
     // the keys to not be deleted
     Object.keys(data).forEach(key => !toDelete.includes(key) || delete data[key])
     // if it is in toDelete, delete that key
@@ -64,7 +64,7 @@ export default async function handler(req, res) {
                 } else {
                     data.photos = product.photos
                 }
-                const newProduct = extendedData(data)
+                const newProduct = extendedData(data, false)
                 await Product.updateOne({ _id: id },
                     {
                         $unset: getConfig(JSON.stringify(product)),

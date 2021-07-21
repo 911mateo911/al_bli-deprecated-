@@ -4,8 +4,6 @@ const reducer = (state, action) => {
         closePopover: { ...state, anchorEl: null },
         openDialog: { ...state, dialogOpen: true },
         closeDialog: { ...state, dialogOpen: false },
-        startLoading: { ...state, loading: true },
-        stopLoading: { ...state, loading: false },
         openShareDialog: { ...state, shareDialogOpen: true },
         closeShareDialog: { ...state, shareDialogOpen: false },
         openFullScreenPhotos: { ...state, fullScreenPhoto: true },

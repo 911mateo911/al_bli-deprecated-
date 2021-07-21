@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useContext, memo } from 'react'
+import { SearchContext, SearchDispatch } from '../contexts/search.context'
+import ShareDialog from '../showProduct/ShareDialog'
 import { Swiper, SwiperSlide } from "swiper/react"
 import Post from './Post'
 import { makeStyles } from '@material-ui/core/styles'
@@ -20,9 +22,11 @@ const timeAgo = new TimeAgo('sq')
 
 const useStyles = makeStyles(styles)
 
-export default function LatestPosts({ posts, setLoading }) {
+function LatestPosts({ posts }) {
     const classes = useStyles()
     const { src: shoesPng } = shoes
+    const state = useContext(SearchContext)
+    const dispatch = useContext(SearchDispatch)
     const errorMsg = (
         <>
             <h3 className={classes.h3} >Te fundit</h3>
@@ -45,6 +49,11 @@ export default function LatestPosts({ posts, setLoading }) {
     return (
         <>
             <h3 className={classes.h3} >Te fundit</h3>
+            <ShareDialog
+                url={state.dialogUrl}
+                open={state.shareDialogOpen}
+                dispatch={dispatch}
+            />
             <Swiper
                 className={classes.root}
                 slidesPerView={'auto'}
@@ -66,7 +75,6 @@ export default function LatestPosts({ posts, setLoading }) {
                                 favouritedBy={e.favouritedBy}
                                 price={e.price}
                                 currency={e.currency}
-                                setLoading={setLoading}
                                 id={e._id}
                                 photo={e.photos[0] || ''}
                                 slug={e.slug}
@@ -79,3 +87,5 @@ export default function LatestPosts({ posts, setLoading }) {
         </>
     )
 }
+
+export default memo(LatestPosts)

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, memo } from 'react'
 import Popover from '@material-ui/core/Popover'
 import { makeStyles } from '@material-ui/core/styles'
 import Avatar from '@material-ui/core/Avatar'
@@ -16,19 +16,24 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import { FlashDispatchContext } from '../contexts/flashMsgs.context'
+import { BackDropDispatch } from '../contexts/backdrop.context'
 
 const useStyles = makeStyles(styles)
 
-export default function PopoverElem({ open,
+function PopoverElem({
+    open,
     close,
     anchor,
+    id,
     name,
     email,
     color,
-    profilePicUrl
+    profilePicUrl,
+    openBackDrop
 }) {
     const classes = useStyles()
     const dispatch = useContext(FlashDispatchContext)
+    const backDropDSP = useContext(BackDropDispatch)
     const router = useRouter()
     function signOutAndClose() {
         close()
@@ -40,6 +45,11 @@ export default function PopoverElem({ open,
             severity: 'success'
         })
         dispatch({ type: 'showSnackbar' })
+    }
+    function goTo(url) {
+        close()
+        backDropDSP({ type: 'openBackDrop' })
+        router.push(url)
     }
     const style = { backgroundColor: color }
     return (
@@ -68,7 +78,9 @@ export default function PopoverElem({ open,
                     <h5 className={classes.h5} >{email}</h5>
                 </span>
                 <List component='nav' className={classes.list} >
-                    <ListItem button>
+                    <ListItem
+                        onClick={() => goTo(`/perdorues/${id}`)}
+                        button>
                         <ListItemIcon>
                             <AccountCircleIcon />
                         </ListItemIcon>
@@ -100,3 +112,5 @@ export default function PopoverElem({ open,
         </Popover>
     )
 }
+
+export default memo(PopoverElem)

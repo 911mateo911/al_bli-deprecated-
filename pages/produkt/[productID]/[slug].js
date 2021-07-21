@@ -24,6 +24,9 @@ export async function getServerSideProps(context) {
         if (!foundProduct) {
             throw new Error()
         }
+        if (!foundProduct.seller) {
+            throw new Error()
+        }
         return {
             props: {
                 product: JSON.stringify(foundProduct)
