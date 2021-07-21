@@ -7,7 +7,7 @@ const styles = theme => ({
     },
     root: {
         width: 'fit-content',
-        maxWidth: '500px',
+        maxWidth: '280px',
         minWidth: '250px',
         padding: '10px',
         display: 'flex',
@@ -29,15 +29,21 @@ const styles = theme => ({
         fontFamily: 'Source Sans Pro',
         fontWeight: '600',
         margin: '5px',
-        width: '100%',
+        maxWidth: '200px',
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
         textAlign: 'center'
     },
     h5: {
         fontFamily: 'Source Sans Pro',
         fontWeight: '400',
         margin: '0',
-        width: '100%',
-        textAlign: 'center'
+        maxWidth: '260px',
+        textAlign: 'center',
+        whiteSpace: 'nowrap',
+        overflowX: 'hidden',
+        textOverflow: 'ellipsis'
     },
     list: {
         width: '100%'

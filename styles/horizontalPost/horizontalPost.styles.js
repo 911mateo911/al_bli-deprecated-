@@ -16,7 +16,6 @@ const styles = theme => ({
         fontWeight: '500',
         width: '100%',
         whiteSpace: 'nowrap',
-        textOverflow: 'ellipsis',
         color: 'rgba(0, 0, 0, 0.8)',
         margin: '0',
         overflowX: 'hidden',
