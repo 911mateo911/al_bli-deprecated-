@@ -1,34 +1,37 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# al-Bli
+This is al-Bli, a new place to sell/buy second handed items.
 
-## Getting Started
+## Run locally
+Fisrt 
 
-First, run the development server:
+    npm install
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+To run locally you need to open a mongo local server and change two little things in the next.config.js and in /utils/dbConnection.js.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Since you need secret variables you need to specify a .env file to store the cloudinary config vars and also specify the NEXT_AUTH_URL to `http://localhost:port`
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+In /utils/dbConnection.js change the process.env.MONDODB_URL to the top variable MONGODB_URI
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+In next.config.js we need to tell webpack to use .env variables so replace with: 
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+    const webpack =  require('webpack')
+    const { parsed: myEnv } =  require('dotenv').config()
+    module.exports  = {
+         eslint: {
+            ignoreDuringBuilds: true
+         },
+         webpack(config){
+            config.plugins.push(new webpack.EnvironmentPlugin(myEnv))
+            return config
+         }
+    }
 
-## Learn More
+Then build the app: 
 
-To learn more about Next.js, take a look at the following resources:
+    npm run build
+    npm run start
+Or run in development: 
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+    npm run dev
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+The app is hosted in vercel at al-bli.vercel.app
