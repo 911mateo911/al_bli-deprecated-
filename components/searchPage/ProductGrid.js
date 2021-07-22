@@ -13,6 +13,12 @@ TimeAgo.addLocale(sq)
 const timeAgo = new TimeAgo('sq')
 
 const styles = theme => ({
+    root: {
+        width: '80%',
+        [theme.breakpoints.down('md')]: {
+            width: '100%'
+        }
+    },
     h1: {
         fontWeight: '600',
         fontFamily: 'Lato',
@@ -56,7 +62,7 @@ function ProductGrid({ products, gridLoading }) {
         )
     }
     return (
-        <>
+        <div className={classes.root} >
             <h1 className={classes.results} >Rezultate:</h1>
             <Divider className={classes.divider} />
             <Grid container justify='space-evenly'>
@@ -82,7 +88,7 @@ function ProductGrid({ products, gridLoading }) {
                 })}
             </Grid>
             <VisibilityChecker />
-        </>
+        </div>
     )
 }
 
