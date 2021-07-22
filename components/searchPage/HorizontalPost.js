@@ -67,7 +67,7 @@ function HorizontalPost({
     }
     function handleEdit() {
         setLoading(true)
-        router.push(`produkt/ndrysho/${id}`)
+        router.push(`/produkt/ndrysho/${id}`)
     }
     return (
         <Card className={classes.root} >
