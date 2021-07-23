@@ -4,7 +4,8 @@ import reducer from '../reducers/profilePage.reducer'
 const initialValues = {
     shareDialogOpen: false,
     dialogUrl: '',
-    pageLoading: false
+    pageLoading: false,
+    tabIndex: 0
 }
 
 export const ProfilePageCTX = createContext()

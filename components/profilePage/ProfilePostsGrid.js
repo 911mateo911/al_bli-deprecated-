@@ -4,7 +4,8 @@ import TimeAgo from 'javascript-time-ago'
 import Grid from '@material-ui/core/Grid'
 import sq from 'javascript-time-ago/locale/sq'
 import HorizontalPost from '../searchPage/HorizontalPost'
-import { ProfilePageDSC, ProfilePageCTX } from '../contexts/profilePage.context'
+import { ProfilePageCTX, ProfilePageDSC } from '../contexts/profilePage.context'
+import { BackDropDispatch } from '../contexts/backdrop.context'
 TimeAgo.addLocale(sq)
 const timeAgo = new TimeAgo('sq')
 
@@ -27,25 +28,27 @@ const styles = theme => ({
 
 const useStyles = makeStyles(styles)
 
-export default function ProfilePostsGrid({ products, profilePic, seller }) {
+export default function ProfilePostsGrid({ products }) {
     const classes = useStyles()
     const state = useContext(ProfilePageCTX)
     const dispatch = useContext(ProfilePageDSC)
-    function setLoading(boolean) {
-        dispatch({ type: 'setPageLoading', value: boolean })
+    const backDropDSC = useContext(BackDropDispatch)
+    function setLoading() {
+        dispatch({ type: 'setTabIndex', value: 0 })
+        backDropDSC({ type: 'openBackDrop' })
     }
     return (
         <div className={classes.root} >
-            <h1 className={classes.h1} >Postimet:</h1>
             <Grid container justify='space-evenly' >
+                {products.length === 0 && <h1 className={classes.h1} >Nuk u gjet asnje postim</h1>}
                 {products.map((e, i) => {
                     return (
                         <HorizontalPost
                             key={i}
                             favouritedBy={e.favouritedBy}
-                            profilePic={profilePic || ''}
+                            profilePic={e.seller.profilePic || ''}
                             name={e.name}
-                            seller={seller}
+                            seller={e.seller}
                             title={e.title}
                             price={e.price}
                             currency={e.currency}

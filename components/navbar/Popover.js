@@ -11,6 +11,7 @@ import Button from '@material-ui/core/Button'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import Divider from '@material-ui/core/Divider'
+import { ProfilePageDSC } from '../contexts/profilePage.context'
 import EditIcon from '@material-ui/icons/Edit'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
@@ -34,6 +35,7 @@ function PopoverElem({
     const classes = useStyles()
     const dispatch = useContext(FlashDispatchContext)
     const backDropDSP = useContext(BackDropDispatch)
+    const profilePageDSP = useContext(ProfilePageDSC)
     const router = useRouter()
     function signOutAndClose() {
         close()
@@ -46,7 +48,8 @@ function PopoverElem({
         })
         dispatch({ type: 'showSnackbar' })
     }
-    function goTo(url) {
+    function goTo(url, fav = false) {
+        if (fav) profilePageDSP({ type: 'setTabIndex', value: 1 })
         close()
         backDropDSP({ type: 'openBackDrop' })
         router.push(url)
@@ -86,7 +89,10 @@ function PopoverElem({
                         </ListItemIcon>
                         <ListItemText primary="Profili im" />
                     </ListItem>
-                    <ListItem button>
+                    <ListItem
+                        onClick={() => goTo(`/perdorues/${id}`, true)}
+                        button
+                    >
                         <ListItemIcon>
                             <FavoriteIcon />
                         </ListItemIcon>
