@@ -4,10 +4,12 @@ import { makeStyles } from '@material-ui/core/styles'
 import ProfileHead from './ProfileHead'
 import Error from '../Error'
 import ShareDialog from '../showProduct/ShareDialog'
+import { useSession } from 'next-auth/client'
 import shoes from '../../public/shoes.png'
 import Divider from '@material-ui/core/Divider'
 import Loader from '../Loader'
 import ProfilePostsGrid from './ProfilePostsGrid'
+import TabBar from './TabBar'
 
 const styles = theme => ({
     root: {
@@ -18,22 +20,16 @@ const styles = theme => ({
         alignItems: 'center',
         flexDirection: 'column',
         paddingBottom: '5px'
-    },
-    h1: {
-        fontFamily: 'Lato',
-        fontWeight: '500',
-        margin: '10px',
-        textAlign: 'center',
-        fontSize: '1.5rem'
     }
 })
 
 const useStyles = makeStyles(styles)
 
-export default function ProfilePage({ user, products }) {
+export default function ProfilePage({ user, products, favouritedPosts }) {
     const classes = useStyles()
     const state = useContext(ProfilePageCTX)
     const dispatch = useContext(ProfilePageDSC)
+    const [session, loading] = useSession()
     if (user.error) {
         return (
             <Error
@@ -43,7 +39,7 @@ export default function ProfilePage({ user, products }) {
             />
         )
     }
-    if (state.pageLoading) return <Loader />
+    if (loading) return <Loader />
     const {
         avatarColor,
         name,
@@ -53,6 +49,9 @@ export default function ProfilePage({ user, products }) {
         profilePic,
     } = JSON.parse(user)
     const myProd = JSON.parse(products)
+    const favPosts = JSON.parse(favouritedPosts)
+    const toBeShown = state.tabIndex ? favPosts : myProd
+    const isOwner = Boolean(session) && (session.user._id === _id)
     return (
         <div className={classes.root} >
             <ProfileHead
@@ -67,18 +66,19 @@ export default function ProfilePage({ user, products }) {
                 open={state.shareDialogOpen}
                 dispatch={dispatch}
             />
-            {myProd.length > 0 ?
-                <ProfilePostsGrid
-                    products={myProd}
-                    profilePic={profilePic}
-                    seller={
-                        {
-                            _id: _id
-                        }
+            <TabBar
+                value={state.tabIndex}
+                isOwner={isOwner}
+            />
+            <ProfilePostsGrid
+                products={toBeShown}
+                profilePic={profilePic}
+                seller={
+                    {
+                        _id: _id
                     }
-                /> :
-                <h1 className={classes.h1} >Nuk u gjet asnje postim</h1>
-            }
+                }
+            />
         </div>
     )
 }

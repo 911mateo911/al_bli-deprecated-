@@ -10,6 +10,7 @@ export default function HeadTags({
     return (
         <Head>
             <title>{title}</title>
+            <meta name="google-site-verification" content="XKoi-bP-d-7ttuhUExYSP_k5GxrfZmgpgNGnwXxW86g" />
             <meta name="title" content={title} />
             <meta name="description" content={description} />
             <meta name="keywords" content={keywords} />

@@ -3,7 +3,8 @@ const reducer = (state, action) => {
         openShareDialog: { ...state, shareDialogOpen: true },
         closeShareDialog: { ...state, shareDialogOpen: false },
         setDialogUrl: { ...state, dialogUrl: action.value },
-        setPageLoading: { ...state, pageLoading: action.value }
+        setPageLoading: { ...state, pageLoading: action.value },
+        setTabIndex: { ...state, tabIndex: action.value }
     }
     return actions[action.type]
 }

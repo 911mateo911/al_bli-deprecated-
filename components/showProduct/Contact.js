@@ -44,6 +44,13 @@ const styles = theme => ({
     },
     copy: {
         padding: '2px'
+    },
+    text: {
+        textOverflow: 'ellipsis',
+        overflow: 'hidden',
+        paddingRight: '1rem',
+        whiteSpace: 'nowrap',
+        wordBreak: 'break-word'
     }
 })
 
@@ -73,7 +80,9 @@ export default function Contact({ email, whatsapp, telephone }) {
                                 <ListItemIcon>
                                     <AlternateEmailIcon />
                                 </ListItemIcon>
-                                <ListItemText primary={email} />
+                                <ListItemText
+                                    classes={{ primary: classes.text }}
+                                    primary={email} />
                                 <ListItemSecondaryAction>
                                     <CopyToClipboard text={email} >
                                         <IconButton>
@@ -88,7 +97,9 @@ export default function Contact({ email, whatsapp, telephone }) {
                                 <ListItemIcon>
                                     <CallIcon />
                                 </ListItemIcon>
-                                <ListItemText primary={telephone} />
+                                <ListItemText
+                                    classes={{ primary: classes.text }}
+                                    primary={telephone} />
                                 <ListItemSecondaryAction>
                                     <CopyToClipboard text={telephone} >
                                         <IconButton>
@@ -103,7 +114,9 @@ export default function Contact({ email, whatsapp, telephone }) {
                                 <ListItemIcon>
                                     <WhatsAppIcon />
                                 </ListItemIcon>
-                                <ListItemText primary={whatsapp} />
+                                <ListItemText
+                                    classes={{ primary: classes.text }}
+                                    primary={whatsapp} />
                                 <ListItemSecondaryAction>
                                     <CopyToClipboard text={whatsapp} >
                                         <IconButton>
