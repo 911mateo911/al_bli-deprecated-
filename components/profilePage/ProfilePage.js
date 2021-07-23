@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { ProfilePageCTX, ProfilePageDSC } from '../contexts/profilePage.context'
 import { makeStyles } from '@material-ui/core/styles'
 import ProfileHead from './ProfileHead'
@@ -50,8 +50,10 @@ export default function ProfilePage({ user, products, favouritedPosts }) {
     } = JSON.parse(user)
     const myProd = JSON.parse(products)
     const favPosts = JSON.parse(favouritedPosts)
-    const toBeShown = state.tabIndex ? favPosts : myProd
     const isOwner = Boolean(session) && (session.user._id === _id)
+    const toBeShown = isOwner ?
+        (state.tabIndex ? favPosts : myProd)
+        : myProd
     return (
         <div className={classes.root} >
             <ProfileHead

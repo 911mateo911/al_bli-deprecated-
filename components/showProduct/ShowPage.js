@@ -1,6 +1,7 @@
 import React, { useState, useContext, memo, useEffect } from 'react'
 import { BackDropDispatch } from '../contexts/backdrop.context'
 import styles from '../../styles/showPage/showPage.styles'
+import { ProfilePageDSC } from '../contexts/profilePage.context'
 import { makeStyles } from '@material-ui/core/styles'
 import IconButton from '@material-ui/core/IconButton'
 import FullscreenCarousel from './FullscreenCarousel'
@@ -34,11 +35,13 @@ function ShowPage({ product }) {
     const state = useContext(ShowPageContext)
     const dispatch = useContext(ShowPageDispatch)
     const toggleModalDsp = useContext(BackDropDispatch)
+    const profileDSP = useContext(ProfilePageDSC)
     const classes = useStyles()
     useEffect(() => {
         toggleModalDsp({ type: 'closeBackDrop' })
     }, [])
     const [session, loading] = useSession()
+    const router = useRouter()
     const popoverOpen = Boolean(state.anchorEl)
     if (loading) return <Loader />
     if (product.error) {
@@ -68,8 +71,8 @@ function ShowPage({ product }) {
         currency,
         email
     } = JSON.parse(product)
-    const router = useRouter()
     function goTo() {
+        profileDSP({ type: 'setTabIndex', value: 0 })
         toggleModalDsp({ type: 'openBackDrop' })
         router.push(`/perdorues/${seller._id}`)
     }
@@ -109,7 +112,7 @@ function ShowPage({ product }) {
                         <Avatar
                             className={classes.avt}
                             onClick={goTo}
-                            style={{ backgroundColor: '#3291ff' }}
+                            style={{ backgroundColor: seller.avatarColor }}
                         >
                             {name[0].toUpperCase()}
                         </Avatar>

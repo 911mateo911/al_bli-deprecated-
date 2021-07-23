@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { memo, useContext } from 'react'
 import styles from '../../styles/horizontalPost/horizontalPost.styles'
 import { makeStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
@@ -15,6 +15,7 @@ import CardMedia from '@material-ui/core/CardMedia'
 import CardContent from '@material-ui/core/CardContent'
 import CardActions from '@material-ui/core/CardActions'
 import Avatar from '@material-ui/core/Avatar'
+import { ProfilePageDSC } from '../contexts/profilePage.context'
 
 const useStyles = makeStyles(styles)
 
@@ -35,9 +36,11 @@ function HorizontalPost({
 }) {
     const classes = useStyles()
     const router = useRouter()
+    const profileDSC = useContext(ProfilePageDSC)
     const [session, loading] = useSession()
     const image = photo ? photo.url : 'https://res.cloudinary.com/dxtjwhnoz/image/upload/c_mpad,h_2160,w_3840/v1624539769/no-photos_p4vnkf.png'
     function goTo() {
+        profileDSC({ type: 'setTabIndex', value: 0 })
         setLoading(true)
         router.push(`/perdorues/${seller._id}`)
     }
@@ -52,6 +55,7 @@ function HorizontalPost({
                 <Avatar
                     onClick={goTo}
                     className={classes.avatar}
+                    style={{ backgroundColor: seller.avatarColor }}
                 >
                     {name[0].toUpperCase()}
                 </Avatar>
