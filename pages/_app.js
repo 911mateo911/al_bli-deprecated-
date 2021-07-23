@@ -18,7 +18,7 @@ function MyApp({ Component, pageProps }) {
     <>
       <Provider session={pageProps.session} >
         <Head>
-          <meta name="google-site-verification" content="XKoi-bP-d-7ttuhUExYSP_k5GxrfZmgpgNGnwXxW86g" />
+          <meta name="google-site-verification" content="uInlj3ih5aqXcqlQ4ghoRTX1C98Ejw9FLpmSs2eF2eA" />
           <link rel="shortcut icon" href='/favicon.png' type="image/x-icon" />
           <link rel="apple-touch-icon" type="image/x-icon" sizes="180x180" href="/favicon.png" />
           <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />

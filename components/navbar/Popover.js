@@ -49,7 +49,11 @@ function PopoverElem({
         dispatch({ type: 'showSnackbar' })
     }
     function goTo(url, fav = false) {
-        if (fav) profilePageDSP({ type: 'setTabIndex', value: 1 })
+        if (fav) {
+            profilePageDSP({ type: 'setTabIndex', value: 1 })
+        } else {
+            profilePageDSP({ type: 'setTabIndex', value: 0 })
+        }
         close()
         backDropDSP({ type: 'openBackDrop' })
         router.push(url)

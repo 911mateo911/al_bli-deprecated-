@@ -41,7 +41,7 @@ export default async function handler(req, res) {
             .limit(10).skip(page * 10).sort({
                 rating: -1
             })
-            .populate('seller', { profilePic: 1 })
+            .populate('seller', { profilePic: 1, avatarColor: 1 })
         if (!product) {
             throw new CustomError('Nuk u gjet asnje rezultat!', 404)
         }

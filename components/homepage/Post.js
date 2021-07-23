@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { BackDropDispatch } from '../contexts/backdrop.context'
+import { ProfilePageDSC } from '../contexts/profilePage.context'
 import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/client'
 import clsx from 'clsx'
@@ -42,7 +43,9 @@ export default function Post({
     const [session, loading] = useSession()
     const dispatch = useContext(BackDropDispatch)
     const searchDSP = useContext(SearchDispatch)
+    const profileDSP = useContext(ProfilePageDSC)
     function goTo() {
+        profileDSP({ type: 'setTabIndex', value: 0 })
         dispatch({ type: 'openBackDrop' })
         router.push(`/perdorues/${seller._id}`)
     }
@@ -57,6 +60,7 @@ export default function Post({
                 <Avatar
                     className={classes.avatar}
                     onClick={goTo}
+                    style={{ backgroundColor: seller.avatarColor }}
                 >
                     {name[0].toUpperCase()}
                 </Avatar>

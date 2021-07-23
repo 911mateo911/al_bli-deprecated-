@@ -29,7 +29,11 @@ function TabBar({ value, isOwner }) {
             <Tabs
                 centered
                 variant='fullWidth'
-                value={value}
+                value={
+                    isOwner ?
+                        value :
+                        0
+                }
                 indicatorColor="primary"
                 textColor="primary"
                 onChange={handleChange}
